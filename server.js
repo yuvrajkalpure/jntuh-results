@@ -9,13 +9,14 @@ const PORT = process.env.PORT || 3000;
 
 
 /*
- * Cache
- *
- * stdTTL = 1 hour
- *
- * If the same HTNO is requested again
- * within 1 hour, JNTUH will NOT be contacted.
- */
+|--------------------------------------------------------------------------
+| CACHE
+|--------------------------------------------------------------------------
+|
+| Store results for 1 hour.
+|
+*/
+
 const resultCache = new NodeCache({
     stdTTL: 60 * 60,
     checkperiod: 120
@@ -23,8 +24,10 @@ const resultCache = new NodeCache({
 
 
 /*
- * Serve index.html from root
- */
+|--------------------------------------------------------------------------
+| SERVE index.html
+|--------------------------------------------------------------------------
+*/
 
 app.get("/", (req, res) => {
 
@@ -34,22 +37,23 @@ app.get("/", (req, res) => {
 
 
 /*
- * Result API
- */
+|--------------------------------------------------------------------------
+| RESULT API
+|--------------------------------------------------------------------------
+*/
 
 app.get("/api/result", async (req, res) => {
 
     try {
 
-        const htno =
-            req.query.htno
-                ?.trim()
-                .toUpperCase();
+        const htno = req.query.htno
+            ?.trim()
+            .toUpperCase();
 
 
         /*
-         * Validate HTNO
-         */
+        | Validate HTNO
+        */
 
         if (!htno) {
 
@@ -57,7 +61,8 @@ app.get("/api/result", async (req, res) => {
 
                 success: false,
 
-                message: "Hall Ticket Number is required."
+                message:
+                    "Hall Ticket Number is required."
 
             });
 
@@ -70,7 +75,8 @@ app.get("/api/result", async (req, res) => {
 
                 success: false,
 
-                message: "Invalid Hall Ticket Number."
+                message:
+                    "Invalid Hall Ticket Number."
 
             });
 
@@ -78,10 +84,10 @@ app.get("/api/result", async (req, res) => {
 
 
         /*
-         * ---------------------------------
-         * CHECK CACHE
-         * ---------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | CHECK CACHE
+        |--------------------------------------------------------------------------
+        */
 
         const cachedResult =
             resultCache.get(htno);
@@ -111,35 +117,33 @@ app.get("/api/result", async (req, res) => {
 
 
         /*
-         * ---------------------------------
-         * JNTUH REQUEST
-         * ---------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | JNTUH FORM DATA
+        |--------------------------------------------------------------------------
+        */
 
-        const body = new URLSearchParams({
+        const formData = new URLSearchParams();
 
-            degree: "btech",
+        formData.append("degree", "btech");
+        formData.append("examCode", "1964");
+        formData.append("etype", "r17");
+        formData.append("result", "null");
+        formData.append("grad", "null");
+        formData.append("type", "intgrade");
+        formData.append("htno", htno);
 
-            examCode: "1964",
 
-            etype: "r17",
-
-            result: "null",
-
-            grad: "null",
-
-            type: "intgrade",
-
-            htno: htno
-
-        });
-
+        /*
+        |--------------------------------------------------------------------------
+        | REQUEST JNTUH
+        |--------------------------------------------------------------------------
+        */
 
         const response = await axios.post(
 
             "http://results.jntuh.ac.in/results/resultAction",
 
-            body.toString(),
+            formData.toString(),
 
             {
 
@@ -169,56 +173,59 @@ app.get("/api/result", async (req, res) => {
         );
 
 
+        console.log(
+            "JNTUH HTTP status:",
+            response.status
+        );
+
+
         /*
-         * ---------------------------------
-         * PARSE HTML
-         * ---------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | PARSE HTML
+        |--------------------------------------------------------------------------
+        */
 
-        const html =
-            response.data;
+        const html = response.data;
+
+        const $ = cheerio.load(html);
 
 
-        const $ =
-            cheerio.load(html);
-
+        /*
+        |--------------------------------------------------------------------------
+        | FIND STUDENT RESULT TABLE
+        |--------------------------------------------------------------------------
+        */
 
         const resultTable =
-            findResultTable($);
+            findStudentResultTable($);
 
-
-        /*
-         * No result found
-         */
 
         if (!resultTable) {
 
-            const responseData = {
+            console.log(
+                "No student result table found."
+            );
+
+
+            return res.json({
 
                 success: false,
 
                 message:
-                    "Result table was not found.",
+                    "Student result table was not found.",
 
                 htno: htno
 
-            };
-
-
-            /*
-             * Don't cache failures.
-             */
-
-            return res.json(responseData);
+            });
 
         }
 
 
         /*
-         * ---------------------------------
-         * CREATE RESULT
-         * ---------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | RESPONSE
+        |--------------------------------------------------------------------------
+        */
 
         const resultData = {
 
@@ -232,10 +239,10 @@ app.get("/api/result", async (req, res) => {
 
 
         /*
-         * ---------------------------------
-         * STORE CACHE
-         * ---------------------------------
-         */
+        |--------------------------------------------------------------------------
+        | SAVE TO CACHE
+        |--------------------------------------------------------------------------
+        */
 
         resultCache.set(
             htno,
@@ -280,16 +287,16 @@ app.get("/api/result", async (req, res) => {
 
 
 /*
- * ---------------------------------------
- * FIND RESULT TABLE
- * ---------------------------------------
- */
+|--------------------------------------------------------------------------
+| FIND STUDENT RESULT TABLE
+|--------------------------------------------------------------------------
+*/
 
-function findResultTable($) {
+function findStudentResultTable($) {
 
     let bestTable = null;
 
-    let bestScore = 0;
+    let bestScore = -1;
 
 
     $("table").each(
@@ -299,16 +306,131 @@ function findResultTable($) {
                 $(table)
                     .text()
                     .replace(/\s+/g, " ")
-                    .trim()
-                    .toLowerCase();
+                    .trim();
 
+
+            const lowerText =
+                text.toLowerCase();
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | EXCLUDE UGC GRADE GUIDELINES TABLE
+            |--------------------------------------------------------------------------
+            */
+
+            const isGradeGuidelinesTable =
+
+                lowerText.includes(
+                    "% of marks secured in a subject"
+                )
+
+                ||
+
+                lowerText.includes(
+                    "letter grade (ugc guide lines)"
+                )
+
+                ||
+
+                lowerText.includes(
+                    "grade points(g)"
+                )
+
+                ||
+
+                lowerText.includes(
+                    "greater than or equal to 90"
+                );
+
+
+            if (isGradeGuidelinesTable) {
+
+                console.log(
+                    "Skipping grade guidelines table"
+                );
+
+                return;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | EXTRACT ROWS
+            |--------------------------------------------------------------------------
+            */
+
+            const rows = [];
+
+
+            $(table)
+                .find("tr")
+                .each(
+                    (rowIndex, row) => {
+
+                        const cells = [];
+
+
+                        $(row)
+                            .find("th, td")
+                            .each(
+                                (cellIndex, cell) => {
+
+                                    const value =
+                                        $(cell)
+                                            .text()
+                                            .replace(
+                                                /\s+/g,
+                                                " "
+                                            )
+                                            .trim();
+
+
+                                    if (value) {
+
+                                        cells.push(value);
+
+                                    }
+
+                                }
+                            );
+
+
+                        if (cells.length > 0) {
+
+                            rows.push(cells);
+
+                        }
+
+                    }
+                );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | IGNORE SMALL TABLES
+            |--------------------------------------------------------------------------
+            */
+
+            if (rows.length < 2) {
+
+                return;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | SCORE TABLE
+            |--------------------------------------------------------------------------
+            */
 
             let score = 0;
 
 
             /*
-             * Words commonly found
-             * in JNTUH result tables.
+             * Student-result related keywords
              */
 
             const keywords = [
@@ -321,58 +443,80 @@ function findResultTable($) {
 
                 "credits",
 
+                "credit",
+
+                "marks",
+
                 "internal",
 
                 "external",
 
-                "marks",
+                "mid",
 
-                "result"
+                "semester"
 
             ];
 
 
-            keywords.forEach(
-                keyword => {
+            for (
+                const keyword of keywords
+            ) {
 
-                    if (
-                        text.includes(keyword)
-                    ) {
+                if (
+                    lowerText.includes(keyword)
+                ) {
 
-                        score++;
-
-                    }
+                    score++;
 
                 }
-            );
-
-
-            /*
-             * Ignore tiny tables.
-             */
-
-            const rowCount =
-                $(table)
-                    .find("tr")
-                    .length;
-
-
-            if (rowCount >= 2) {
-
-                score += 1;
 
             }
 
 
             /*
-             * Keep highest scoring table.
-             */
+            |--------------------------------------------------------------------------
+            | SUBJECT TABLE GETS HIGHER SCORE
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+                lowerText.includes("subject")
+            ) {
+
+                score += 5;
+
+            }
+
+
+            if (
+                lowerText.includes("grade")
+            ) {
+
+                score += 2;
+
+            }
+
+
+            if (
+                lowerText.includes("credits")
+            ) {
+
+                score += 2;
+
+            }
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | KEEP BEST TABLE
+            |--------------------------------------------------------------------------
+            */
 
             if (score > bestScore) {
 
                 bestScore = score;
 
-                bestTable = table;
+                bestTable = rows;
 
             }
 
@@ -380,67 +524,16 @@ function findResultTable($) {
     );
 
 
-    if (!bestTable) {
-
-        return null;
-
-    }
-
-
-    /*
-     * Convert selected table
-     * into JSON.
-     */
-
-    const rows = [];
-
-
-    $(bestTable)
-        .find("tr")
-        .each(
-            (rowIndex, row) => {
-
-                const cells = [];
-
-
-                $(row)
-                    .find("th, td")
-                    .each(
-                        (cellIndex, cell) => {
-
-                            cells.push(
-
-                                $(cell)
-                                    .text()
-                                    .replace(/\s+/g, " ")
-                                    .trim()
-
-                            );
-
-                        }
-                    );
-
-
-                if (cells.length > 0) {
-
-                    rows.push(cells);
-
-                }
-
-            }
-        );
-
-
-    return rows;
+    return bestTable;
 
 }
 
 
 /*
- * ---------------------------------------
- * START SERVER
- * ---------------------------------------
- */
+|--------------------------------------------------------------------------
+| SERVER
+|--------------------------------------------------------------------------
+*/
 
 app.listen(
     PORT,
@@ -452,114 +545,4 @@ app.listen(
         );
 
     }
-);            degree: "btech",
-            examCode: "1964",
-            etype: "r17",
-            result: "null",
-            grad: "null",
-            type: "intgrade",
-            htno: htno
-        });
-
-        const response = await axios.post(
-            "http://results.jntuh.ac.in/results/resultAction",
-            body.toString(),
-            {
-                headers: {
-                    "Content-Type":
-                        "application/x-www-form-urlencoded",
-
-                    "User-Agent":
-                        "Mozilla/5.0",
-
-                    "Referer":
-                        "http://results.jntuh.ac.in/results/jsp/" +
-                        "SearchResult.jsp?degree=btech" +
-                        "&examCode=1964" +
-                        "&etype=r17" +
-                        "&type=intgrade"
-                },
-
-                timeout: 20000,
-
-                responseType: "text"
-            }
-        );
-
-        console.log(
-            "JNTUH status:",
-            response.status
-        );
-
-        const html = response.data;
-
-        const $ = cheerio.load(html);
-
-        const tables = [];
-
-        $("table").each((index, table) => {
-
-            const rows = [];
-
-            $(table)
-                .find("tr")
-                .each((index, row) => {
-
-                    const cells = [];
-
-                    $(row)
-                        .find("th, td")
-                        .each((index, cell) => {
-
-                            cells.push(
-                                $(cell)
-                                    .text()
-                                    .replace(/\s+/g, " ")
-                                    .trim()
-                            );
-
-                        });
-
-                    if (cells.length > 0) {
-                        rows.push(cells);
-                    }
-
-                });
-
-            if (rows.length > 0) {
-                tables.push(rows);
-            }
-
-        });
-
-        res.json({
-            success: true,
-            htno: htno,
-            tables: tables
-        });
-
-    } catch (error) {
-
-        console.error(
-            "JNTUH ERROR:",
-            error.message
-        );
-
-        res.status(500).json({
-            success: false,
-            message:
-                "Could not retrieve JNTUH result",
-            error:
-                error.message
-        });
-    }
-});
-
-
-app.listen(PORT, "0.0.0.0", () => {
-
-    console.log(
-        `Server running on port ${PORT}`
-    );
-
-});
+);
