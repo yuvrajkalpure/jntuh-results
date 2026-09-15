@@ -548,7 +548,7 @@ async function searchResult(forceRefresh = false) {
 
     console.log("LOCAL CACHE MISS:", htno);
     status.className = "status loading";
-    status.textContent = "Fetching all semester results from JNTUH...";
+    status.textContent = "Fetching results...";
 
     try {
         const response = await fetch(`/api/result?htno=${encodeURIComponent(htno)}`);
