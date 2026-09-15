@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JNTUH Results</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f7fa;
+    color: #15171a;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    background: #ffffff;
+    padding: calc(16px + env(safe-area-inset-top)) 16px 16px;
+    border-bottom: 1px solid #e8eaed;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 750;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #73777d;
+    font-size: 14px;
+}
+
+/* MAIN & LAYOUT */
+main {
+    width: 100%;
+    padding: 16px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    main { padding: 30px; }
+    .layout-container {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        align-items: start;
+        gap: 24px;
+    }
+}
+
+.main-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar-column {
+    width: 100%;
+}
+
+/* SEARCH CARD */
+.search-card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e7e9ec;
+}
+
+@media (min-width: 768px) {
+    .search-card { padding: 24px; }
+}
+
+.search-card-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 650;
+    white-space: nowrap;
+    color: #374151;
+}
+
+.input {
+    flex: 1;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d6d9de;
+    border-radius: 9px;
+    outline: none;
+    font-size: 16px;
+    background: #fff;
+    text-transform: uppercase;
+}
+
+.input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, .10);
+}
+
+/* STATUS */
+.status {
+    display: none;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.status.loading {
+    display: block;
+    background: #eef5ff;
+    color: #1458a6;
+}
+
+.status.error {
+    display: block;
+    background: #fff0f0;
+    color: #b42318;
+}
+
+/* SIDEBAR HISTORY */
+.history {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e7e9ec;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.history-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.clear-history {
+    border: 0;
+    background: none;
+    color: #0066cc;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-item {
+    width: 100%;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.history-item:hover {
+    background: #eef5ff;
+}
+
+.history-htno {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* RESULT & CARDS */
+.result {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.result-card {
+    width: 100%;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #e7e9ec;
+    overflow: hidden;
+}
+
+.exam-banner {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #e7e9ec;
+    line-height: 1.4;
+}
+
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    background: #fafbfc;
+    border-bottom: 1px solid #e7e9ec;
+}
+
+.student-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.student-info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.student-info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    word-break: break-word;
+}
+
+.grade-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.grade-badge.grade-o { background: #dcfce7; color: #15803d; }
+.grade-badge.grade-a { background: #dbeafe; color: #1d4ed8; }
+.grade-badge.grade-b { background: #fef9c3; color: #a16207; }
+.grade-badge.grade-f { background: #fee2e2; color: #b91c1c; }
+
+.result-table tr.failed-row,
+.result-table tr.failed-row td {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+    font-weight: 600;
+}
+
+/* STATS CARDS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e7e9ec;
+}
+
+.stat-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-card.primary {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    border: none;
+    color: white;
+}
+
+.stat-card.primary .stat-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.stat-card.primary .stat-value {
+    color: #ffffff;
+}
+
+.stat-card.primary .stat-sub {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.stat-sub {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+/* TABLE */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.result-table th {
+    background: #f7f8fa;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.result-table td {
+    font-size: 13px;
+}
+
+.result-table th, .result-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e8eaed;
+    text-align: left;
+}
+
+.result-table tr:last-child td {
+    border-bottom: 0;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+<header class="header">
+    <div class="header-inner">
+        <h1 class="title">JNTUH Results</h1>
+        <div class="subtitle">B.Tech Multi-Semester Results (1-1 to 3-2)</div>
+    </div>
+</header>
+
+<main>
+<div class="content">
+    <div class="layout-container">
+        <div class="main-column">
+            <div class="search-card">
+                <div class="search-card-row">
+                    <label class="label" for="htno">Hall Ticket No:</label>
+                    <input class="input" id="htno" type="text" placeholder="e.g. 23E31A0586" autocomplete="off" autocapitalize="characters" maxlength="10">
+                </div>
+                <div id="status" class="status"></div>
+            </div>
+
+            <div id="result" class="result"></div>
+        </div>
+
+        <aside class="sidebar-column">
+            <div id="history" class="history"></div>
+        </aside>
+    </div>
+</div>
+</main>
+</div>
+
+<script>
+const RESULT_CACHE_KEY = "jntuh_result_cache";
+const MAX_CACHED_RESULTS = 10;
+const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
+
+function getCachedResults() {
+    try {
+        return JSON.parse(localStorage.getItem(RESULT_CACHE_KEY)) || {};
+    } catch {
+        return {};
+    }
+}
+
+function saveResultToCache(htno, data) {
+    if (!data || !data.success) return;
+    const cache = getCachedResults();
+    cache[htno] = {
+        data: data,
+        timestamp: Date.now()
+    };
+
+    const entries = Object.entries(cache)
+        .sort((a, b) => b[1].timestamp - a[1].timestamp)
+        .slice(0, MAX_CACHED_RESULTS);
+
+    const limitedCache = Object.fromEntries(entries);
+    localStorage.setItem(RESULT_CACHE_KEY, JSON.stringify(limitedCache));
+    renderHistory();
+}
+
+function removeResultFromCache(htno) {
+    const cache = getCachedResults();
+    if (cache[htno]) {
+        delete cache[htno];
+        localStorage.setItem(RESULT_CACHE_KEY, JSON.stringify(cache));
+        renderHistory();
+    }
+}
+
+function getCachedResult(htno) {
+    const cache = getCachedResults();
+    const cached = cache[htno];
+    if (!cached) return null;
+
+    const age = Date.now() - cached.timestamp;
+    if (age > CACHE_DURATION) {
+        delete cache[htno];
+        localStorage.setItem(RESULT_CACHE_KEY, JSON.stringify(cache));
+        return null;
+    }
+
+    return cached.data;
+}
+
+function getHistory() {
+    const cache = getCachedResults();
+    return Object.entries(cache)
+        .sort((a, b) => b[1].timestamp - a[1].timestamp)
+        .map(([htno]) => htno);
+}
+
+function clearHistory() {
+    localStorage.removeItem(RESULT_CACHE_KEY);
+    renderHistory();
+    document.getElementById("result").innerHTML = "";
+}
+
+function renderHistory() {
+    const historyContainer = document.getElementById("history");
+    const history = getHistory();
+
+    if (history.length === 0) {
+        historyContainer.style.display = "none";
+        historyContainer.innerHTML = "";
+        return;
+    }
+
+    historyContainer.style.display = "block";
+    let html = `
+        <div class="history-header">
+            <div class="history-title">Recent Searches</div>
+            <button class="clear-history" onclick="clearHistory()">Clear</button>
+        </div>
+        <div class="history-list">
+    `;
+
+    history.forEach(htno => {
+        html += `
+            <div class="history-item" onclick="useHistory('${htno}')">
+                <span class="history-htno">${escapeHtml(htno)}</span>
+            </div>
+        `;
+    });
+
+    html += `</div>`;
+    historyContainer.innerHTML = html;
+}
+
+function useHistory(htno) {
+    document.getElementById("htno").value = htno;
+    searchResult();
+}
+
+async function searchResult(forceRefresh = false) {
+    const input = document.getElementById("htno");
+    const status = document.getElementById("status");
+    const result = document.getElementById("result");
+    const htno = input.value.trim().toUpperCase();
+
+    result.innerHTML = "";
+    status.className = "status";
+    status.textContent = "";
+
+    if (!htno) {
+        showError("Please enter your Hall Ticket Number.");
+        return;
+    }
+
+    /* Check local cache first */
+    if (!forceRefresh) {
+        const cachedResult = getCachedResult(htno);
+        if (cachedResult) {
+            console.log("LOCAL CACHE HIT:", htno);
+            displayResult(cachedResult);
+            status.className = "status";
+            status.textContent = "";
+            return;
+        }
+    }
+
+    console.log("LOCAL CACHE MISS:", htno);
+    status.className = "status loading";
+    status.textContent = "Fetching all semester results from JNTUH...";
+
+    try {
+        const response = await fetch(`/api/result?htno=${encodeURIComponent(htno)}`);
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            removeResultFromCache(htno);
+            throw new Error(data.message || "Invalid Hall Ticket Number.");
+        }
+
+        saveResultToCache(htno, data);
+        displayResult(data);
+        status.className = "status";
+        status.textContent = "";
+
+    } catch (error) {
+        console.error(error);
+        removeResultFromCache(htno);
+        showError(error.message || "Something went wrong.");
+    }
+}
+
+function getGradeClass(grade) {
+    const clean = String(grade).trim().toUpperCase();
+    if (clean === "O" || clean === "A+") return "grade-o";
+    if (clean === "A" || clean === "B+") return "grade-a";
+    if (clean === "B" || clean === "C") return "grade-b";
+    if (clean === "F" || clean === "AB") return "grade-f";
+    return "";
+}
+
+function displayResult(data) {
+    const result = document.getElementById("result");
+    const details = data.details || {};
+    const name = details.name || "";
+    const fatherName = details.fatherName || "";
+    const htno = details.htno || data.htno || "";
+
+    let infoGridHTML = "";
+    if (name || htno || fatherName) {
+        infoGridHTML = `
+            <div class="student-info-grid">
+                ${name ? `<div class="student-info-item"><span class="student-info-label">Student Name</span><span class="student-info-value">${escapeHtml(name)}</span></div>` : ""}
+                ${htno ? `<div class="student-info-item"><span class="student-info-label">Hall Ticket No.</span><span class="student-info-value">${escapeHtml(htno)}</span></div>` : ""}
+                ${fatherName ? `<div class="student-info-item"><span class="student-info-label">Father's Name</span><span class="student-info-value">${escapeHtml(fatherName)}</span></div>` : ""}
+            </div>
+        `;
+    }
+
+    /* Overall Summary Card */
+    let overallStatsHTML = "";
+    if (data.overallSummary) {
+        const ov = data.overallSummary;
+        const ovFailed = ov.isFailed;
+        const ovCgpaDisplay = !ovFailed && ov.cgpa != null ? ov.cgpa.toFixed(2) : "N/A";
+        const ovPercentageDisplay = !ovFailed && ov.percentage != null ? `${ov.percentage.toFixed(1)}%` : "N/A";
+        const ovStatusText = !ovFailed ? "PASSED ALL" : "BACKLOGS EXIST";
+        const ovStatusColor = !ovFailed ? "#15803d" : "#b91c1c";
+
+        overallStatsHTML = `
+            <div class="result-card" style="margin-bottom: 20px;">
+                <div class="exam-banner" style="background: linear-gradient(135deg, #0052cc 0%, #0033aa 100%); color: white;">
+                    Overall Cumulative Performance
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card primary" style="${ovFailed ? 'background: #64748b; color: white;' : ''}">
+                        <span class="stat-label">Overall CGPA</span>
+                        <span class="stat-value">${ovCgpaDisplay}</span>
+                        <span class="stat-sub">${ovFailed ? 'Must pass all sems' : 'Cumulative GPA'}</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Overall %</span>
+                        <span class="stat-value">${ovPercentageDisplay}</span>
+                        <span class="stat-sub">${ovFailed ? 'Must pass all sems' : 'Equivalent %'}</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Total Credits</span>
+                        <span class="stat-value">${ov.totalEarnedCredits} / ${ov.totalCredits}</span>
+                        <span class="stat-sub">Earned / Max</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Overall Status</span>
+                        <span class="stat-value" style="color: ${ovStatusColor};">${ovStatusText}</span>
+                        <span class="stat-sub">${ov.totalSemesters} Semesters Found</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /* Semesters List */
+    let semestersHTML = `<div class="semesters-container" style="display: flex; flex-direction: column; gap: 20px;">`;
+
+    if (data.semesters && data.semesters.length > 0) {
+        data.semesters.forEach(sem => {
+            const examTitle = sem.examTitle || `Semester ${sem.semester} Results`;
+            const summary = sem.summary;
+
+            let semStatsHTML = "";
+            if (summary) {
+                const isFailed = summary.isFailed || summary.failedSubjects > 0;
+                const passStatusText = !isFailed ? "PASSED" : `FAILED (${summary.failedSubjects})`;
+                const passStatusColor = !isFailed ? "#15803d" : "#b91c1c";
+
+                const sgpaDisplay = !isFailed && summary.sgpa != null ? summary.sgpa.toFixed(2) : "N/A";
+                const percentageDisplay = !isFailed && summary.percentage != null ? `${summary.percentage.toFixed(1)}%` : "N/A";
+
+                semStatsHTML = `
+                    <div class="stats-grid">
+                        <div class="stat-card primary" style="${isFailed ? 'background: #64748b; color: white;' : ''}">
+                            <span class="stat-label">SGPA</span>
+                            <span class="stat-value">${sgpaDisplay}</span>
+                            <span class="stat-sub">${isFailed ? 'Must pass all' : 'Sem GPA'}</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Percentage</span>
+                            <span class="stat-value">${percentageDisplay}</span>
+                            <span class="stat-sub">${isFailed ? 'Must pass all' : 'Equivalent %'}</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Credits</span>
+                            <span class="stat-value">${summary.earnedCredits} / ${summary.totalCredits}</span>
+                            <span class="stat-sub">Earned / Total</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Status</span>
+                            <span class="stat-value" style="color: ${passStatusColor};">${passStatusText}</span>
+                            <span class="stat-sub">${summary.passedSubjects}/${summary.totalSubjects} Passed</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const headers = sem.table && sem.table[0] ? sem.table[0].map(h => String(h).toLowerCase().trim()) : [];
+            const gradeIdx = headers.findIndex(h => h.includes("grade") && !h.includes("point"));
+
+            let tableHTML = `<div class="table-wrapper"><table class="result-table">`;
+            if (sem.table) {
+                sem.table.forEach((row, rowIndex) => {
+                    let isRowFailed = false;
+                    if (rowIndex > 0) {
+                        if (gradeIdx !== -1 && row[gradeIdx]) {
+                            const gStr = String(row[gradeIdx]).trim().toUpperCase();
+                            if (gStr === "F" || gStr === "AB" || gStr === "ABSENT") isRowFailed = true;
+                        }
+                        if (!isRowFailed) {
+                            isRowFailed = row.some(cell => {
+                                const cStr = String(cell).trim().toUpperCase();
+                                return cStr === "F" || cStr === "AB" || cStr === "ABSENT";
+                            });
+                        }
+                    }
+
+                    let rowClass = rowIndex > 0 ? (isRowFailed ? ' class="failed-row"' : '') : '';
+                    tableHTML += `<tr${rowClass}>`;
+                    row.forEach((cell, cellIndex) => {
+                        const tag = rowIndex === 0 ? "th" : "td";
+                        let cellFormatted = escapeHtml(cell);
+
+                        if (rowIndex > 0 && sem.table[0] && sem.table[0][cellIndex]) {
+                            const headerText = sem.table[0][cellIndex].toLowerCase();
+                            if (headerText.includes("grade")) {
+                                const gradeClass = getGradeClass(cell);
+                                if (gradeClass) {
+                                    cellFormatted = `<span class="grade-badge ${gradeClass}">${cellFormatted}</span>`;
+                                }
+                            }
+                        }
+                        tableHTML += `<${tag}>${cellFormatted}</${tag}>`;
+                    });
+                    tableHTML += "</tr>";
+                });
+            }
+            tableHTML += `</table></div>`;
+
+            semestersHTML += `
+                <div class="result-card">
+                    <div class="exam-banner">${escapeHtml(examTitle)}</div>
+                    ${semStatsHTML}
+                    ${tableHTML}
+                </div>
+            `;
+        });
+    }
+
+    semestersHTML += `</div>`;
+
+    result.innerHTML = `
+        <div class="all-results">
+            <div class="result-card" style="margin-bottom: 20px;">
+                ${infoGridHTML}
+            </div>
+            ${overallStatsHTML}
+            ${semestersHTML}
+        </div>
+    `;
+}
+
+function showError(message) {
+    const status = document.getElementById("status");
+    status.className = "status error";
+    status.textContent = message;
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+renderHistory();
+
+const htnoInput = document.getElementById("htno");
+
+htnoInput.addEventListener("input", () => {
+    htnoInput.value = htnoInput.value.toUpperCase();
+    if (htnoInput.value.trim().length === 10) {
+        searchResult();
+    }
+});
+
+htnoInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        searchResult();
+    }
+});
+</script>
+</body>
+</html>
