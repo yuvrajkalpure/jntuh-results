@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>JNTUH Results</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f5f6f8;
+
+            padding: 30px;
+        }
+
+
+        .container {
+
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 20px rgba(0,0,0,.08);
+        }
+
+
+        h1 {
+
+            text-align: center;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 10px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 15px;
+
+            border: 0;
+
+            border-radius: 7px;
+
+            background: #0066cc;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        button:disabled {
+
+            opacity: .6;
+        }
+
+
+        #loading {
+
+            display: none;
+
+            text-align: center;
+
+            margin: 20px;
+        }
+
+
+        #error {
+
+            color: red;
+
+            margin-top: 20px;
+        }
+
+
+        .table-container {
+
+            background: white;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            overflow-x: auto;
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        th,
+        td {
+
+            padding: 10px;
+
+            border: 1px solid #ddd;
+
+            text-align: left;
+        }
+
+
+        th {
+
+            background: #eee;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+        <h1>
+            JNTUH Results
+        </h1>
+
+
+        <label>
+            Hall Ticket Number
+        </label>
+
+
+        <input
+            id="htno"
+            placeholder="23E31A0586"
+        />
+
+
+        <button
+            id="searchBtn"
+            onclick="searchResult()"
+        >
+            Get Result
+        </button>
+
+
+        <div id="loading">
+            Getting result...
+        </div>
+
+
+        <div id="error"></div>
+
+    </div>
+
+
+    <div id="result"></div>
+
+
+</div>
+
+
+<script>
+
+async function searchResult() {
+
+
+    const htno =
+        document
+            .getElementById("htno")
+            .value
+            .trim();
+
+
+    const button =
+        document.getElementById("searchBtn");
+
+
+    const loading =
+        document.getElementById("loading");
+
+
+    const error =
+        document.getElementById("error");
+
+
+    const result =
+        document.getElementById("result");
+
+
+    error.textContent = "";
+
+    result.innerHTML = "";
+
+
+    if (!htno) {
+
+        error.textContent =
+            "Enter Hall Ticket Number.";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    loading.style.display = "block";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `/api/result?htno=${encodeURIComponent(htno)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.message
+            );
+
+        }
+
+
+        displayResult(data);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("error")
+            .textContent =
+                error.message ||
+                "Something went wrong.";
+
+    }
+
+
+    button.disabled = false;
+
+    loading.style.display = "none";
+
+}
+
+
+
+function displayResult(data) {
+
+
+    const result =
+        document.getElementById("result");
+
+
+    let html = `
+
+        <div class="card">
+
+            <h2>
+                Result
+            </h2>
+
+            <p>
+                <strong>
+                    HTNO:
+                </strong>
+
+                ${escapeHtml(data.htno)}
+            </p>
+
+        </div>
+
+    `;
+
+
+    data.tables.forEach(
+        (rows) => {
+
+            html += `
+                <div class="table-container">
+                    <table>
+            `;
+
+
+            rows.forEach(
+                (row, index) => {
+
+                    html += "<tr>";
+
+
+                    row.forEach(
+                        cell => {
+
+                            const tag =
+                                index === 0
+                                    ? "th"
+                                    : "td";
+
+
+                            html += `
+                                <${tag}>
+                                    ${escapeHtml(cell)}
+                                </${tag}>
+                            `;
+
+                        }
+                    );
+
+
+                    html += "</tr>";
+
+                }
+            );
+
+
+            html += `
+                    </table>
+                </div>
+            `;
+
+        }
+    );
+
+
+    result.innerHTML = html;
+
+}
+
+
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+}
+
+</script>
+
+
+</body>
+
+  </html>
