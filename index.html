@@ -4,163 +4,563 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-    <title>JNTUH Results</title>
+<title>JNTUH Results</title>
 
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
 
-        body {
+html,
+body {
 
-            margin: 0;
+    margin: 0;
 
-            font-family: Arial, sans-serif;
+    padding: 0;
 
-            background: #f5f6f8;
+    width: 100%;
 
-            padding: 30px;
-        }
+    min-height: 100%;
 
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-        .container {
+    background: #f5f7fa;
 
-            max-width: 900px;
+    color: #15171a;
+}
 
-            margin: auto;
-        }
 
+body {
 
-        .card {
+    min-height: 100vh;
 
-            background: white;
+}
 
-            padding: 25px;
 
-            border-radius: 12px;
+/* --------------------------------
+   APP
+-------------------------------- */
 
-            box-shadow:
-                0 4px 20px rgba(0,0,0,.08);
-        }
+.app {
 
+    width: 100%;
 
-        h1 {
+    min-height: 100vh;
 
-            text-align: center;
-        }
+}
 
 
-        input {
+/* --------------------------------
+   HEADER
+-------------------------------- */
 
-            width: 100%;
+.header {
 
-            padding: 13px;
+    width: 100%;
 
-            margin-top: 10px;
+    background: #ffffff;
 
-            border: 1px solid #ccc;
+    padding:
+        calc(16px + env(safe-area-inset-top))
+        16px
+        16px;
 
-            border-radius: 7px;
+    border-bottom: 1px solid #e8eaed;
 
-            font-size: 16px;
-        }
+}
 
 
-        button {
+.header-inner {
 
-            width: 100%;
+    width: 100%;
 
-            padding: 13px;
+    max-width: 700px;
 
-            margin-top: 15px;
+    margin: auto;
 
-            border: 0;
+}
 
-            border-radius: 7px;
 
-            background: #0066cc;
+.title {
 
-            color: white;
+    font-size: 24px;
 
-            font-size: 16px;
+    font-weight: 750;
 
-            cursor: pointer;
-        }
+    margin: 0;
 
+}
 
-        button:disabled {
 
-            opacity: .6;
-        }
+.subtitle {
 
+    margin-top: 5px;
 
-        #loading {
+    color: #73777d;
 
-            display: none;
+    font-size: 14px;
 
-            text-align: center;
+}
 
-            margin: 20px;
-        }
 
+/* --------------------------------
+   MAIN
+-------------------------------- */
 
-        #error {
+main {
 
-            color: red;
+    width: 100%;
 
-            margin-top: 20px;
-        }
+    padding: 16px;
 
+}
 
-        .table-container {
 
-            background: white;
+.content {
 
-            margin-top: 20px;
+    width: 100%;
 
-            padding: 15px;
+    max-width: 700px;
 
-            border-radius: 10px;
+    margin: auto;
 
-            overflow-x: auto;
-        }
+}
 
 
-        table {
+/* --------------------------------
+   SEARCH CARD
+-------------------------------- */
 
-            width: 100%;
+.search-card {
 
-            border-collapse: collapse;
-        }
+    width: 100%;
 
+    background: #ffffff;
 
-        th,
-        td {
+    border-radius: 14px;
 
-            padding: 10px;
+    padding: 18px;
 
-            border: 1px solid #ddd;
+    border: 1px solid #e7e9ec;
 
-            text-align: left;
-        }
+}
 
 
-        th {
+.label {
 
-            background: #eee;
-        }
+    display: block;
 
-    </style>
+    font-size: 14px;
+
+    font-weight: 650;
+
+    margin-bottom: 8px;
+
+}
+
+
+.input {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 14px;
+
+    border:
+        1px solid #d6d9de;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    background: #fff;
+
+    text-transform: uppercase;
+
+}
+
+
+.input:focus {
+
+    border-color: #0066cc;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 102, 204, .10);
+
+}
+
+
+.search-button {
+
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 12px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #0066cc;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+}
+
+
+.search-button:active {
+
+    transform: scale(.99);
+
+}
+
+
+.search-button:disabled {
+
+    opacity: .6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* --------------------------------
+   STATUS
+-------------------------------- */
+
+.status {
+
+    display: none;
+
+    margin-top: 14px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+}
+
+
+.status.loading {
+
+    display: block;
+
+    background: #eef5ff;
+
+    color: #1458a6;
+
+}
+
+
+.status.error {
+
+    display: block;
+
+    background: #fff0f0;
+
+    color: #b42318;
+
+}
+
+
+/* --------------------------------
+   HISTORY
+-------------------------------- */
+
+.history {
+
+    margin-top: 20px;
+
+}
+
+
+.history-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+}
+
+
+.history-title {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+.clear-history {
+
+    border: 0;
+
+    background: none;
+
+    color: #0066cc;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+.history-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.history-item {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    background: white;
+
+    border: 1px solid #e7e9ec;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    cursor: pointer;
+
+}
+
+
+.history-htno {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.history-status {
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+
+/* --------------------------------
+   RESULT
+-------------------------------- */
+
+.result {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+}
+
+
+.result-card {
+
+    width: 100%;
+
+    background: white;
+
+    border-radius: 14px;
+
+    border: 1px solid #e7e9ec;
+
+    overflow: hidden;
+
+}
+
+
+.result-heading {
+
+    padding: 16px;
+
+    border-bottom: 1px solid #e7e9ec;
+
+}
+
+
+.result-title {
+
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+}
+
+
+.result-htno {
+
+    margin-top: 5px;
+
+    color: #73777d;
+
+    font-size: 13px;
+
+}
+
+
+/* --------------------------------
+   TABLE
+-------------------------------- */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.result-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 520px;
+
+}
+
+
+.result-table th {
+
+    background: #f7f8fa;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+.result-table td {
+
+    font-size: 13px;
+
+}
+
+
+.result-table th,
+.result-table td {
+
+    padding: 12px 10px;
+
+    border-bottom:
+        1px solid #e8eaed;
+
+    text-align: left;
+
+}
+
+
+.result-table tr:last-child td {
+
+    border-bottom: 0;
+
+}
+
+
+/* --------------------------------
+   CACHE BADGE
+-------------------------------- */
+
+.cache-badge {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #eef8f1;
+
+    color: #18743c;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* --------------------------------
+   DESKTOP
+-------------------------------- */
+
+@media (min-width: 768px) {
+
+    main {
+
+        padding: 30px;
+    }
+
+
+    .search-card {
+
+        padding: 24px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -168,88 +568,314 @@
 <body>
 
 
-<div class="container">
+<div class="app">
 
 
-    <div class="card">
+<header class="header">
 
-        <h1>
+    <div class="header-inner">
+
+        <h1 class="title">
             JNTUH Results
         </h1>
 
+        <div class="subtitle">
+            B.Tech Results
+        </div>
 
-        <label>
+    </div>
+
+</header>
+
+
+<main>
+
+<div class="content">
+
+
+    <!-- SEARCH -->
+
+    <div class="search-card">
+
+        <label
+            class="label"
+            for="htno"
+        >
             Hall Ticket Number
         </label>
 
 
         <input
+            class="input"
             id="htno"
+            type="text"
             placeholder="23E31A0586"
-        />
+            autocomplete="off"
+            autocapitalize="characters"
+        >
 
 
         <button
-            id="searchBtn"
+            class="search-button"
+            id="searchButton"
             onclick="searchResult()"
         >
             Get Result
         </button>
 
 
-        <div id="loading">
-            Getting result...
-        </div>
-
-
-        <div id="error"></div>
+        <div
+            id="status"
+            class="status"
+        ></div>
 
     </div>
 
 
-    <div id="result"></div>
+    <!-- HISTORY -->
 
+    <div
+        id="history"
+        class="history"
+    ></div>
+
+
+    <!-- RESULT -->
+
+    <div
+        id="result"
+        class="result"
+    ></div>
+
+
+</div>
+
+</main>
 
 </div>
 
 
 <script>
 
+
+/* --------------------------------
+   HISTORY STORAGE
+-------------------------------- */
+
+const HISTORY_KEY =
+    "jntuh_result_history";
+
+
+function getHistory() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                HISTORY_KEY
+            )
+        ) || [];
+
+    } catch {
+
+        return [];
+
+    }
+
+}
+
+
+function saveHistory(htno) {
+
+    let history =
+        getHistory();
+
+
+    /*
+     * Remove duplicate
+     */
+
+    history =
+        history.filter(
+            item => item !== htno
+        );
+
+
+    /*
+     * Add newest first
+     */
+
+    history.unshift(htno);
+
+
+    /*
+     * Keep only last 10
+     */
+
+    history =
+        history.slice(0, 10);
+
+
+    localStorage.setItem(
+        HISTORY_KEY,
+        JSON.stringify(history)
+    );
+
+
+    renderHistory();
+
+}
+
+
+function clearHistory() {
+
+    localStorage.removeItem(
+        HISTORY_KEY
+    );
+
+    renderHistory();
+
+}
+
+
+function renderHistory() {
+
+    const historyContainer =
+        document.getElementById(
+            "history"
+        );
+
+
+    const history =
+        getHistory();
+
+
+    if (history.length === 0) {
+
+        historyContainer.innerHTML = "";
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div class="history-header">
+
+            <div class="history-title">
+                Recent Searches
+            </div>
+
+            <button
+                class="clear-history"
+                onclick="clearHistory()"
+            >
+                Clear
+            </button>
+
+        </div>
+
+        <div class="history-list">
+
+    `;
+
+
+    history.forEach(htno => {
+
+        html += `
+
+            <div
+                class="history-item"
+                onclick="useHistory('${htno}')"
+            >
+
+                <span class="history-htno">
+                    ${escapeHtml(htno)}
+                </span>
+
+                <span class="history-status">
+                    View
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+        </div>
+    `;
+
+
+    historyContainer.innerHTML =
+        html;
+
+}
+
+
+function useHistory(htno) {
+
+    document.getElementById(
+        "htno"
+    ).value = htno;
+
+
+    searchResult();
+
+}
+
+
+/* --------------------------------
+   SEARCH
+-------------------------------- */
+
 async function searchResult() {
 
 
-    const htno =
-        document
-            .getElementById("htno")
-            .value
-            .trim();
+    const input =
+        document.getElementById(
+            "htno"
+        );
 
 
     const button =
-        document.getElementById("searchBtn");
+        document.getElementById(
+            "searchButton"
+        );
 
 
-    const loading =
-        document.getElementById("loading");
-
-
-    const error =
-        document.getElementById("error");
+    const status =
+        document.getElementById(
+            "status"
+        );
 
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
 
 
-    error.textContent = "";
+    const htno =
+        input.value
+            .trim()
+            .toUpperCase();
+
 
     result.innerHTML = "";
+
+    status.className =
+        "status";
 
 
     if (!htno) {
 
-        error.textContent =
-            "Enter Hall Ticket Number.";
+        showError(
+            "Please enter your Hall Ticket Number."
+        );
 
         return;
 
@@ -258,7 +884,13 @@ async function searchResult() {
 
     button.disabled = true;
 
-    loading.style.display = "block";
+
+    status.className =
+        "status loading";
+
+
+    status.textContent =
+        "Fetching result...";
 
 
     try {
@@ -274,140 +906,264 @@ async function searchResult() {
             await response.json();
 
 
-        if (!data.success) {
+        if (!response.ok ||
+            !data.success) {
 
             throw new Error(
-                data.message
+                data.message ||
+                "Unable to get result."
             );
 
         }
 
 
+        /*
+         * Save to browser history
+         */
+
+        saveHistory(htno);
+
+
+        /*
+         * Display result
+         */
+
         displayResult(data);
+
+
+        /*
+         * Show cache status
+         */
+
+        if (data.cached) {
+
+            status.className =
+                "status loading";
+
+            status.textContent =
+                "Loaded from cache.";
+
+        } else {
+
+            status.className =
+                "status";
+
+            status.textContent =
+                "";
+
+        }
 
 
     } catch (error) {
 
+
         console.error(error);
 
-        document
-            .getElementById("error")
-            .textContent =
-                error.message ||
-                "Something went wrong.";
+
+        showError(
+            error.message ||
+            "Something went wrong."
+        );
+
+
+    } finally {
+
+        button.disabled = false;
 
     }
-
-
-    button.disabled = false;
-
-    loading.style.display = "none";
 
 }
 
 
+/* --------------------------------
+   RESULT UI
+-------------------------------- */
 
 function displayResult(data) {
 
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "result"
+        );
 
 
-    let html = `
+    let tableHTML = `
 
-        <div class="card">
+        <div class="table-wrapper">
 
-            <h2>
-                Result
-            </h2>
+            <table class="result-table">
 
-            <p>
-                <strong>
-                    HTNO:
-                </strong>
+    `;
 
-                ${escapeHtml(data.htno)}
-            </p>
+
+    data.table.forEach(
+        (row, rowIndex) => {
+
+            tableHTML += "<tr>";
+
+
+            row.forEach(cell => {
+
+                const tag =
+                    rowIndex === 0
+                        ? "th"
+                        : "td";
+
+
+                tableHTML += `
+
+                    <${tag}>
+                        ${escapeHtml(cell)}
+                    </${tag}>
+
+                `;
+
+            });
+
+
+            tableHTML += "</tr>";
+
+        }
+    );
+
+
+    tableHTML += `
+
+            </table>
 
         </div>
 
     `;
 
 
-    data.tables.forEach(
-        (rows) => {
+    result.innerHTML = `
 
-            html += `
-                <div class="table-container">
-                    <table>
-            `;
+        <div class="result-card">
 
+            <div class="result-heading">
 
-            rows.forEach(
-                (row, index) => {
+                <h2 class="result-title">
+                    Result
+                </h2>
 
-                    html += "<tr>";
-
-
-                    row.forEach(
-                        cell => {
-
-                            const tag =
-                                index === 0
-                                    ? "th"
-                                    : "td";
-
-
-                            html += `
-                                <${tag}>
-                                    ${escapeHtml(cell)}
-                                </${tag}>
-                            `;
-
-                        }
-                    );
-
-
-                    html += "</tr>";
-
-                }
-            );
-
-
-            html += `
-                    </table>
+                <div class="result-htno">
+                    HTNO:
+                    <strong>
+                        ${escapeHtml(data.htno)}
+                    </strong>
                 </div>
-            `;
 
-        }
-    );
+                ${
+                    data.cached
+                    ? `
+                        <span class="cache-badge">
+                            Cached result
+                        </span>
+                    `
+                    : ""
+                }
 
+            </div>
 
-    result.innerHTML = html;
+            ${tableHTML}
+
+        </div>
+
+    `;
 
 }
 
 
+/* --------------------------------
+   ERROR
+-------------------------------- */
+
+function showError(message) {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status error";
+
+
+    status.textContent =
+        message;
+
+}
+
+
+/* --------------------------------
+   SECURITY
+-------------------------------- */
 
 function escapeHtml(value) {
 
     return String(value)
 
-        .replaceAll("&", "&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<", "&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">", "&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"', "&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
 }
+
+
+/* --------------------------------
+   INITIALIZE
+-------------------------------- */
+
+renderHistory();
+
+
+/*
+ * Press Enter to search
+ */
+
+document
+    .getElementById("htno")
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchResult();
+
+            }
+
+        }
+    );
 
 </script>
 
 
 </body>
 
-  </html>
+    </html>
