@@ -491,31 +491,31 @@ main {
 
     .result-table .col-code {
         text-align: left;
-        font-size: 0.66rem;
+        font-size: 0.65rem;
         padding-left: 2px;
-        width: 18%;
+        width: 15%;
     }
 
     .result-table .col-name {
         text-align: left;
-        font-size: 0.66rem;
-        line-height: 1.2;
-        width: 32%;
+        font-size: 0.68rem;
+        line-height: 1.25;
+        width: 45%;
         word-break: break-word;
     }
 
     .result-table .col-num {
-        width: 8.5%;
+        width: 6.5%;
         text-align: center;
     }
 
     .result-table .col-grade {
-        width: 8.5%;
+        width: 7.5%;
         text-align: center;
     }
 
     .result-table .col-attempts {
-        width: 8%;
+        width: 6.5%;
         text-align: center;
     }
 

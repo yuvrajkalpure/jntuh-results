@@ -33,7 +33,7 @@ export default function ResultTable({ table, subjectsList }) {
               <th><span className="desktop-text">Total</span><span className="mobile-text">Tot</span></th>
               <th>Grade</th>
               <th><span className="desktop-text">Credits</span><span className="mobile-text">Cr</span></th>
-              <th><span className="desktop-text">Attempts</span><span className="mobile-text">A</span></th>
+              <th>Attempts</th>
             </tr>
           </thead>
           <tbody>
@@ -70,7 +70,7 @@ export default function ResultTable({ table, subjectsList }) {
                         title="Click to view detailed marks and JNTUH link per attempt"
                       >
                         <span className="desktop-text">{attemptsCount} Attempt{attemptsCount > 1 ? 's' : ''}</span>
-                        <span className="mobile-text">A{attemptsCount}</span>
+                        <span className="mobile-text">{attemptsCount}</span>
                         <span style={{ fontSize: '0.65rem' }}>{isExpanded ? '▲' : '▼'}</span>
                       </button>
                     </td>
