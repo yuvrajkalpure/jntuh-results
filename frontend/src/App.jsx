@@ -106,9 +106,15 @@ export default function App() {
     console.log("LOCAL CACHE MISS (REACT):", cleanHtno);
     setStatus({ type: 'loading', message: 'Fetching all semester results from JNTUH...' });
 
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
     try {
       const response = await fetch(`${API_BASE_URL}/api/result?htno=${encodeURIComponent(cleanHtno)}`);
+      
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        throw new Error(`Backend server at '${API_BASE_URL || 'Vercel'}' returned HTML instead of JSON. Please verify your live backend URL and set VITE_API_BASE_URL in Vercel settings.`);
+      }
+
       const data = await response.json();
 
       if (!response.ok || !data.success) {
