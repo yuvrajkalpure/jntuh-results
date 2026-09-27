@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
 /* Mount API routes */
 app.use("/api", resultRoutes);
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[SERVER] JNTUH Results API running on port ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`[SERVER] JNTUH Results API running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
