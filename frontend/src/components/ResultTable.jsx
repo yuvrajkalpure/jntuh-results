@@ -26,14 +26,14 @@ export default function ResultTable({ table, subjectsList }) {
         <table className="result-table">
           <thead>
             <tr>
-              <th><span className="desktop-text">Subject Code</span><span className="mobile-text">Code</span></th>
-              <th><span className="desktop-text">Subject Name</span><span className="mobile-text">Subject</span></th>
-              <th><span className="desktop-text">Internal</span><span className="mobile-text">Int</span></th>
-              <th><span className="desktop-text">External</span><span className="mobile-text">Ext</span></th>
-              <th><span className="desktop-text">Total</span><span className="mobile-text">Tot</span></th>
-              <th>Grade</th>
-              <th><span className="desktop-text">Credits</span><span className="mobile-text">Cr</span></th>
-              <th>Attempts</th>
+              <th className="col-code"><span className="desktop-text">Subject Code</span><span className="mobile-text">Code</span></th>
+              <th className="col-name"><span className="desktop-text">Subject Name</span><span className="mobile-text">Subject</span></th>
+              <th className="col-num"><span className="desktop-text">Internal</span><span className="mobile-text">Int</span></th>
+              <th className="col-num"><span className="desktop-text">External</span><span className="mobile-text">Ext</span></th>
+              <th className="col-num"><span className="desktop-text">Total</span><span className="mobile-text">Tot</span></th>
+              <th className="col-grade">Grade</th>
+              <th className="col-num"><span className="desktop-text">Credits</span><span className="mobile-text">Cr</span></th>
+              <th className="col-attempts">Attempts</th>
             </tr>
           </thead>
           <tbody>
