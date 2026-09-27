@@ -30,9 +30,7 @@ function parseHTNO(htno) {
     const effectiveCohortYear = isLateral ? admissionYear - 1 : admissionYear;
     const studentRegulation = getStudentRegulation(effectiveCohortYear);
 
-    const targetSemesters = isLateral
-        ? ["4-2", "4-1", "3-2", "3-1", "2-2", "2-1"]
-        : ["4-2", "4-1", "3-2", "3-1", "2-2", "2-1", "1-2", "1-1"];
+    const targetSemesters = getTargetSemesters(effectiveCohortYear, isLateral);
 
     return {
         htno: cleanHtno,
@@ -47,6 +45,26 @@ function parseHTNO(htno) {
         studentRegulation,
         targetSemesters
     };
+}
+
+function getTargetSemesters(effectiveCohortYear, isLateral) {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    // Calculate cohort progress
+    const cohortYears = currentYear - effectiveCohortYear + (currentMonth >= 6 ? 1 : 0);
+
+    const allRegularSemesters = ["1-1", "1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"];
+    const allLateralSemesters = ["2-1", "2-2", "3-1", "3-2", "4-1", "4-2"];
+
+    const baseSemesters = isLateral ? allLateralSemesters : allRegularSemesters;
+
+    let maxSemIndex = baseSemesters.length - 1;
+    if (cohortYears <= 1) maxSemIndex = isLateral ? 1 : 1;
+    else if (cohortYears === 2) maxSemIndex = isLateral ? 3 : 3;
+    else if (cohortYears === 3) maxSemIndex = isLateral ? 5 : 5;
+
+    const validSemesters = baseSemesters.slice(0, maxSemIndex + 1);
+    return validSemesters.reverse();
 }
 
 function getStudentRegulation(effectiveCohortYear) {

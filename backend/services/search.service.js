@@ -36,11 +36,12 @@ async function searchStudent(rawHtno) {
         const releases = releaseService.getReleasesForGroup(group, catalog);
         if (releases.length === 0) continue;
 
+        // Separate DB Hits from DB Misses
+        const missingReleases = [];
         for (const release of releases) {
             const releaseId = `${release.examCode}_${release.attemptType}`;
             const existingRecord = storeService.getStudentResultForRelease(htno, releaseId);
 
-            // A. Check Database Store First
             if (existingRecord) {
                 if (existingRecord.hasResult) {
                     console.log(`[SEARCH SERVICE] DB HIT (VALID): ${htno} -> ${group.semester} [${release.examCode} ${release.attemptType}]`);
@@ -48,29 +49,36 @@ async function searchStudent(rawHtno) {
                 } else {
                     console.log(`[SEARCH SERVICE] DB HIT (NO RESULT): ${htno} -> ${group.semester} [${release.examCode} ${release.attemptType}]`);
                 }
-                continue;
-            }
-
-            // B. Database Miss -> Request JNTUH Server
-            console.log(`[SEARCH SERVICE] DB MISS: Querying JNTUH for ${htno} -> ${group.semester} [${release.examCode} ${release.attemptType}]...`);
-            const html = await jntuhService.fetchRawResultHtml(htno, release);
-
-            if (!html) {
-                // Network failure or socket hang up - do NOT mark as NO_RESULT!
-                console.warn(`[SEARCH SERVICE] Network failure fetching examCode ${release.examCode} for ${htno}`);
-                continue;
-            }
-
-            const parsed = resultParser.parseResultHtml(html, release);
-
-            if (parsed.success) {
-                // Save valid result to DB store
-                const saved = storeService.saveStudentResult(htno, batchInfo, parsed);
-                if (saved) validStudentResults.push(saved);
             } else {
-                // Record NO_RESULT in DB store (JNTUH explicitly returned "invalid hallticket number")
-                storeService.saveNoResult(htno, batchInfo, release);
+                missingReleases.push(release);
             }
+        }
+
+        // Fetch DB Misses in parallel for this semester group
+        if (missingReleases.length > 0) {
+            console.log(`[SEARCH SERVICE] DB MISS (${missingReleases.length} releases for ${group.semester}): Querying JNTUH in parallel...`);
+            const fetchPromises = missingReleases.map(async (release) => {
+                try {
+                    const html = await jntuhService.fetchRawResultHtml(htno, release);
+                    if (!html) return null;
+
+                    const parsed = resultParser.parseResultHtml(html, release);
+                    if (parsed.success) {
+                        return storeService.saveStudentResult(htno, batchInfo, parsed);
+                    } else {
+                        storeService.saveNoResult(htno, batchInfo, release);
+                        return null;
+                    }
+                } catch (err) {
+                    console.warn(`[SEARCH SERVICE] Error fetching release ${release.examCode}:`, err.message);
+                    return null;
+                }
+            });
+
+            const fetchedResults = await Promise.all(fetchPromises);
+            fetchedResults.forEach(res => {
+                if (res) validStudentResults.push(res);
+            });
         }
     }
 

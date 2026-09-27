@@ -83,6 +83,28 @@
       "branchCode": "05",
       "createdAt": "2026-09-27T09:43:49.693Z",
       "updatedAt": "2026-09-27T09:43:52.675Z"
+    },
+    "23E31A0557": {
+      "id": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "batchId": "2023-REGULAR-R22",
+      "name": "VANGURU SHIVANAND REDDY",
+      "fatherName": "VANGURU KONDAL REDDY",
+      "collegeCode": "E3",
+      "branchCode": "05",
+      "createdAt": "2026-09-27T11:12:03.107Z",
+      "updatedAt": "2026-09-27T11:12:05.741Z"
+    },
+    "23E31A0555": {
+      "id": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "batchId": "2023-REGULAR-R22",
+      "name": "TAMADA CHANDRIKA",
+      "fatherName": "TAMADA KRISHNA",
+      "collegeCode": "E3",
+      "branchCode": "05",
+      "createdAt": "2026-09-27T11:15:08.954Z",
+      "updatedAt": "2026-09-27T11:15:11.876Z"
     }
   },
   "result_groups": {
@@ -1176,7 +1198,8 @@
           "A+",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1964&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1945_SUPPLY": {
       "id": "23E31A0586_1945_SUPPLY",
@@ -1478,7 +1501,8 @@
           "A",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1942&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1927_SUPPLY": {
       "id": "23E31A0586_1927_SUPPLY",
@@ -1814,7 +1838,8 @@
           "O",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1913&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1969_REGULAR": {
       "id": "23E31A0586_1969_REGULAR",
@@ -1903,7 +1928,8 @@
           "B+",
           "3"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1951&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1813_RCRV": {
       "id": "23E31A0586_1813_RCRV",
@@ -2187,7 +2213,8 @@
           "A+",
           "1.5"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1833&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1953_REGULAR": {
       "id": "23E31A0586_1953_REGULAR",
@@ -2574,7 +2601,8 @@
           "A+",
           "1.5"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1800&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1932_REGULAR": {
       "id": "23E31A0586_1932_REGULAR",
@@ -2960,7 +2988,8 @@
           "A+",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1763&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0586"
     },
     "23E31A0586_1851_REGULAR": {
       "id": "23E31A0586_1851_REGULAR",
@@ -3516,7 +3545,8 @@
           "A+",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1964&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1945_SUPPLY": {
       "id": "23E31A0556_1945_SUPPLY",
@@ -3818,7 +3848,8 @@
           "A",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1942&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1927_SUPPLY": {
       "id": "23E31A0556_1927_SUPPLY",
@@ -4154,7 +4185,8 @@
           "A+",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1913&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1969_REGULAR": {
       "id": "23E31A0556_1969_REGULAR",
@@ -4489,7 +4521,8 @@
           "A",
           "1.5"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1833&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1953_REGULAR": {
       "id": "23E31A0556_1953_REGULAR",
@@ -4544,7 +4577,8 @@
           "F",
           "0"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1953&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1818_SUPPLY": {
       "id": "23E31A0556_1818_SUPPLY",
@@ -4634,7 +4668,8 @@
           "F",
           "0"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1917&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1971_SUPPLY": {
       "id": "23E31A0556_1971_SUPPLY",
@@ -4689,7 +4724,8 @@
           "Ab",
           "0"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1971&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1771_RCRV": {
       "id": "23E31A0556_1771_RCRV",
@@ -5008,7 +5044,8 @@
           "O",
           "1.5"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1800&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1932_REGULAR": {
       "id": "23E31A0556_1932_REGULAR",
@@ -5063,7 +5100,8 @@
           "B",
           "4"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1932&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1768_SUPPLY": {
       "id": "23E31A0556_1768_SUPPLY",
@@ -5153,7 +5191,8 @@
           "F",
           "0"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1855&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1955_SUPPLY": {
       "id": "23E31A0556_1955_SUPPLY",
@@ -5278,7 +5317,8 @@
           "0",
           "No Change in Grade"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1800&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1932_RCRV": {
       "id": "23E31A0556_1932_RCRV",
@@ -5528,7 +5568,8 @@
           "A+",
           "1"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1763&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1851_REGULAR": {
       "id": "23E31A0556_1851_REGULAR",
@@ -5583,7 +5624,8 @@
           "B",
           "3"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1851&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1958_REGULAR": {
       "id": "23E31A0556_1958_REGULAR",
@@ -5672,7 +5714,8 @@
           "F",
           "0"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1803&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1935_SUPPLY": {
       "id": "23E31A0556_1935_SUPPLY",
@@ -5797,7 +5840,8 @@
           "0",
           "No Change in Grade"
         ]
-      ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1763&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0556"
     },
     "23E31A0556_1803_RCRV": {
       "id": "23E31A0556_1803_RCRV",
@@ -16472,6 +16516,5432 @@
       "resultStatus": "NO_RESULT",
       "hasResult": false,
       "fetchedAt": "2026-09-27T09:44:09.588Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1961_REGULAR": {
+      "id": "23E31A0557_1961_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1961_REGULAR",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1961",
+      "semester": "4-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech IV Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:03.118Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1976_SUPPLY": {
+      "id": "23E31A0557_1976_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1976_SUPPLY",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1976",
+      "semester": "4-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech IV Year II Semester (R22) Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:03.509Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1961_RCRV": {
+      "id": "23E31A0557_1961_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1961_RCRV",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1961",
+      "semester": "4-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:03.713Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1976_RCRV": {
+      "id": "23E31A0557_1976_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1976_RCRV",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1976",
+      "semester": "4-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year II Semester (R22) Advance Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:03.951Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1948_REGULAR": {
+      "id": "23E31A0557_1948_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1948_REGULAR",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1948",
+      "semester": "4-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech IV Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:04.225Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1973_SUPPLY": {
+      "id": "23E31A0557_1973_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1973_SUPPLY",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1973",
+      "semester": "4-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech IV Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:04.444Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1948_RCRV": {
+      "id": "23E31A0557_1948_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1948_RCRV",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1948",
+      "semester": "4-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:04.737Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1973_RCRV": {
+      "id": "23E31A0557_1973_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1973_RCRV",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1973",
+      "semester": "4-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:04.914Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1921_REGULAR": {
+      "id": "23E31A0557_1921_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1921_REGULAR",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1921",
+      "semester": "3-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech III Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:05.145Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1964_REGULAR": {
+      "id": "23E31A0557_1964_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1964_REGULAR",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1964",
+      "semester": "3-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of III B.Tech. II Semester (R22) Regular 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:05.749Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 14,
+        "totalSubjects": 9,
+        "passedSubjects": 7,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "186GK",
+          "subjectName": "RENEWABLE ENERGY SOURCES (SYLLABUS FORM M.E)",
+          "internalMarks": "20",
+          "externalMarks": "21",
+          "totalMarks": "41",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186EF",
+          "subjectName": "SCRIPTING LANGUAGES",
+          "internalMarks": "20",
+          "externalMarks": "3",
+          "totalMarks": "23",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "186CY",
+          "subjectName": "MACHINE LEARNING",
+          "internalMarks": "27",
+          "externalMarks": "17",
+          "totalMarks": "44",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "186CB",
+          "subjectName": "FORMAL LANGUAGES AND AUTOMATA THEORY",
+          "internalMarks": "20",
+          "externalMarks": "22",
+          "totalMarks": "42",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186AK",
+          "subjectName": "ARTIFICIAL INTELLIGENCE",
+          "internalMarks": "28",
+          "externalMarks": "32",
+          "totalMarks": "60",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18671",
+          "subjectName": "INDUSTRIAL ORIENTED MINI PROJECT",
+          "internalMarks": "0",
+          "externalMarks": "70",
+          "totalMarks": "70",
+          "grade": "A",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18661",
+          "subjectName": "SCRIPTING LANGUAGES LAB",
+          "internalMarks": "29",
+          "externalMarks": "31",
+          "totalMarks": "60",
+          "grade": "B+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18631",
+          "subjectName": "MACHINE LEARNING LAB",
+          "internalMarks": "28",
+          "externalMarks": "50",
+          "totalMarks": "78",
+          "grade": "A",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18607",
+          "subjectName": "ARTIFICIAL INTELLIGENCE LABORATORY",
+          "internalMarks": "35",
+          "externalMarks": "48",
+          "totalMarks": "83",
+          "grade": "A+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "186GK",
+          "RENEWABLE ENERGY SOURCES (SYLLABUS FORM M.E)",
+          "20",
+          "21",
+          "41",
+          "C",
+          "3"
+        ],
+        [
+          "186EF",
+          "SCRIPTING LANGUAGES",
+          "20",
+          "3",
+          "23",
+          "F",
+          "0"
+        ],
+        [
+          "186CY",
+          "MACHINE LEARNING",
+          "27",
+          "17",
+          "44",
+          "F",
+          "0"
+        ],
+        [
+          "186CB",
+          "FORMAL LANGUAGES AND AUTOMATA THEORY",
+          "20",
+          "22",
+          "42",
+          "C",
+          "3"
+        ],
+        [
+          "186AK",
+          "ARTIFICIAL INTELLIGENCE",
+          "28",
+          "32",
+          "60",
+          "B+",
+          "3"
+        ],
+        [
+          "18671",
+          "INDUSTRIAL ORIENTED MINI PROJECT",
+          "0",
+          "70",
+          "70",
+          "A",
+          "2"
+        ],
+        [
+          "18661",
+          "SCRIPTING LANGUAGES LAB",
+          "29",
+          "31",
+          "60",
+          "B+",
+          "1"
+        ],
+        [
+          "18631",
+          "MACHINE LEARNING LAB",
+          "28",
+          "50",
+          "78",
+          "A",
+          "1"
+        ],
+        [
+          "18607",
+          "ARTIFICIAL INTELLIGENCE LABORATORY",
+          "35",
+          "48",
+          "83",
+          "A+",
+          "1"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1964&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1945_SUPPLY": {
+      "id": "23E31A0557_1945_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1945_SUPPLY",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1945",
+      "semester": "3-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech III Year II Semester (R22) Supplementary Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:05.965Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1921_RCRV": {
+      "id": "23E31A0557_1921_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1921_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1921",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:06.128Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1945_RCRV": {
+      "id": "23E31A0557_1945_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1945_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1945",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Supplementary Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:06.683Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1964_RCRV": {
+      "id": "23E31A0557_1964_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1964_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1964",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Regular Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:06.848Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1841_REGULAR": {
+      "id": "23E31A0557_1841_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1841_REGULAR",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1841",
+      "semester": "3-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech III Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:07.101Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1942_REGULAR": {
+      "id": "23E31A0557_1942_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1942_REGULAR",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1942",
+      "semester": "3-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of III B.Tech. I Semester (R22) Regular 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:07.809Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 17,
+        "totalSubjects": 10,
+        "passedSubjects": 9,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "185DZ",
+          "subjectName": "PRINCIPLES OF PROGRAMMING LANGUAGES",
+          "internalMarks": "29",
+          "externalMarks": "21",
+          "totalMarks": "50",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "185BW",
+          "subjectName": "DEVOPS",
+          "internalMarks": "25",
+          "externalMarks": "21",
+          "totalMarks": "46",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "185BT",
+          "subjectName": "DESIGN AND ANALYSIS OF ALGORITHMS",
+          "internalMarks": "21",
+          "externalMarks": "30",
+          "totalMarks": "51",
+          "grade": "B",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "185BB",
+          "subjectName": "COMPUTER NETWORKS",
+          "internalMarks": "26",
+          "externalMarks": "17",
+          "totalMarks": "43",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "185BA",
+          "subjectName": "COMPUTER GRAPHICS",
+          "internalMarks": "18",
+          "externalMarks": "23",
+          "totalMarks": "41",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18539",
+          "subjectName": "INTELLECTUAL PROPERTY RIGHTS",
+          "internalMarks": "72",
+          "externalMarks": "0",
+          "totalMarks": "72",
+          "grade": "A",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18530",
+          "subjectName": "UI DESIGN-FLUTTER",
+          "internalMarks": "35",
+          "externalMarks": "28",
+          "totalMarks": "63",
+          "grade": "B+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18508",
+          "subjectName": "DEVOPS LAB",
+          "internalMarks": "35",
+          "externalMarks": "52",
+          "totalMarks": "87",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18506",
+          "subjectName": "COMPUTER NETWORKS LAB",
+          "internalMarks": "27",
+          "externalMarks": "48",
+          "totalMarks": "75",
+          "grade": "A",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18502",
+          "subjectName": "ADVANCED ENGLISH COMMUNICATION SKILLS LAB",
+          "internalMarks": "21",
+          "externalMarks": "43",
+          "totalMarks": "64",
+          "grade": "B+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "185DZ",
+          "PRINCIPLES OF PROGRAMMING LANGUAGES",
+          "29",
+          "21",
+          "50",
+          "B",
+          "3"
+        ],
+        [
+          "185BW",
+          "DEVOPS",
+          "25",
+          "21",
+          "46",
+          "C",
+          "3"
+        ],
+        [
+          "185BT",
+          "DESIGN AND ANALYSIS OF ALGORITHMS",
+          "21",
+          "30",
+          "51",
+          "B",
+          "4"
+        ],
+        [
+          "185BB",
+          "COMPUTER NETWORKS",
+          "26",
+          "17",
+          "43",
+          "F",
+          "0"
+        ],
+        [
+          "185BA",
+          "COMPUTER GRAPHICS",
+          "18",
+          "23",
+          "41",
+          "C",
+          "3"
+        ],
+        [
+          "18539",
+          "INTELLECTUAL PROPERTY RIGHTS",
+          "72",
+          "0",
+          "72",
+          "A",
+          "0"
+        ],
+        [
+          "18530",
+          "UI DESIGN-FLUTTER",
+          "35",
+          "28",
+          "63",
+          "B+",
+          "1"
+        ],
+        [
+          "18508",
+          "DEVOPS LAB",
+          "35",
+          "52",
+          "87",
+          "A+",
+          "1"
+        ],
+        [
+          "18506",
+          "COMPUTER NETWORKS LAB",
+          "27",
+          "48",
+          "75",
+          "A",
+          "1"
+        ],
+        [
+          "18502",
+          "ADVANCED ENGLISH COMMUNICATION SKILLS LAB",
+          "21",
+          "43",
+          "64",
+          "B+",
+          "1"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1942&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1927_SUPPLY": {
+      "id": "23E31A0557_1927_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1927_SUPPLY",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1927",
+      "semester": "3-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech III Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:08.018Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1967_SUPPLY": {
+      "id": "23E31A0557_1967_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1967_SUPPLY",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1967",
+      "semester": "3-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of III B.Tech. I Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:08.267Z",
+      "summary": {
+        "sgpa": 0.75,
+        "percentage": 2.5,
+        "totalCredits": 20,
+        "earnedCredits": 3,
+        "totalSubjects": 1,
+        "passedSubjects": 1,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "185BB",
+          "subjectName": "COMPUTER NETWORKS",
+          "internalMarks": "26",
+          "externalMarks": "23",
+          "totalMarks": "49",
+          "grade": "C",
+          "credits": "3"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "185BB",
+          "COMPUTER NETWORKS",
+          "26",
+          "23",
+          "49",
+          "C",
+          "3"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1967&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1841_RCRV": {
+      "id": "23E31A0557_1841_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1841_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1841",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:08.442Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1927_RCRV": {
+      "id": "23E31A0557_1927_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1927_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1927",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:08.751Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1942_RCRV": {
+      "id": "23E31A0557_1942_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1942_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1942",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Regular Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:08.939Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1967_RCRV": {
+      "id": "23E31A0557_1967_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1967_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1967",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Supplementary Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:09.214Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1813_REGULAR": {
+      "id": "23E31A0557_1813_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1813_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1813",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:09.388Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1913_REGULAR": {
+      "id": "23E31A0557_1913_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1913_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1913",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of II B.Tech. II Semester (R22) Regular 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:09.989Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 14,
+        "totalSubjects": 10,
+        "passedSubjects": 8,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "184CG",
+          "subjectName": "SOFTWARE ENGINEERING",
+          "internalMarks": "24",
+          "externalMarks": "24",
+          "totalMarks": "48",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184BZ",
+          "subjectName": "OPERATING SYSTEMS",
+          "internalMarks": "23",
+          "externalMarks": "26",
+          "totalMarks": "49",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184AU",
+          "subjectName": "DISCRETE MATHEMATICS",
+          "internalMarks": "21",
+          "externalMarks": "9",
+          "totalMarks": "30",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "184AQ",
+          "subjectName": "DATABASE MANAGEMENT SYSTEMS",
+          "internalMarks": "29",
+          "externalMarks": "13",
+          "totalMarks": "42",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "184AF",
+          "subjectName": "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+          "internalMarks": "24",
+          "externalMarks": "27",
+          "totalMarks": "51",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18442",
+          "subjectName": "REAL-TIME RESEARCH PROJECT/ SOCIETAL RELATED PROJECT",
+          "internalMarks": "48",
+          "externalMarks": "0",
+          "totalMarks": "48",
+          "grade": "O",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18434",
+          "subjectName": "CONSTITUTION OF INDIA",
+          "internalMarks": "76",
+          "externalMarks": "0",
+          "totalMarks": "76",
+          "grade": "A",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18427",
+          "subjectName": "OPERATING SYSTEMS LAB",
+          "internalMarks": "32",
+          "externalMarks": "51",
+          "totalMarks": "83",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18426",
+          "subjectName": "NODE JS REACT JS DJANGO",
+          "internalMarks": "30",
+          "externalMarks": "52",
+          "totalMarks": "82",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18409",
+          "subjectName": "DATABASE MANAGEMENT SYSTEMS LAB",
+          "internalMarks": "31",
+          "externalMarks": "50",
+          "totalMarks": "81",
+          "grade": "A+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "184CG",
+          "SOFTWARE ENGINEERING",
+          "24",
+          "24",
+          "48",
+          "C",
+          "3"
+        ],
+        [
+          "184BZ",
+          "OPERATING SYSTEMS",
+          "23",
+          "26",
+          "49",
+          "C",
+          "3"
+        ],
+        [
+          "184AU",
+          "DISCRETE MATHEMATICS",
+          "21",
+          "9",
+          "30",
+          "F",
+          "0"
+        ],
+        [
+          "184AQ",
+          "DATABASE MANAGEMENT SYSTEMS",
+          "29",
+          "13",
+          "42",
+          "F",
+          "0"
+        ],
+        [
+          "184AF",
+          "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+          "24",
+          "27",
+          "51",
+          "B",
+          "3"
+        ],
+        [
+          "18442",
+          "REAL-TIME RESEARCH PROJECT/ SOCIETAL RELATED PROJECT",
+          "48",
+          "0",
+          "48",
+          "O",
+          "2"
+        ],
+        [
+          "18434",
+          "CONSTITUTION OF INDIA",
+          "76",
+          "0",
+          "76",
+          "A",
+          "0"
+        ],
+        [
+          "18427",
+          "OPERATING SYSTEMS LAB",
+          "32",
+          "51",
+          "83",
+          "A+",
+          "1"
+        ],
+        [
+          "18426",
+          "NODE JS REACT JS DJANGO",
+          "30",
+          "52",
+          "82",
+          "A+",
+          "1"
+        ],
+        [
+          "18409",
+          "DATABASE MANAGEMENT SYSTEMS LAB",
+          "31",
+          "50",
+          "81",
+          "A+",
+          "1"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1913&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1969_REGULAR": {
+      "id": "23E31A0557_1969_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1969_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1969",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year II Semester (R22) Regular Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:10.217Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1837_SUPPLY": {
+      "id": "23E31A0557_1837_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1837_SUPPLY",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1837",
+      "semester": "2-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:10.391Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1951_SUPPLY": {
+      "id": "23E31A0557_1951_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1951_SUPPLY",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1951",
+      "semester": "2-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of II B.Tech. II Semester (R22) Supplementary 2025 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:10.693Z",
+      "summary": {
+        "sgpa": 1.65,
+        "percentage": 11.5,
+        "totalCredits": 20,
+        "earnedCredits": 6,
+        "totalSubjects": 2,
+        "passedSubjects": 2,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "184AU",
+          "subjectName": "DISCRETE MATHEMATICS",
+          "internalMarks": "21",
+          "externalMarks": "21",
+          "totalMarks": "42",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184AQ",
+          "subjectName": "DATABASE MANAGEMENT SYSTEMS",
+          "internalMarks": "29",
+          "externalMarks": "25",
+          "totalMarks": "54",
+          "grade": "B",
+          "credits": "3"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "184AU",
+          "DISCRETE MATHEMATICS",
+          "21",
+          "21",
+          "42",
+          "C",
+          "3"
+        ],
+        [
+          "184AQ",
+          "DATABASE MANAGEMENT SYSTEMS",
+          "29",
+          "25",
+          "54",
+          "B",
+          "3"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1951&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1813_RCRV": {
+      "id": "23E31A0557_1813_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1813_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1813",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:10.883Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1913_RCRV": {
+      "id": "23E31A0557_1913_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1913_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1913",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:11.105Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1951_RCRV": {
+      "id": "23E31A0557_1951_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1951_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1951",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:11.295Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1969_RCRV": {
+      "id": "23E31A0557_1969_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1969_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1969",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:11.534Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1771_REGULAR": {
+      "id": "23E31A0557_1771_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1771_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1771",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:11.698Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1833_REGULAR": {
+      "id": "23E31A0557_1833_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1833_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1833",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of II B.Tech. I Semester (R22) Regular 2024 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:12.557Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 7,
+        "totalSubjects": 9,
+        "passedSubjects": 5,
+        "failedSubjects": 4,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "183BU",
+          "subjectName": "OBJECT ORIENTED PROGRAMMING THROUGH JAVA",
+          "internalMarks": "25",
+          "externalMarks": "23",
+          "totalMarks": "48",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AP",
+          "subjectName": "DIGITAL ELECTRONICS",
+          "internalMarks": "31",
+          "externalMarks": "4",
+          "totalMarks": "35",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "183AM",
+          "subjectName": "DATA STRUCTURES",
+          "internalMarks": "28",
+          "externalMarks": "8",
+          "totalMarks": "36",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "183AK",
+          "subjectName": "COMPUTER ORIENTED STATISTICAL METHODS",
+          "internalMarks": "24",
+          "externalMarks": "6",
+          "totalMarks": "30",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "183AH",
+          "subjectName": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "internalMarks": "23",
+          "externalMarks": "8",
+          "totalMarks": "31",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18339",
+          "subjectName": "GENDER SENSITIZATION LAB",
+          "internalMarks": "88",
+          "externalMarks": "0",
+          "totalMarks": "88",
+          "grade": "A+",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18326",
+          "subjectName": "OBJECT ORIENTED PROGRAMMING THROUGH JAVA LAB",
+          "internalMarks": "32",
+          "externalMarks": "44",
+          "totalMarks": "76",
+          "grade": "A",
+          "credits": "1.5"
+        },
+        {
+          "subjectCode": "18308",
+          "subjectName": "DATA VISUALIZATION R PROGRAMMING POWER BI",
+          "internalMarks": "31",
+          "externalMarks": "52",
+          "totalMarks": "83",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18307",
+          "subjectName": "DATA STRUCTURES LAB",
+          "internalMarks": "28",
+          "externalMarks": "45",
+          "totalMarks": "73",
+          "grade": "A",
+          "credits": "1.5"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "183BU",
+          "OBJECT ORIENTED PROGRAMMING THROUGH JAVA",
+          "25",
+          "23",
+          "48",
+          "C",
+          "3"
+        ],
+        [
+          "183AP",
+          "DIGITAL ELECTRONICS",
+          "31",
+          "4",
+          "35",
+          "F",
+          "0"
+        ],
+        [
+          "183AM",
+          "DATA STRUCTURES",
+          "28",
+          "8",
+          "36",
+          "F",
+          "0"
+        ],
+        [
+          "183AK",
+          "COMPUTER ORIENTED STATISTICAL METHODS",
+          "24",
+          "6",
+          "30",
+          "F",
+          "0"
+        ],
+        [
+          "183AH",
+          "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "23",
+          "8",
+          "31",
+          "F",
+          "0"
+        ],
+        [
+          "18339",
+          "GENDER SENSITIZATION LAB",
+          "88",
+          "0",
+          "88",
+          "A+",
+          "0"
+        ],
+        [
+          "18326",
+          "OBJECT ORIENTED PROGRAMMING THROUGH JAVA LAB",
+          "32",
+          "44",
+          "76",
+          "A",
+          "1.5"
+        ],
+        [
+          "18308",
+          "DATA VISUALIZATION R PROGRAMMING POWER BI",
+          "31",
+          "52",
+          "83",
+          "A+",
+          "1"
+        ],
+        [
+          "18307",
+          "DATA STRUCTURES LAB",
+          "28",
+          "45",
+          "73",
+          "A",
+          "1.5"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1833&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1953_REGULAR": {
+      "id": "23E31A0557_1953_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1953_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1953",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of II B.Tech. I Semester (R22) Regular 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:13.422Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 3,
+        "totalSubjects": 2,
+        "passedSubjects": 1,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "183AM",
+          "subjectName": "DATA STRUCTURES",
+          "internalMarks": "28",
+          "externalMarks": "21",
+          "totalMarks": "49",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AK",
+          "subjectName": "COMPUTER ORIENTED STATISTICAL METHODS",
+          "internalMarks": "24",
+          "externalMarks": "4",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "183AM",
+          "DATA STRUCTURES",
+          "28",
+          "21",
+          "49",
+          "C",
+          "3"
+        ],
+        [
+          "183AK",
+          "COMPUTER ORIENTED STATISTICAL METHODS",
+          "24",
+          "4",
+          "28",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1953&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1818_SUPPLY": {
+      "id": "23E31A0557_1818_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1818_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1818",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:13.616Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1917_SUPPLY": {
+      "id": "23E31A0557_1917_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1917_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1917",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of II B.Tech. I Semester (R22) Supplementary 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:13.974Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 6,
+        "totalSubjects": 4,
+        "passedSubjects": 2,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "183AP",
+          "subjectName": "DIGITAL ELECTRONICS",
+          "internalMarks": "31",
+          "externalMarks": "22",
+          "totalMarks": "53",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AM",
+          "subjectName": "DATA STRUCTURES",
+          "internalMarks": "28",
+          "externalMarks": "11",
+          "totalMarks": "39",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "183AK",
+          "subjectName": "COMPUTER ORIENTED STATISTICAL METHODS",
+          "internalMarks": "24",
+          "externalMarks": "4",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "183AH",
+          "subjectName": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "internalMarks": "23",
+          "externalMarks": "21",
+          "totalMarks": "44",
+          "grade": "C",
+          "credits": "3"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "183AP",
+          "DIGITAL ELECTRONICS",
+          "31",
+          "22",
+          "53",
+          "B",
+          "3"
+        ],
+        [
+          "183AM",
+          "DATA STRUCTURES",
+          "28",
+          "11",
+          "39",
+          "F",
+          "0"
+        ],
+        [
+          "183AK",
+          "COMPUTER ORIENTED STATISTICAL METHODS",
+          "24",
+          "4",
+          "28",
+          "F",
+          "0"
+        ],
+        [
+          "183AH",
+          "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "23",
+          "21",
+          "44",
+          "C",
+          "3"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1917&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1971_SUPPLY": {
+      "id": "23E31A0557_1971_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1971_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1971",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of II B.Tech. I Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:14.277Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 1,
+        "passedSubjects": 0,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "183AK",
+          "subjectName": "COMPUTER ORIENTED STATISTICAL METHODS",
+          "internalMarks": "24",
+          "externalMarks": "4",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "183AK",
+          "COMPUTER ORIENTED STATISTICAL METHODS",
+          "24",
+          "4",
+          "28",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1971&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1771_RCRV": {
+      "id": "23E31A0557_1771_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1771_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1771",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:14.534Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1818_RCRV": {
+      "id": "23E31A0557_1818_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1818_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1818",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:14.770Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1917_RCRV": {
+      "id": "23E31A0557_1917_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1917_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1917",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:14.974Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1953_RCRV": {
+      "id": "23E31A0557_1953_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1953_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1953",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:15.135Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1971_RCRV": {
+      "id": "23E31A0557_1971_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1971_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1971",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:15.487Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1704_REGULAR": {
+      "id": "23E31A0557_1704_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1704_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1704",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:15.697Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1800_REGULAR": {
+      "id": "23E31A0557_1800_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1800_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1800",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Regular 2024 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:16.238Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 8.5,
+        "totalSubjects": 8,
+        "passedSubjects": 6,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AM",
+          "subjectName": "ENGLISH FOR SKILL ENHANCEMENT",
+          "internalMarks": "26",
+          "externalMarks": "31",
+          "totalMarks": "57",
+          "grade": "B",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "182AG",
+          "subjectName": "ELECTRONIC DEVICES AND CIRCUITS",
+          "internalMarks": "22",
+          "externalMarks": "7",
+          "totalMarks": "29",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "20",
+          "externalMarks": "8",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18217",
+          "subjectName": "ENVIRONMENTAL SCIENCE",
+          "internalMarks": "67",
+          "externalMarks": "0",
+          "totalMarks": "67",
+          "grade": "B+",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18215",
+          "subjectName": "PYTHON PROGRAMMING LABORATORY",
+          "internalMarks": "37",
+          "externalMarks": "50",
+          "totalMarks": "87",
+          "grade": "A+",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18213",
+          "subjectName": "IT WORKSHOP",
+          "internalMarks": "38",
+          "externalMarks": "52",
+          "totalMarks": "90",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18210",
+          "subjectName": "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LABORATORY",
+          "internalMarks": "29",
+          "externalMarks": "48",
+          "totalMarks": "77",
+          "grade": "A",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18209",
+          "subjectName": "ENGINEERING WORKSHOP",
+          "internalMarks": "36",
+          "externalMarks": "52",
+          "totalMarks": "88",
+          "grade": "A+",
+          "credits": "2.5"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AM",
+          "ENGLISH FOR SKILL ENHANCEMENT",
+          "26",
+          "31",
+          "57",
+          "B",
+          "2"
+        ],
+        [
+          "182AG",
+          "ELECTRONIC DEVICES AND CIRCUITS",
+          "22",
+          "7",
+          "29",
+          "F",
+          "0"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "20",
+          "8",
+          "28",
+          "F",
+          "0"
+        ],
+        [
+          "18217",
+          "ENVIRONMENTAL SCIENCE",
+          "67",
+          "0",
+          "67",
+          "B+",
+          "0"
+        ],
+        [
+          "18215",
+          "PYTHON PROGRAMMING LABORATORY",
+          "37",
+          "50",
+          "87",
+          "A+",
+          "2"
+        ],
+        [
+          "18213",
+          "IT WORKSHOP",
+          "38",
+          "52",
+          "90",
+          "O",
+          "1"
+        ],
+        [
+          "18210",
+          "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LABORATORY",
+          "29",
+          "48",
+          "77",
+          "A",
+          "1"
+        ],
+        [
+          "18209",
+          "ENGINEERING WORKSHOP",
+          "36",
+          "52",
+          "88",
+          "A+",
+          "2.5"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1800&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1932_REGULAR": {
+      "id": "23E31A0557_1932_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1932_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1932",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Regular 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:16.636Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 1.5,
+        "totalSubjects": 3,
+        "passedSubjects": 1,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AR",
+          "subjectName": "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "internalMarks": "31",
+          "externalMarks": "5",
+          "totalMarks": "36",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "20",
+          "externalMarks": "9",
+          "totalMarks": "29",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18201",
+          "subjectName": "APPLIED PHYSICS LABORATORY",
+          "internalMarks": "30",
+          "externalMarks": "47",
+          "totalMarks": "77",
+          "grade": "A",
+          "credits": "1.5"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AR",
+          "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "31",
+          "5",
+          "36",
+          "F",
+          "0"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "20",
+          "9",
+          "29",
+          "F",
+          "0"
+        ],
+        [
+          "18201",
+          "APPLIED PHYSICS LABORATORY",
+          "30",
+          "47",
+          "77",
+          "A",
+          "1.5"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1932&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1768_SUPPLY": {
+      "id": "23E31A0557_1768_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1768_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1768",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:16.841Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1855_SUPPLY": {
+      "id": "23E31A0557_1855_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1855_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1855",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Supplementary 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:17.092Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 2,
+        "totalSubjects": 2,
+        "passedSubjects": 1,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AG",
+          "subjectName": "ELECTRONIC DEVICES AND CIRCUITS",
+          "internalMarks": "22",
+          "externalMarks": "26",
+          "totalMarks": "48",
+          "grade": "C",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "20",
+          "externalMarks": "10",
+          "totalMarks": "30",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AG",
+          "ELECTRONIC DEVICES AND CIRCUITS",
+          "22",
+          "26",
+          "48",
+          "C",
+          "2"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "20",
+          "10",
+          "30",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1855&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1955_SUPPLY": {
+      "id": "23E31A0557_1955_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1955_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1955",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:17.365Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 2,
+        "passedSubjects": 0,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AR",
+          "subjectName": "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "internalMarks": "31",
+          "externalMarks": "5",
+          "totalMarks": "36",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "20",
+          "externalMarks": "8",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AR",
+          "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "31",
+          "5",
+          "36",
+          "F",
+          "0"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "20",
+          "8",
+          "28",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1955&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1979_SUPPLY": {
+      "id": "23E31A0557_1979_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1979_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1979",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:17.620Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 2,
+        "passedSubjects": 0,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AR",
+          "subjectName": "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "internalMarks": "31",
+          "externalMarks": "4",
+          "totalMarks": "35",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "20",
+          "externalMarks": "6",
+          "totalMarks": "26",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AR",
+          "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "31",
+          "4",
+          "35",
+          "F",
+          "0"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "20",
+          "6",
+          "26",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1979&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1704_RCRV": {
+      "id": "23E31A0557_1704_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1704_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1704",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:17.793Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1768_RCRV": {
+      "id": "23E31A0557_1768_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1768_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1768",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:18.069Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1800_RCRV": {
+      "id": "23E31A0557_1800_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1800_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1800",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:18.354Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1932_RCRV": {
+      "id": "23E31A0557_1932_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1932_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1932",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:18.567Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1955_RCRV": {
+      "id": "23E31A0557_1955_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1955_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1955",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:18.769Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1662_REGULAR": {
+      "id": "23E31A0557_1662_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1662_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1662",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:18.968Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1763_REGULAR": {
+      "id": "23E31A0557_1763_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1763_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1763",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Regular 2024 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:19.520Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 7,
+        "totalSubjects": 9,
+        "passedSubjects": 5,
+        "failedSubjects": 4,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AP",
+          "subjectName": "PROGRAMMING FOR PROBLEM SOLVING",
+          "internalMarks": "26",
+          "externalMarks": "21",
+          "totalMarks": "47",
+          "grade": "C",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "11",
+          "totalMarks": "26",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AJ",
+          "subjectName": "ENGINEERING CHEMISTRY",
+          "internalMarks": "21",
+          "externalMarks": "11",
+          "totalMarks": "32",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AG",
+          "subjectName": "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "internalMarks": "16",
+          "externalMarks": "4",
+          "totalMarks": "20",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AB",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING",
+          "internalMarks": "16",
+          "externalMarks": "8",
+          "totalMarks": "24",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18117",
+          "subjectName": "PROGRAMMING FOR PROBLEM SOLVING LABORATORY",
+          "internalMarks": "30",
+          "externalMarks": "52",
+          "totalMarks": "82",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18113",
+          "subjectName": "ENGINEERING CHEMISTRY LABORATORY",
+          "internalMarks": "27",
+          "externalMarks": "50",
+          "totalMarks": "77",
+          "grade": "A",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18107",
+          "subjectName": "ELEMENTS OF COMPUTER SCIENCE & ENGINEERING",
+          "internalMarks": "45",
+          "externalMarks": "0",
+          "totalMarks": "45",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18102",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING LABORATORY",
+          "internalMarks": "30",
+          "externalMarks": "46",
+          "totalMarks": "76",
+          "grade": "A",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AP",
+          "PROGRAMMING FOR PROBLEM SOLVING",
+          "26",
+          "21",
+          "47",
+          "C",
+          "3"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "11",
+          "26",
+          "F",
+          "0"
+        ],
+        [
+          "181AJ",
+          "ENGINEERING CHEMISTRY",
+          "21",
+          "11",
+          "32",
+          "F",
+          "0"
+        ],
+        [
+          "181AG",
+          "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "16",
+          "4",
+          "20",
+          "F",
+          "0"
+        ],
+        [
+          "181AB",
+          "BASIC ELECTRICAL ENGINEERING",
+          "16",
+          "8",
+          "24",
+          "F",
+          "0"
+        ],
+        [
+          "18117",
+          "PROGRAMMING FOR PROBLEM SOLVING LABORATORY",
+          "30",
+          "52",
+          "82",
+          "A+",
+          "1"
+        ],
+        [
+          "18113",
+          "ENGINEERING CHEMISTRY LABORATORY",
+          "27",
+          "50",
+          "77",
+          "A",
+          "1"
+        ],
+        [
+          "18107",
+          "ELEMENTS OF COMPUTER SCIENCE & ENGINEERING",
+          "45",
+          "0",
+          "45",
+          "O",
+          "1"
+        ],
+        [
+          "18102",
+          "BASIC ELECTRICAL ENGINEERING LABORATORY",
+          "30",
+          "46",
+          "76",
+          "A",
+          "1"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1763&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1851_REGULAR": {
+      "id": "23E31A0557_1851_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1851_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1851",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Regular 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:19.866Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 6,
+        "totalSubjects": 4,
+        "passedSubjects": 2,
+        "failedSubjects": 2,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "16",
+          "totalMarks": "31",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AJ",
+          "subjectName": "ENGINEERING CHEMISTRY",
+          "internalMarks": "21",
+          "externalMarks": "21",
+          "totalMarks": "42",
+          "grade": "C",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "181AG",
+          "subjectName": "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "internalMarks": "16",
+          "externalMarks": "3",
+          "totalMarks": "19",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AB",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING",
+          "internalMarks": "16",
+          "externalMarks": "24",
+          "totalMarks": "40",
+          "grade": "C",
+          "credits": "2"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "16",
+          "31",
+          "F",
+          "0"
+        ],
+        [
+          "181AJ",
+          "ENGINEERING CHEMISTRY",
+          "21",
+          "21",
+          "42",
+          "C",
+          "4"
+        ],
+        [
+          "181AG",
+          "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "16",
+          "3",
+          "19",
+          "F",
+          "0"
+        ],
+        [
+          "181AB",
+          "BASIC ELECTRICAL ENGINEERING",
+          "16",
+          "24",
+          "40",
+          "C",
+          "2"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1851&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1958_REGULAR": {
+      "id": "23E31A0557_1958_REGULAR",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1958_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1958",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:20.088Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 1,
+        "passedSubjects": 0,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "7",
+          "totalMarks": "22",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "7",
+          "22",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1958&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1699_SUPPLY": {
+      "id": "23E31A0557_1699_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1699_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1699",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:20.298Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1803_SUPPLY": {
+      "id": "23E31A0557_1803_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1803_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1803",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Supplementary 2024 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:20.828Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 4,
+        "passedSubjects": 0,
+        "failedSubjects": 4,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "13",
+          "totalMarks": "28",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AJ",
+          "subjectName": "ENGINEERING CHEMISTRY",
+          "internalMarks": "21",
+          "externalMarks": "8",
+          "totalMarks": "29",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AG",
+          "subjectName": "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "internalMarks": "16",
+          "externalMarks": "16",
+          "totalMarks": "32",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AB",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING",
+          "internalMarks": "16",
+          "externalMarks": "11",
+          "totalMarks": "27",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "13",
+          "28",
+          "F",
+          "0"
+        ],
+        [
+          "181AJ",
+          "ENGINEERING CHEMISTRY",
+          "21",
+          "8",
+          "29",
+          "F",
+          "0"
+        ],
+        [
+          "181AG",
+          "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "16",
+          "16",
+          "32",
+          "F",
+          "0"
+        ],
+        [
+          "181AB",
+          "BASIC ELECTRICAL ENGINEERING",
+          "16",
+          "11",
+          "27",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1803&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1935_SUPPLY": {
+      "id": "23E31A0557_1935_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1935_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1935",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Supplementary 2025 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:21.237Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 3,
+        "totalSubjects": 2,
+        "passedSubjects": 1,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "15",
+          "totalMarks": "30",
+          "grade": "F",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "181AG",
+          "subjectName": "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "internalMarks": "16",
+          "externalMarks": "29",
+          "totalMarks": "45",
+          "grade": "C",
+          "credits": "3"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "15",
+          "30",
+          "F",
+          "0"
+        ],
+        [
+          "181AG",
+          "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "16",
+          "29",
+          "45",
+          "C",
+          "3"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1935&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1982_SUPPLY": {
+      "id": "23E31A0557_1982_SUPPLY",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1982_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1982",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Supplementary 2026 Exams",
+      "resultStatus": "FAILED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:12:21.545Z",
+      "summary": {
+        "sgpa": null,
+        "percentage": null,
+        "totalCredits": 20,
+        "earnedCredits": 0,
+        "totalSubjects": 1,
+        "passedSubjects": 0,
+        "failedSubjects": 1,
+        "isFailed": true
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "15",
+          "externalMarks": "10",
+          "totalMarks": "25",
+          "grade": "F",
+          "credits": "0"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "15",
+          "10",
+          "25",
+          "F",
+          "0"
+        ]
+      ],
+      "jntuhUrl": "http://results.jntuh.ac.in/results/resultAction?degree=btech&examCode=1982&etype=r17&result=null&grad=null&type=intgrade&htno=23E31A0557"
+    },
+    "23E31A0557_1662_RCRV": {
+      "id": "23E31A0557_1662_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1662_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1662",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:21.735Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1699_RCRV": {
+      "id": "23E31A0557_1699_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1699_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1699",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:21.944Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1763_RCRV": {
+      "id": "23E31A0557_1763_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1763_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1763",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:22.137Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1803_RCRV": {
+      "id": "23E31A0557_1803_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1803_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1803",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:22.296Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1935_RCRV": {
+      "id": "23E31A0557_1935_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1935_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1935",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:22.470Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0557_1958_RCRV": {
+      "id": "23E31A0557_1958_RCRV",
+      "studentId": "student_23E31A0557",
+      "htno": "23E31A0557",
+      "resultReleaseId": "1958_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1958",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:12:22.658Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1961_REGULAR": {
+      "id": "23E31A0555_1961_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1961_REGULAR",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1961",
+      "semester": "4-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech IV Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:08.964Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1976_SUPPLY": {
+      "id": "23E31A0555_1976_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1976_SUPPLY",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1976",
+      "semester": "4-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech IV Year II Semester (R22) Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:09.261Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1961_RCRV": {
+      "id": "23E31A0555_1961_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1961_RCRV",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1961",
+      "semester": "4-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:09.470Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1976_RCRV": {
+      "id": "23E31A0555_1976_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1976_RCRV",
+      "groupId": "4-2_R22_BTECH",
+      "examCode": "1976",
+      "semester": "4-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year II Semester (R22) Advance Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:09.678Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1948_REGULAR": {
+      "id": "23E31A0555_1948_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1948_REGULAR",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1948",
+      "semester": "4-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech IV Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:10.082Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1973_SUPPLY": {
+      "id": "23E31A0555_1973_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1973_SUPPLY",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1973",
+      "semester": "4-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech IV Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:10.737Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1948_RCRV": {
+      "id": "23E31A0555_1948_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1948_RCRV",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1948",
+      "semester": "4-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:10.906Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1973_RCRV": {
+      "id": "23E31A0555_1973_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1973_RCRV",
+      "groupId": "4-1_R22_BTECH",
+      "examCode": "1973",
+      "semester": "4-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech IV Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:11.150Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1921_REGULAR": {
+      "id": "23E31A0555_1921_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1921_REGULAR",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1921",
+      "semester": "3-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech III Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:11.329Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1964_REGULAR": {
+      "id": "23E31A0555_1964_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1964_REGULAR",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1964",
+      "semester": "3-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of III B.Tech. II Semester (R22) Regular 2026 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:11.887Z",
+      "summary": {
+        "sgpa": 7.75,
+        "percentage": 72.5,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 9,
+        "passedSubjects": 9,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "186GK",
+          "subjectName": "RENEWABLE ENERGY SOURCES (SYLLABUS FORM M.E)",
+          "internalMarks": "31",
+          "externalMarks": "33",
+          "totalMarks": "64",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186EF",
+          "subjectName": "SCRIPTING LANGUAGES",
+          "internalMarks": "24",
+          "externalMarks": "29",
+          "totalMarks": "53",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186CY",
+          "subjectName": "MACHINE LEARNING",
+          "internalMarks": "38",
+          "externalMarks": "50",
+          "totalMarks": "88",
+          "grade": "A+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186CB",
+          "subjectName": "FORMAL LANGUAGES AND AUTOMATA THEORY",
+          "internalMarks": "33",
+          "externalMarks": "28",
+          "totalMarks": "61",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "186AK",
+          "subjectName": "ARTIFICIAL INTELLIGENCE",
+          "internalMarks": "37",
+          "externalMarks": "40",
+          "totalMarks": "77",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18671",
+          "subjectName": "INDUSTRIAL ORIENTED MINI PROJECT",
+          "internalMarks": "0",
+          "externalMarks": "75",
+          "totalMarks": "75",
+          "grade": "A",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18661",
+          "subjectName": "SCRIPTING LANGUAGES LAB",
+          "internalMarks": "37",
+          "externalMarks": "55",
+          "totalMarks": "92",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18631",
+          "subjectName": "MACHINE LEARNING LAB",
+          "internalMarks": "31",
+          "externalMarks": "52",
+          "totalMarks": "83",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18607",
+          "subjectName": "ARTIFICIAL INTELLIGENCE LABORATORY",
+          "internalMarks": "32",
+          "externalMarks": "53",
+          "totalMarks": "85",
+          "grade": "A+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "186GK",
+          "RENEWABLE ENERGY SOURCES (SYLLABUS FORM M.E)",
+          "31",
+          "33",
+          "64",
+          "B+",
+          "3"
+        ],
+        [
+          "186EF",
+          "SCRIPTING LANGUAGES",
+          "24",
+          "29",
+          "53",
+          "B",
+          "3"
+        ],
+        [
+          "186CY",
+          "MACHINE LEARNING",
+          "38",
+          "50",
+          "88",
+          "A+",
+          "3"
+        ],
+        [
+          "186CB",
+          "FORMAL LANGUAGES AND AUTOMATA THEORY",
+          "33",
+          "28",
+          "61",
+          "B+",
+          "3"
+        ],
+        [
+          "186AK",
+          "ARTIFICIAL INTELLIGENCE",
+          "37",
+          "40",
+          "77",
+          "A",
+          "3"
+        ],
+        [
+          "18671",
+          "INDUSTRIAL ORIENTED MINI PROJECT",
+          "0",
+          "75",
+          "75",
+          "A",
+          "2"
+        ],
+        [
+          "18661",
+          "SCRIPTING LANGUAGES LAB",
+          "37",
+          "55",
+          "92",
+          "O",
+          "1"
+        ],
+        [
+          "18631",
+          "MACHINE LEARNING LAB",
+          "31",
+          "52",
+          "83",
+          "A+",
+          "1"
+        ],
+        [
+          "18607",
+          "ARTIFICIAL INTELLIGENCE LABORATORY",
+          "32",
+          "53",
+          "85",
+          "A+",
+          "1"
+        ]
+      ]
+    },
+    "23E31A0555_1945_SUPPLY": {
+      "id": "23E31A0555_1945_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1945_SUPPLY",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1945",
+      "semester": "3-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech III Year II Semester (R22) Supplementary Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:12.355Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1921_RCRV": {
+      "id": "23E31A0555_1921_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1921_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1921",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:12.551Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1945_RCRV": {
+      "id": "23E31A0555_1945_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1945_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1945",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Supplementary Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:12.742Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1964_RCRV": {
+      "id": "23E31A0555_1964_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1964_RCRV",
+      "groupId": "3-2_R22_BTECH",
+      "examCode": "1964",
+      "semester": "3-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year II Semester (R22) Regular Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:13.257Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1841_REGULAR": {
+      "id": "23E31A0555_1841_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1841_REGULAR",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1841",
+      "semester": "3-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech III Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:13.459Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1942_REGULAR": {
+      "id": "23E31A0555_1942_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1942_REGULAR",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1942",
+      "semester": "3-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of III B.Tech. I Semester (R22) Regular 2025 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:14.125Z",
+      "summary": {
+        "sgpa": 7.75,
+        "percentage": 72.5,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 10,
+        "passedSubjects": 10,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "185DZ",
+          "subjectName": "PRINCIPLES OF PROGRAMMING LANGUAGES",
+          "internalMarks": "36",
+          "externalMarks": "36",
+          "totalMarks": "72",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "185BW",
+          "subjectName": "DEVOPS",
+          "internalMarks": "34",
+          "externalMarks": "43",
+          "totalMarks": "77",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "185BT",
+          "subjectName": "DESIGN AND ANALYSIS OF ALGORITHMS",
+          "internalMarks": "34",
+          "externalMarks": "28",
+          "totalMarks": "62",
+          "grade": "B+",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "185BB",
+          "subjectName": "COMPUTER NETWORKS",
+          "internalMarks": "36",
+          "externalMarks": "37",
+          "totalMarks": "73",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "185BA",
+          "subjectName": "COMPUTER GRAPHICS",
+          "internalMarks": "24",
+          "externalMarks": "44",
+          "totalMarks": "68",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18539",
+          "subjectName": "INTELLECTUAL PROPERTY RIGHTS",
+          "internalMarks": "85",
+          "externalMarks": "0",
+          "totalMarks": "85",
+          "grade": "A+",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18530",
+          "subjectName": "UI DESIGN-FLUTTER",
+          "internalMarks": "36",
+          "externalMarks": "30",
+          "totalMarks": "66",
+          "grade": "B+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18508",
+          "subjectName": "DEVOPS LAB",
+          "internalMarks": "39",
+          "externalMarks": "58",
+          "totalMarks": "97",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18506",
+          "subjectName": "COMPUTER NETWORKS LAB",
+          "internalMarks": "34",
+          "externalMarks": "55",
+          "totalMarks": "89",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18502",
+          "subjectName": "ADVANCED ENGLISH COMMUNICATION SKILLS LAB",
+          "internalMarks": "23",
+          "externalMarks": "47",
+          "totalMarks": "70",
+          "grade": "A",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "185DZ",
+          "PRINCIPLES OF PROGRAMMING LANGUAGES",
+          "36",
+          "36",
+          "72",
+          "A",
+          "3"
+        ],
+        [
+          "185BW",
+          "DEVOPS",
+          "34",
+          "43",
+          "77",
+          "A",
+          "3"
+        ],
+        [
+          "185BT",
+          "DESIGN AND ANALYSIS OF ALGORITHMS",
+          "34",
+          "28",
+          "62",
+          "B+",
+          "4"
+        ],
+        [
+          "185BB",
+          "COMPUTER NETWORKS",
+          "36",
+          "37",
+          "73",
+          "A",
+          "3"
+        ],
+        [
+          "185BA",
+          "COMPUTER GRAPHICS",
+          "24",
+          "44",
+          "68",
+          "B+",
+          "3"
+        ],
+        [
+          "18539",
+          "INTELLECTUAL PROPERTY RIGHTS",
+          "85",
+          "0",
+          "85",
+          "A+",
+          "0"
+        ],
+        [
+          "18530",
+          "UI DESIGN-FLUTTER",
+          "36",
+          "30",
+          "66",
+          "B+",
+          "1"
+        ],
+        [
+          "18508",
+          "DEVOPS LAB",
+          "39",
+          "58",
+          "97",
+          "O",
+          "1"
+        ],
+        [
+          "18506",
+          "COMPUTER NETWORKS LAB",
+          "34",
+          "55",
+          "89",
+          "A+",
+          "1"
+        ],
+        [
+          "18502",
+          "ADVANCED ENGLISH COMMUNICATION SKILLS LAB",
+          "23",
+          "47",
+          "70",
+          "A",
+          "1"
+        ]
+      ]
+    },
+    "23E31A0555_1927_SUPPLY": {
+      "id": "23E31A0555_1927_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1927_SUPPLY",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1927",
+      "semester": "3-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech III Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:14.384Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1967_SUPPLY": {
+      "id": "23E31A0555_1967_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1967_SUPPLY",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1967",
+      "semester": "3-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech III Year I Semester (R22) Supplementary Examinations APPIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:14.592Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1841_RCRV": {
+      "id": "23E31A0555_1841_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1841_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1841",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:15.035Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1927_RCRV": {
+      "id": "23E31A0555_1927_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1927_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1927",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:15.412Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1942_RCRV": {
+      "id": "23E31A0555_1942_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1942_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1942",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Regular Examinations NOV-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:15.669Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1967_RCRV": {
+      "id": "23E31A0555_1967_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1967_RCRV",
+      "groupId": "3-1_R22_BTECH",
+      "examCode": "1967",
+      "semester": "3-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech III Year I Semester (R22) Supplementary Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:16.225Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1813_REGULAR": {
+      "id": "23E31A0555_1813_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1813_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1813",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:16.428Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1913_REGULAR": {
+      "id": "23E31A0555_1913_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1913_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1913",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of II B.Tech. II Semester (R22) Regular 2025 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:16.996Z",
+      "summary": {
+        "sgpa": 7.95,
+        "percentage": 74.5,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 10,
+        "passedSubjects": 10,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "184CG",
+          "subjectName": "SOFTWARE ENGINEERING",
+          "internalMarks": "32",
+          "externalMarks": "32",
+          "totalMarks": "64",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184BZ",
+          "subjectName": "OPERATING SYSTEMS",
+          "internalMarks": "37",
+          "externalMarks": "37",
+          "totalMarks": "74",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184AU",
+          "subjectName": "DISCRETE MATHEMATICS",
+          "internalMarks": "37",
+          "externalMarks": "32",
+          "totalMarks": "69",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184AQ",
+          "subjectName": "DATABASE MANAGEMENT SYSTEMS",
+          "internalMarks": "38",
+          "externalMarks": "38",
+          "totalMarks": "76",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "184AF",
+          "subjectName": "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+          "internalMarks": "36",
+          "externalMarks": "42",
+          "totalMarks": "78",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18442",
+          "subjectName": "REAL-TIME RESEARCH PROJECT/ SOCIETAL RELATED PROJECT",
+          "internalMarks": "43",
+          "externalMarks": "0",
+          "totalMarks": "43",
+          "grade": "A+",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18434",
+          "subjectName": "CONSTITUTION OF INDIA",
+          "internalMarks": "75",
+          "externalMarks": "0",
+          "totalMarks": "75",
+          "grade": "A",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18427",
+          "subjectName": "OPERATING SYSTEMS LAB",
+          "internalMarks": "31",
+          "externalMarks": "55",
+          "totalMarks": "86",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18426",
+          "subjectName": "NODE JS REACT JS DJANGO",
+          "internalMarks": "29",
+          "externalMarks": "55",
+          "totalMarks": "84",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18409",
+          "subjectName": "DATABASE MANAGEMENT SYSTEMS LAB",
+          "internalMarks": "30",
+          "externalMarks": "54",
+          "totalMarks": "84",
+          "grade": "A+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "184CG",
+          "SOFTWARE ENGINEERING",
+          "32",
+          "32",
+          "64",
+          "B+",
+          "3"
+        ],
+        [
+          "184BZ",
+          "OPERATING SYSTEMS",
+          "37",
+          "37",
+          "74",
+          "A",
+          "3"
+        ],
+        [
+          "184AU",
+          "DISCRETE MATHEMATICS",
+          "37",
+          "32",
+          "69",
+          "B+",
+          "3"
+        ],
+        [
+          "184AQ",
+          "DATABASE MANAGEMENT SYSTEMS",
+          "38",
+          "38",
+          "76",
+          "A",
+          "3"
+        ],
+        [
+          "184AF",
+          "BUSINESS ECONOMICS & FINANCIAL ANALYSIS",
+          "36",
+          "42",
+          "78",
+          "A",
+          "3"
+        ],
+        [
+          "18442",
+          "REAL-TIME RESEARCH PROJECT/ SOCIETAL RELATED PROJECT",
+          "43",
+          "0",
+          "43",
+          "A+",
+          "2"
+        ],
+        [
+          "18434",
+          "CONSTITUTION OF INDIA",
+          "75",
+          "0",
+          "75",
+          "A",
+          "0"
+        ],
+        [
+          "18427",
+          "OPERATING SYSTEMS LAB",
+          "31",
+          "55",
+          "86",
+          "A+",
+          "1"
+        ],
+        [
+          "18426",
+          "NODE JS REACT JS DJANGO",
+          "29",
+          "55",
+          "84",
+          "A+",
+          "1"
+        ],
+        [
+          "18409",
+          "DATABASE MANAGEMENT SYSTEMS LAB",
+          "30",
+          "54",
+          "84",
+          "A+",
+          "1"
+        ]
+      ]
+    },
+    "23E31A0555_1969_REGULAR": {
+      "id": "23E31A0555_1969_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1969_REGULAR",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1969",
+      "semester": "2-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year II Semester (R22) Regular Examinations APRIL-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:17.178Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1837_SUPPLY": {
+      "id": "23E31A0555_1837_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1837_SUPPLY",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1837",
+      "semester": "2-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:17.349Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1951_SUPPLY": {
+      "id": "23E31A0555_1951_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1951_SUPPLY",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1951",
+      "semester": "2-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:17.553Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1813_RCRV": {
+      "id": "23E31A0555_1813_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1813_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1813",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:17.870Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1913_RCRV": {
+      "id": "23E31A0555_1913_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1913_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1913",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:18.171Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1951_RCRV": {
+      "id": "23E31A0555_1951_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1951_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1951",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:18.373Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1969_RCRV": {
+      "id": "23E31A0555_1969_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1969_RCRV",
+      "groupId": "2-2_R22_BTECH",
+      "examCode": "1969",
+      "semester": "2-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year II Semester (R22) Regular Examinations APR-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:18.587Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1771_REGULAR": {
+      "id": "23E31A0555_1771_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1771_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1771",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:18.887Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1833_REGULAR": {
+      "id": "23E31A0555_1833_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1833_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1833",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of II B.Tech. I Semester (R22) Regular 2024 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:19.371Z",
+      "summary": {
+        "sgpa": 7.33,
+        "percentage": 68.3,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 9,
+        "passedSubjects": 9,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "183BU",
+          "subjectName": "OBJECT ORIENTED PROGRAMMING THROUGH JAVA",
+          "internalMarks": "31",
+          "externalMarks": "33",
+          "totalMarks": "64",
+          "grade": "B+",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AP",
+          "subjectName": "DIGITAL ELECTRONICS",
+          "internalMarks": "36",
+          "externalMarks": "23",
+          "totalMarks": "59",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AM",
+          "subjectName": "DATA STRUCTURES",
+          "internalMarks": "37",
+          "externalMarks": "38",
+          "totalMarks": "75",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "183AK",
+          "subjectName": "COMPUTER ORIENTED STATISTICAL METHODS",
+          "internalMarks": "39",
+          "externalMarks": "24",
+          "totalMarks": "63",
+          "grade": "B+",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "183AH",
+          "subjectName": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "internalMarks": "26",
+          "externalMarks": "28",
+          "totalMarks": "54",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "18339",
+          "subjectName": "GENDER SENSITIZATION LAB",
+          "internalMarks": "95",
+          "externalMarks": "0",
+          "totalMarks": "95",
+          "grade": "O",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18326",
+          "subjectName": "OBJECT ORIENTED PROGRAMMING THROUGH JAVA LAB",
+          "internalMarks": "37",
+          "externalMarks": "53",
+          "totalMarks": "90",
+          "grade": "O",
+          "credits": "1.5"
+        },
+        {
+          "subjectCode": "18308",
+          "subjectName": "DATA VISUALIZATION R PROGRAMMING POWER BI",
+          "internalMarks": "32",
+          "externalMarks": "52",
+          "totalMarks": "84",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18307",
+          "subjectName": "DATA STRUCTURES LAB",
+          "internalMarks": "33",
+          "externalMarks": "51",
+          "totalMarks": "84",
+          "grade": "A+",
+          "credits": "1.5"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "183BU",
+          "OBJECT ORIENTED PROGRAMMING THROUGH JAVA",
+          "31",
+          "33",
+          "64",
+          "B+",
+          "3"
+        ],
+        [
+          "183AP",
+          "DIGITAL ELECTRONICS",
+          "36",
+          "23",
+          "59",
+          "B",
+          "3"
+        ],
+        [
+          "183AM",
+          "DATA STRUCTURES",
+          "37",
+          "38",
+          "75",
+          "A",
+          "3"
+        ],
+        [
+          "183AK",
+          "COMPUTER ORIENTED STATISTICAL METHODS",
+          "39",
+          "24",
+          "63",
+          "B+",
+          "4"
+        ],
+        [
+          "183AH",
+          "COMPUTER ORGANIZATION AND ARCHITECTURE",
+          "26",
+          "28",
+          "54",
+          "B",
+          "3"
+        ],
+        [
+          "18339",
+          "GENDER SENSITIZATION LAB",
+          "95",
+          "0",
+          "95",
+          "O",
+          "0"
+        ],
+        [
+          "18326",
+          "OBJECT ORIENTED PROGRAMMING THROUGH JAVA LAB",
+          "37",
+          "53",
+          "90",
+          "O",
+          "1.5"
+        ],
+        [
+          "18308",
+          "DATA VISUALIZATION R PROGRAMMING POWER BI",
+          "32",
+          "52",
+          "84",
+          "A+",
+          "1"
+        ],
+        [
+          "18307",
+          "DATA STRUCTURES LAB",
+          "33",
+          "51",
+          "84",
+          "A+",
+          "1.5"
+        ]
+      ]
+    },
+    "23E31A0555_1953_REGULAR": {
+      "id": "23E31A0555_1953_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1953_REGULAR",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1953",
+      "semester": "2-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech II Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:19.530Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1818_SUPPLY": {
+      "id": "23E31A0555_1818_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1818_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1818",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:19.758Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1917_SUPPLY": {
+      "id": "23E31A0555_1917_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1917_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1917",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year I Semester (R22) Supplementary Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:20.040Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1971_SUPPLY": {
+      "id": "23E31A0555_1971_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1971_SUPPLY",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1971",
+      "semester": "2-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech II Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:20.330Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1771_RCRV": {
+      "id": "23E31A0555_1771_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1771_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1771",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:20.556Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1818_RCRV": {
+      "id": "23E31A0555_1818_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1818_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1818",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:20.737Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1917_RCRV": {
+      "id": "23E31A0555_1917_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1917_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1917",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations JUNE-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:20.936Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1953_RCRV": {
+      "id": "23E31A0555_1953_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1953_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1953",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:21.149Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1971_RCRV": {
+      "id": "23E31A0555_1971_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1971_RCRV",
+      "groupId": "2-1_R22_BTECH",
+      "examCode": "1971",
+      "semester": "2-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech II Year I Semester (R22) Supplementary Examinations MAY-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:21.345Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1704_REGULAR": {
+      "id": "23E31A0555_1704_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1704_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1704",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:21.551Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1800_REGULAR": {
+      "id": "23E31A0555_1800_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1800_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1800",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. II Semester (R22) Regular 2024 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:22.185Z",
+      "summary": {
+        "sgpa": 7.22,
+        "percentage": 67.2,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 10,
+        "passedSubjects": 10,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "182AR",
+          "subjectName": "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "internalMarks": "18",
+          "externalMarks": "30",
+          "totalMarks": "48",
+          "grade": "C",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "182AM",
+          "subjectName": "ENGLISH FOR SKILL ENHANCEMENT",
+          "internalMarks": "30",
+          "externalMarks": "28",
+          "totalMarks": "58",
+          "grade": "B",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "182AG",
+          "subjectName": "ELECTRONIC DEVICES AND CIRCUITS",
+          "internalMarks": "32",
+          "externalMarks": "29",
+          "totalMarks": "61",
+          "grade": "B+",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "182AB",
+          "subjectName": "APPLIED PHYSICS",
+          "internalMarks": "27",
+          "externalMarks": "24",
+          "totalMarks": "51",
+          "grade": "B",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "18217",
+          "subjectName": "ENVIRONMENTAL SCIENCE",
+          "internalMarks": "70",
+          "externalMarks": "0",
+          "totalMarks": "70",
+          "grade": "A",
+          "credits": "0"
+        },
+        {
+          "subjectCode": "18215",
+          "subjectName": "PYTHON PROGRAMMING LABORATORY",
+          "internalMarks": "36",
+          "externalMarks": "48",
+          "totalMarks": "84",
+          "grade": "A+",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18213",
+          "subjectName": "IT WORKSHOP",
+          "internalMarks": "35",
+          "externalMarks": "56",
+          "totalMarks": "91",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18210",
+          "subjectName": "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LABORATORY",
+          "internalMarks": "28",
+          "externalMarks": "43",
+          "totalMarks": "71",
+          "grade": "A",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18209",
+          "subjectName": "ENGINEERING WORKSHOP",
+          "internalMarks": "38",
+          "externalMarks": "59",
+          "totalMarks": "97",
+          "grade": "O",
+          "credits": "2.5"
+        },
+        {
+          "subjectCode": "18201",
+          "subjectName": "APPLIED PHYSICS LABORATORY",
+          "internalMarks": "30",
+          "externalMarks": "58",
+          "totalMarks": "88",
+          "grade": "A+",
+          "credits": "1.5"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "182AR",
+          "ORDINARY DIFFERENTIAL EQUATIONS AND VECTOR CALCULUS",
+          "18",
+          "30",
+          "48",
+          "C",
+          "4"
+        ],
+        [
+          "182AM",
+          "ENGLISH FOR SKILL ENHANCEMENT",
+          "30",
+          "28",
+          "58",
+          "B",
+          "2"
+        ],
+        [
+          "182AG",
+          "ELECTRONIC DEVICES AND CIRCUITS",
+          "32",
+          "29",
+          "61",
+          "B+",
+          "2"
+        ],
+        [
+          "182AB",
+          "APPLIED PHYSICS",
+          "27",
+          "24",
+          "51",
+          "B",
+          "4"
+        ],
+        [
+          "18217",
+          "ENVIRONMENTAL SCIENCE",
+          "70",
+          "0",
+          "70",
+          "A",
+          "0"
+        ],
+        [
+          "18215",
+          "PYTHON PROGRAMMING LABORATORY",
+          "36",
+          "48",
+          "84",
+          "A+",
+          "2"
+        ],
+        [
+          "18213",
+          "IT WORKSHOP",
+          "35",
+          "56",
+          "91",
+          "O",
+          "1"
+        ],
+        [
+          "18210",
+          "ENGLISH LANGUAGE AND COMMUNICATION SKILLS LABORATORY",
+          "28",
+          "43",
+          "71",
+          "A",
+          "1"
+        ],
+        [
+          "18209",
+          "ENGINEERING WORKSHOP",
+          "38",
+          "59",
+          "97",
+          "O",
+          "2.5"
+        ],
+        [
+          "18201",
+          "APPLIED PHYSICS LABORATORY",
+          "30",
+          "58",
+          "88",
+          "A+",
+          "1.5"
+        ]
+      ]
+    },
+    "23E31A0555_1932_REGULAR": {
+      "id": "23E31A0555_1932_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1932_REGULAR",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1932",
+      "semester": "1-2",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year II Semester (R22) Regular Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:22.369Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1768_SUPPLY": {
+      "id": "23E31A0555_1768_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1768_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1768",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:22.672Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1855_SUPPLY": {
+      "id": "23E31A0555_1855_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1855_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1855",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:22.963Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1955_SUPPLY": {
+      "id": "23E31A0555_1955_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1955_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1955",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:23.196Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1979_SUPPLY": {
+      "id": "23E31A0555_1979_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1979_SUPPLY",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1979",
+      "semester": "1-2",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year II Semester (R22) Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:23.393Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1704_RCRV": {
+      "id": "23E31A0555_1704_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1704_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1704",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:23.548Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1768_RCRV": {
+      "id": "23E31A0555_1768_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1768_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1768",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:23.801Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1800_RCRV": {
+      "id": "23E31A0555_1800_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1800_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1800",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:24.026Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1932_RCRV": {
+      "id": "23E31A0555_1932_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1932_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1932",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Regular Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:24.311Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1955_RCRV": {
+      "id": "23E31A0555_1955_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1955_RCRV",
+      "groupId": "1-2_R22_BTECH",
+      "examCode": "1955",
+      "semester": "1-2",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year II Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:24.470Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1662_REGULAR": {
+      "id": "23E31A0555_1662_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1662_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1662",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:24.642Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1763_REGULAR": {
+      "id": "23E31A0555_1763_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1763_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1763",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "Result of I B.Tech. I Semester (R22) Regular 2024 Exams",
+      "resultStatus": "PASSED",
+      "hasResult": true,
+      "fetchedAt": "2026-09-27T11:15:25.195Z",
+      "summary": {
+        "sgpa": 7,
+        "percentage": 65,
+        "totalCredits": 20,
+        "earnedCredits": 20,
+        "totalSubjects": 9,
+        "passedSubjects": 9,
+        "failedSubjects": 0,
+        "isFailed": false
+      },
+      "subjects": [
+        {
+          "subjectCode": "181AP",
+          "subjectName": "PROGRAMMING FOR PROBLEM SOLVING",
+          "internalMarks": "37",
+          "externalMarks": "34",
+          "totalMarks": "71",
+          "grade": "A",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "181AN",
+          "subjectName": "MATRICES AND CALCULUS",
+          "internalMarks": "22",
+          "externalMarks": "21",
+          "totalMarks": "43",
+          "grade": "C",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "181AJ",
+          "subjectName": "ENGINEERING CHEMISTRY",
+          "internalMarks": "27",
+          "externalMarks": "39",
+          "totalMarks": "66",
+          "grade": "B+",
+          "credits": "4"
+        },
+        {
+          "subjectCode": "181AG",
+          "subjectName": "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "internalMarks": "25",
+          "externalMarks": "28",
+          "totalMarks": "53",
+          "grade": "B",
+          "credits": "3"
+        },
+        {
+          "subjectCode": "181AB",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING",
+          "internalMarks": "28",
+          "externalMarks": "27",
+          "totalMarks": "55",
+          "grade": "B",
+          "credits": "2"
+        },
+        {
+          "subjectCode": "18117",
+          "subjectName": "PROGRAMMING FOR PROBLEM SOLVING LABORATORY",
+          "internalMarks": "38",
+          "externalMarks": "57",
+          "totalMarks": "95",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18113",
+          "subjectName": "ENGINEERING CHEMISTRY LABORATORY",
+          "internalMarks": "35",
+          "externalMarks": "47",
+          "totalMarks": "82",
+          "grade": "A+",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18107",
+          "subjectName": "ELEMENTS OF COMPUTER SCIENCE & ENGINEERING",
+          "internalMarks": "45",
+          "externalMarks": "0",
+          "totalMarks": "45",
+          "grade": "O",
+          "credits": "1"
+        },
+        {
+          "subjectCode": "18102",
+          "subjectName": "BASIC ELECTRICAL ENGINEERING LABORATORY",
+          "internalMarks": "37",
+          "externalMarks": "46",
+          "totalMarks": "83",
+          "grade": "A+",
+          "credits": "1"
+        }
+      ],
+      "table": [
+        [
+          "SUBJECT CODE",
+          "SUBJECT NAME",
+          "INTERNAL",
+          "EXTERNAL",
+          "TOTAL",
+          "GRADE",
+          "CREDITS(C)"
+        ],
+        [
+          "181AP",
+          "PROGRAMMING FOR PROBLEM SOLVING",
+          "37",
+          "34",
+          "71",
+          "A",
+          "3"
+        ],
+        [
+          "181AN",
+          "MATRICES AND CALCULUS",
+          "22",
+          "21",
+          "43",
+          "C",
+          "4"
+        ],
+        [
+          "181AJ",
+          "ENGINEERING CHEMISTRY",
+          "27",
+          "39",
+          "66",
+          "B+",
+          "4"
+        ],
+        [
+          "181AG",
+          "COMPUTER AIDED ENGINEERING GRAPHICS",
+          "25",
+          "28",
+          "53",
+          "B",
+          "3"
+        ],
+        [
+          "181AB",
+          "BASIC ELECTRICAL ENGINEERING",
+          "28",
+          "27",
+          "55",
+          "B",
+          "2"
+        ],
+        [
+          "18117",
+          "PROGRAMMING FOR PROBLEM SOLVING LABORATORY",
+          "38",
+          "57",
+          "95",
+          "O",
+          "1"
+        ],
+        [
+          "18113",
+          "ENGINEERING CHEMISTRY LABORATORY",
+          "35",
+          "47",
+          "82",
+          "A+",
+          "1"
+        ],
+        [
+          "18107",
+          "ELEMENTS OF COMPUTER SCIENCE & ENGINEERING",
+          "45",
+          "0",
+          "45",
+          "O",
+          "1"
+        ],
+        [
+          "18102",
+          "BASIC ELECTRICAL ENGINEERING LABORATORY",
+          "37",
+          "46",
+          "83",
+          "A+",
+          "1"
+        ]
+      ]
+    },
+    "23E31A0555_1851_REGULAR": {
+      "id": "23E31A0555_1851_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1851_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1851",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:25.438Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1958_REGULAR": {
+      "id": "23E31A0555_1958_REGULAR",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1958_REGULAR",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1958",
+      "semester": "1-1",
+      "attemptType": "REGULAR",
+      "examTitle": "B.Tech I Year I Semester (R22) Regular Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:25.665Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1699_SUPPLY": {
+      "id": "23E31A0555_1699_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1699_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1699",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:25.914Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1803_SUPPLY": {
+      "id": "23E31A0555_1803_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1803_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1803",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:26.090Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1935_SUPPLY": {
+      "id": "23E31A0555_1935_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1935_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1935",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:26.250Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1982_SUPPLY": {
+      "id": "23E31A0555_1982_SUPPLY",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1982_SUPPLY",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1982",
+      "semester": "1-1",
+      "attemptType": "SUPPLY",
+      "examTitle": "B.Tech I Year I Semester (R22) Supplementary Examinations JUNE-2026 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:26.565Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1662_RCRV": {
+      "id": "23E31A0555_1662_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1662_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1662",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:26.820Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1699_RCRV": {
+      "id": "23E31A0555_1699_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1699_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1699",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:27.077Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1763_RCRV": {
+      "id": "23E31A0555_1763_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1763_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1763",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:27.311Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1803_RCRV": {
+      "id": "23E31A0555_1803_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1803_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1803",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Regular Examinations Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:27.487Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1935_RCRV": {
+      "id": "23E31A0555_1935_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1935_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1935",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations JULY-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:27.639Z",
+      "summary": null,
+      "subjects": [],
+      "table": []
+    },
+    "23E31A0555_1958_RCRV": {
+      "id": "23E31A0555_1958_RCRV",
+      "studentId": "student_23E31A0555",
+      "htno": "23E31A0555",
+      "resultReleaseId": "1958_RCRV",
+      "groupId": "1-1_R22_BTECH",
+      "examCode": "1958",
+      "semester": "1-1",
+      "attemptType": "RCRV",
+      "examTitle": "RC/RV B.Tech I Year I Semester (R22) Supplementary Examinations DEC-2025 Results",
+      "resultStatus": "NO_RESULT",
+      "hasResult": false,
+      "fetchedAt": "2026-09-27T11:15:27.808Z",
       "summary": null,
       "subjects": [],
       "table": []
