@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 /* Root API Status */
-app.get("/", (req, res) => {
+const statusHandler = (req, res) => {
     res.json({
         status: "ok",
         message: "JNTUH Results Backend REST API Server",
@@ -24,7 +24,10 @@ app.get("/", (req, res) => {
             "GET /api/result?htno=:htno"
         ]
     });
-});
+};
+
+app.get("/", statusHandler);
+app.get("/api", statusHandler);
 
 /* Mount API routes */
 app.use("/api", resultRoutes);
