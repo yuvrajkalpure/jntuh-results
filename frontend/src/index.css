@@ -1,0 +1,533 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f5f7fa;
+    color: #15171a;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    background: #ffffff;
+    padding: calc(16px + env(safe-area-inset-top)) 16px 16px;
+    border-bottom: 1px solid #e8eaed;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 750;
+    margin: 0;
+}
+
+/* MAIN & LAYOUT */
+main {
+    width: 100%;
+    padding: 16px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    main { padding: 30px; }
+    .layout-container {
+        display: grid;
+        grid-template-columns: 1fr 280px;
+        align-items: start;
+        gap: 24px;
+    }
+}
+
+.main-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar-column {
+    width: 100%;
+}
+
+/* SEARCH CARD */
+.search-card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e7e9ec;
+}
+
+@media (min-width: 768px) {
+    .search-card { padding: 24px; }
+}
+
+.search-card-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 650;
+    white-space: nowrap;
+    color: #374151;
+}
+
+.input {
+    flex: 1;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #d6d9de;
+    border-radius: 9px;
+    outline: none;
+    font-size: 16px;
+    background: #fff;
+    text-transform: uppercase;
+}
+
+.input:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, .10);
+}
+
+/* STATUS */
+.status {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.status.loading {
+    background: #eef5ff;
+    color: #1458a6;
+}
+
+.status.error {
+    background: #fff0f0;
+    color: #b42318;
+}
+
+/* SIDEBAR HISTORY */
+.history {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #e7e9ec;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.history-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.clear-history {
+    border: 0;
+    background: none;
+    color: #0066cc;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.history-item {
+    width: 100%;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.history-item:hover {
+    background: #eef5ff;
+}
+
+.history-htno {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* RESULT & CARDS */
+.result {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.result-card {
+    width: 100%;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #e7e9ec;
+    overflow: hidden;
+}
+
+.exam-banner {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #e7e9ec;
+    line-height: 1.4;
+}
+
+.student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    background: #fafbfc;
+    border-bottom: 1px solid #e7e9ec;
+}
+
+.student-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.student-info-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.student-info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    word-break: break-word;
+}
+
+.grade-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.grade-badge.grade-o { background: #dcfce7; color: #15803d; }
+.grade-badge.grade-a { background: #dbeafe; color: #1d4ed8; }
+.grade-badge.grade-b { background: #fef9c3; color: #a16207; }
+.grade-badge.grade-f { background: #fee2e2; color: #b91c1c; }
+
+.result-table tr.failed-row,
+.result-table tr.failed-row td {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+    font-weight: 600;
+}
+
+/* STATS CARDS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e7e9ec;
+}
+
+.stat-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-card.primary {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    border: none;
+    color: white;
+}
+
+.stat-card.primary .stat-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.stat-card.primary .stat-value {
+    color: #ffffff;
+}
+
+.stat-card.primary .stat-sub {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.stat-sub {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+/* TABLE & MOBILE RESPONSIVENESS */
+.mobile-text {
+    display: none;
+}
+
+.desktop-text {
+    display: inline;
+}
+
+.attempts-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.attempts-pill-btn.multiple {
+    border: 1px solid #f59e0b;
+    background: #fffbebf0;
+    color: #b45309;
+}
+
+.attempts-pill-btn.multiple:hover {
+    background: #fef3c7;
+}
+
+.attempts-pill-btn.single {
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+}
+
+.attempts-pill-btn.single:hover {
+    background: #f1f5f9;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 100%;
+    table-layout: auto;
+}
+
+.result-table th {
+    background: #f8fafc;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+    padding: 10px 8px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: left;
+}
+
+.result-table td {
+    font-size: 0.82rem;
+    padding: 10px 8px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    color: #1e293b;
+}
+
+.result-table .col-code {
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 0.78rem;
+}
+
+.result-table .col-name {
+    font-weight: 500;
+    word-break: break-word;
+    min-width: 90px;
+}
+
+.result-table .col-num {
+    text-align: center;
+}
+
+.result-table .col-total {
+    font-weight: 700;
+}
+
+.result-table .col-grade {
+    text-align: center;
+}
+
+.result-table .col-attempts {
+    text-align: center;
+}
+
+/* MEDIA QUERIES FOR MOBILE DEVICES (<= 640px) */
+@media (max-width: 640px) {
+    main {
+        padding: 6px 0px !important;
+    }
+
+    .content {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .layout-container {
+        gap: 10px !important;
+    }
+
+    .result-card {
+        padding: 10px 4px !important;
+        border-radius: 0px !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .table-wrapper {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .result-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        table-layout: fixed !important;
+    }
+
+    .mobile-text {
+        display: inline !important;
+    }
+    .desktop-text {
+        display: none !important;
+    }
+
+    .result-table th {
+        font-size: 0.68rem;
+        padding: 6px 2px;
+        text-align: center;
+    }
+
+    .result-table td {
+        font-size: 0.68rem;
+        padding: 6px 2px;
+        text-align: center;
+    }
+
+    .result-table .col-code {
+        text-align: left;
+        font-size: 0.66rem;
+        padding-left: 2px;
+        width: 18%;
+    }
+
+    .result-table .col-name {
+        text-align: left;
+        font-size: 0.66rem;
+        line-height: 1.2;
+        width: 32%;
+        word-break: break-word;
+    }
+
+    .result-table .col-num {
+        width: 8.5%;
+        text-align: center;
+    }
+
+    .result-table .col-grade {
+        width: 8.5%;
+        text-align: center;
+    }
+
+    .result-table .col-attempts {
+        width: 8%;
+        text-align: center;
+    }
+
+    .grade-badge {
+        padding: 1px 3px;
+        font-size: 0.62rem;
+        border-radius: 4px;
+    }
+
+    .attempts-pill-btn {
+        padding: 2px 4px;
+        font-size: 0.62rem;
+        border-radius: 6px;
+    }
+}
