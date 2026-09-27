@@ -122,7 +122,11 @@ export default function App() {
     } catch (err) {
       console.error(err);
       removeResultFromCache(cleanHtno);
-      setStatus({ type: 'error', message: err.message || 'Something went wrong.' });
+      let msg = err.message || 'Something went wrong.';
+      if (err.name === 'TypeError' || msg.includes('Failed to fetch')) {
+        msg = `Unable to connect to backend API server at ${API_BASE_URL}. Please verify your backend server is live and VITE_API_BASE_URL is set correctly in Vercel settings.`;
+      }
+      setStatus({ type: 'error', message: msg });
     }
   };
 
