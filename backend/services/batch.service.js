@@ -1,6 +1,6 @@
 /**
  * Batch Service
- * Resolves student batch cohorts (e.g. 2023-REGULAR-R22 vs 2024-LATERAL-R22)
+ * Resolves student batch cohorts and cohort group keys (e.g. 23-E3-REGULAR-1-A0-R22) per architecture.md (Section 5, 19).
  */
 
 const htnoService = require("./htno.service");
@@ -10,8 +10,13 @@ function resolveBatch(htno) {
     const entryType = student.isLateral ? "LATERAL" : "REGULAR";
     const batchId = `${student.effectiveCohortYear}-${entryType}-${student.studentRegulation}`;
 
+    // Group Key format without collegeCode and branchCode per user instruction: "23-REGULAR-1-R22"
+    const yy = String(student.admissionYear).slice(-2);
+    const groupKey = `${yy}-${entryType}-${student.courseCode}-${student.studentRegulation}`;
+
     return {
         batchId,
+        groupKey,
         admissionYear: student.admissionYear,
         effectiveCohortYear: student.effectiveCohortYear,
         entryType,
@@ -19,6 +24,7 @@ function resolveBatch(htno) {
         degree: "BTECH",
         isLateral: student.isLateral,
         collegeCode: student.collegeCode,
+        courseCode: student.courseCode,
         branchCode: student.branchCode,
         targetSemesters: student.targetSemesters
     };
@@ -27,3 +33,4 @@ function resolveBatch(htno) {
 module.exports = {
     resolveBatch
 };
+

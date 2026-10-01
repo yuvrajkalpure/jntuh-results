@@ -1,850 +1,1505 @@
-Yes. That is a **different and better data architecture** for your actual goal.
+Yes. Based on your requirements, I would **not** design this as “search every examCode for every HTNO.” That will create unnecessary JNTUH requests.
 
-Instead of thinking:
+The better architecture is a **two-level system**:
 
-> HTNO → search releases → aggregate temporary results
+1. **Global JNTUH examination catalog** — continuously maintains all B.Tech examCodes.
+2. **Student/cohort-specific search pattern** — determines which of those examCodes are relevant to a particular HTNO and stops searching as soon as the student's result history proves that further searches are unnecessary.
 
-we can build a **Batch Result Repository**.
+JNTUH's current results portal shows that releases can combine multiple categories—for example, regular/supplementary and RC/RV—and releases happen for different semesters and batches at different times. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
 
-The idea is:
-
-> **Identify a student batch once, collect all result releases belonging to that batch, and store Regular + Supplementary + RC/RV results together.**
-
-Then when a user searches an HTNO, we mostly query **our database**, not JNTUH.
-
-## 1. Core architecture
+## 1. Overall architecture
 
 ```text
-                    JNTUH Result Releases
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Release Discovery   │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Batch Resolver      │
-                 │                     │
-                 │ Admission year      │
-                 │ Regular/Lateral     │
-                 │ Regulation          │
-                 │ College/Branch      │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                 ┌─────────────────────┐
-                 │ Batch Result Store  │
-                 │                     │
-                 │ Regular             │
-                 │ Supplementary       │
-                 │ RC/RV               │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                     Our Database
-                            │
-                  ┌─────────┴─────────┐
-                  │                   │
-              HTNO Search        Background Sync
-                  │                   │
-                  ▼                   ▼
-              User UI             JNTUH Updates
-```
-
----
-
-# 2. What is a "batch"?
-
-We need to define a batch carefully.
-
-For example:
-
-```text
-2023 Regular R22
-```
-
-could represent students who:
-
-```text
-Admission year = 2023
-Entry type = Regular
-Regulation = R22
-```
-
-And:
-
-```text
-2024 Lateral R22
-```
-
-would be a separate batch because those students enter directly into II Year.
-
-So:
-
-```text
-Batch
-├── admissionYear
-├── entryType
-└── regulation
-```
-
-Example:
-
-```json
-{
-  "batchId": "2023-REG-R22",
-  "admissionYear": 2023,
-  "entryType": "REGULAR",
-  "regulation": "R22"
-}
-```
-
-and:
-
-```json
-{
-  "batchId": "2024-LAT-R22",
-  "admissionYear": 2024,
-  "entryType": "LATERAL",
-  "regulation": "R22"
-}
-```
-
----
-
-# 3. The important part: store releases under the batch
-
-Now your architecture becomes:
-
-```text
-2023 Regular R22
-│
-├── I-I
-│   └── Regular
-│       └── examCode XXXXX
-│
-├── I-II
-│   └── Regular
-│       └── examCode XXXXX
-│
-├── II-I
-│   ├── Regular
-│   │   └── examCode XXXXX
-│   │
-│   └── Supplementary
-│       └── examCode XXXXX
-│
-├── II-II
-│   ├── Regular
-│   └── Supplementary
-│
-├── III-I
-│   ├── Regular
-│   ├── Supplementary
-│   └── RC/RV
-│
-├── III-II
-│   ├── Regular
-│   ├── Supplementary
-│   └── RC/RV
-│
-├── IV-I
-│   ├── Regular
-│   ├── Supplementary
-│   └── RC/RV
-│
-└── IV-II
-    ├── Regular
-    ├── Supplementary
-    └── RC/RV
-```
-
-This is much closer to what you want.
-
----
-
-# 4. But don't store only exam codes
-
-We should store the **release itself**.
-
-For example:
-
-```json
-{
-  "releaseId": "1964",
-  "batchId": "2023-REG-R22",
-
-  "semester": "III-II",
-
-  "examType": "REGULAR",
-
-  "examPeriod": "APR-2026",
-
-  "request": {
-    "degree": "btech",
-    "etype": "r17",
-    "type": "intgrade"
-  },
-
-  "rcRv": {
-    "available": true,
-    "request": {
-      "degree": "btech",
-      "etype": "r17",
-      "result": "gradercrv",
-      "type": "rcrvintgrade"
-    }
-  }
-}
-```
-
-This allows us to retrieve both normal and RC/RV results for the same release.
-
-Your JNTUH listing actually demonstrates this pattern: `1964` has the normal result request and an RC/RV variant with `result=gradercrv&type=rcrvintgrade`.  
-
----
-
-# 5. Now the database becomes powerful
-
-I'd use a relational database such as PostgreSQL.
-
-### Tables
-
-```text
-batches
-   │
-   ├── batch_releases
-   │          │
-   │          └── release_variants
-   │
-   └── students
+                         ┌──────────────────────────┐
+                         │   JNTUH Official Site    │
+                         │ Results + Notifications  │
+                         └────────────┬─────────────┘
+                                      │
+                         Every 24 hours / manual
+                                      │
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │ JNTUH Examination Catalog       │
+                    │                                 │
+                    │ examCode                        │
+                    │ semester                        │
+                    │ regulation                      │
+                    │ examType                        │
+                    │ releaseDate                     │
+                    │ source URL                      │
+                    │ status                           │
+                    └────────────────┬────────────────┘
+                                     │
+                                     │
+             ┌───────────────────────┴────────────────────────┐
+             │                                                │
+             ▼                                                ▼
+      ┌───────────────┐                              ┌────────────────┐
+      │ HTNO Parser   │                              │ Result Cache   │
+      │               │                              │                │
+      │ admissionYear │                              │ student result │
+      │ collegeCode   │                              │ subjects       │
+      │ entryType     │                              │ attempts       │
+      │ course        │                              │ fetchedAt      │
+      │ branch        │                              └────────────────┘
+      └───────┬───────┘
               │
-              └── student_results
-                         │
-                         └── subjects
-```
-
-More concretely:
-
-```text
-batches
-│
-├── releases
-│
-├── students
-│
-└── results
+              ▼
+      ┌─────────────────────┐
+      │ Student Search      │
+      │ Pattern / Cohort    │
+      └──────────┬──────────┘
+                 │
+                 ▼
+      ┌─────────────────────┐
+      │ Relevant Releases   │
+      │ only                │
+      └──────────┬──────────┘
+                 │
+        ┌────────┼────────┐
+        ▼        ▼        ▼
+     Regular   Supply    RC/RV
+        │        │        │
+        └────────┼────────┘
+                 ▼
+       ┌───────────────────┐
+       │ Search + Decision │
+       │ Engine            │
+       └─────────┬─────────┘
+                 │
+                 ▼
+          Final Student Result
 ```
 
 ---
 
-# 6. `batches` table
+# 2. Most important concept: Examination Catalog
 
-```sql
-CREATE TABLE batches (
-    id BIGSERIAL PRIMARY KEY,
+Do **not** store examCodes only inside student records.
 
-    admission_year INT NOT NULL,
+Create a global table:
 
-    entry_type VARCHAR(20) NOT NULL,
+### `jntuh_exam_releases`
 
-    regulation VARCHAR(10) NOT NULL,
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    UNIQUE (
-        admission_year,
-        entry_type,
-        regulation
-    )
-);
+```text
+id
+exam_code
+degree
+regulation
+year
+semester
+exam_type
+exam_month
+exam_year
+release_date
+result_url
+source
+is_active
+first_seen_at
+last_seen_at
 ```
 
 Example:
 
 ```text
-id | admission_year | entry_type | regulation
-------------------------------------------------
-1  | 2023           | REGULAR    | R22
-2  | 2024           | LATERAL    | R22
-3  | 2024           | REGULAR    | R22
+exam_code: 1964
+degree: BTECH
+regulation: R22
+year: III
+semester: II
+exam_type: REGULAR
+exam_month: APRIL
+exam_year: 2026
 ```
 
----
-
-# 7. `releases` table
-
-This represents a JNTUH examination release.
-
-```sql
-CREATE TABLE releases (
-    id BIGSERIAL PRIMARY KEY,
-
-    exam_code VARCHAR(20) NOT NULL UNIQUE,
-
-    semester_year INT NOT NULL,
-    semester_number INT NOT NULL,
-
-    regulation VARCHAR(10) NOT NULL,
-
-    exam_type VARCHAR(20) NOT NULL,
-
-    exam_month VARCHAR(20),
-    exam_year INT,
-
-    publication_date DATE,
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-Example:
+Another:
 
 ```text
-exam_code | semester | regulation | type
-------------------------------------------
-1964      | III-II   | R22        | REGULAR
-1945      | III-II   | R22        | SUPPLEMENTARY
-1942      | III-I    | R22        | REGULAR
+exam_code: 1965
+degree: BTECH
+regulation: R18
+year: III
+semester: II
+exam_type: SUPPLY
+exam_month: APRIL
+exam_year: 2026
 ```
+
+But **do not assume examCode itself tells you regulation/type**.
+
+Your catalog scraper should obtain this information from the JNTUH release listing/metadata.
+
+That is important because JNTUH can publish different examination activities around the same period, and its official portal currently shows releases such as B.Tech regular/supplementary/RC-RV combinations. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
 
 ---
 
-# 8. `batch_releases`
+# 3. Update the examination catalog every 24 hours
 
-This is the key table.
+You specifically want:
 
-It connects a release to a batch.
+> no need to search for examcodes everytime
 
-```sql
-CREATE TABLE batch_releases (
-    batch_id BIGINT REFERENCES batches(id),
-    release_id BIGINT REFERENCES releases(id),
+Correct.
 
-    PRIMARY KEY (batch_id, release_id)
-);
+Create a background job:
+
+```text
+Every 24 hours
+       ↓
+Open JNTUH results page
+       ↓
+Extract B.Tech releases
+       ↓
+Compare with database
+       ↓
+New examCode?
+   ├── YES → INSERT
+   └── NO  → UPDATE last_seen_at
+       ↓
+Mark old records appropriately
 ```
+
+For example:
+
+```text
+02:00 AM every day
+
+JNTUH Scanner
+     ↓
+B.Tech releases
+     ↓
+1964 exists
+1965 exists
+1966 exists
+...
+1983 exists
+1984 NEW
+     ↓
+INSERT 1984
+```
+
+So a student search **never needs to scrape the JNTUH release page**.
+
+It only queries your database.
+
+JNTUH's official results portal itself publishes the result announcements, while its examination portal also publishes examination notifications, so these can be separate sources in your catalog-ingestion layer. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
+
+---
+
+# 4. But don't create one giant examCode list for every student
+
+This is where your **pattern system** becomes important.
+
+For example:
+
+```text
+23E31A0586
+```
+
+Parse it into:
+
+```text
+Admission Year = 23
+College        = E3
+Entry Type     = Regular
+Course         = 1
+Branch         = A0
+Serial         = 86
+```
+
+Your student pattern should ignore the serial number.
 
 So:
 
 ```text
-2023 REGULAR R22
-        │
-        ├── 1964
-        ├── 1945
-        ├── 1942
-        └── ...
+23E31A0586
+23E31A0587
+23E31A0588
+23E31A0589
 ```
 
-And:
-
-```text
-2024 LATERAL R22
-        │
-        ├── different releases
-        ├── ...
-```
-
-This is exactly the grouping you are asking for.
+belong to the same search pattern.
 
 ---
 
-# 9. But supplementary needs one more concept
+# 5. Create `htno_groups`
 
-A supplementary release isn't necessarily the regular release of the same semester.
-
-Therefore:
+I recommend this table:
 
 ```text
-batch
-  ↓
-release
-  ↓
-semester
-  ↓
-attempt type
+htno_groups
+```
+
+### Fields
+
+```text
+id
+admission_year
+college_code
+entry_type
+course_code
+branch_code
+regulation
+group_key
+
+first_discovered_at
+last_updated_at
+status
 ```
 
 Example:
 
 ```text
-2023 REGULAR R22
-│
-└── III-II
-    │
-    ├── Regular
-    │   └── 1964
-    │
-    └── Supplementary
-        └── 197X
+admission_year = 23
+college_code   = E3
+entry_type     = REGULAR
+course_code    = 1
+branch_code    = A0
+regulation     = R22
+
+group_key =
+23-E3-REGULAR-1-A0-R22
 ```
 
-The release itself contains the semester and exam type.
+Now:
+
+```text
+23E31A0586
+23E31A0587
+23E31A0588
+23E31A0589
+```
+
+all use:
+
+```text
+23-E3-REGULAR-1-A0-R22
+```
 
 ---
 
-# 10. RC/RV should belong to the release
+# 6. Store the search pattern separately
 
-Don't create:
+Create:
 
 ```text
-1964
-1964-RCRV
+group_result_candidates
 ```
 
-as two independent releases.
+Example:
+
+```text
+group_id
+release_id
+semester
+attempt_type
+priority
+status
+discovered_from
+last_verified_at
+```
+
+Suppose the group is:
+
+```text
+23-E3-REGULAR-1-A0-R22
+```
+
+It might eventually learn:
+
+```text
+I-I
+    REGULAR → 1801
+
+I-II
+    REGULAR → 1850
+    SUPPLY  → 1870
+
+II-I
+    REGULAR → 1900
+    SUPPLY  → 1920
+
+II-II
+    REGULAR → 1950
+    SUPPLY  → 1960
+    RC/RV   → 1961
+
+III-I
+    REGULAR → 1930
+    SUPPLY  → 1940
+    RC/RV   → 1941
+
+III-II
+    REGULAR → 1964
+    SUPPLY  → 1965
+    RC/RV   → 1964/related release
+```
+
+These numbers are just architectural examples—not a claim that those codes correspond to all of those categories.
+
+---
+
+# 7. Very important: same examCode can cover multiple student cohorts
+
+Your architecture should therefore **not** do this:
+
+```text
+student
+   ↓
+examCode
+```
 
 Instead:
 
 ```text
-Release 1964
-│
-├── Original
-│   └── intgrade
-│
-└── RC/RV
-    └── rcrvintgrade
+JNTUH Release
+       │
+       ├── cohort/group A
+       ├── cohort/group B
+       ├── cohort/group C
+       └── ...
 ```
 
-So we can have:
+Because one JNTUH release can contain results for multiple groups.
 
-```sql
-CREATE TABLE release_variants (
-    id BIGSERIAL PRIMARY KEY,
+Your release should be a **global object**.
 
-    release_id BIGINT REFERENCES releases(id),
+Your group determines whether that release is relevant.
 
-    variant_type VARCHAR(20) NOT NULL,
+This is especially important because JNTUH's announcements can combine regular/supplementary categories and different semester activities in a single published release. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
 
-    etype VARCHAR(20),
+---
 
-    result_param VARCHAR(50),
+# 8. The search engine should be stateful
 
-    request_type VARCHAR(50)
-);
+This is the biggest improvement I recommend.
+
+Don't simply:
+
+```text
+for examCode in examCodes:
+    search()
+```
+
+Instead:
+
+```text
+Student Search State
+```
+
+Maintain something like:
+
+```text
+student_progress
+```
+
+```text
+student_id
+
+current_semester
+last_successful_regular
+last_successful_supply
+
+failed_subject_count
+
+has_pending_supply
+has_pending_rcrv
+
+search_status
+```
+
+---
+
+# 9. First search MUST be I-I Regular
+
+You specifically requested:
+
+> first search 1 year 1 semester regular
+
+Correct.
+
+The algorithm should be:
+
+```text
+HTNO
+ ↓
+Parse HTNO
+ ↓
+Determine expected regulation/cohort
+ ↓
+Find I-I Regular releases
+ ↓
+Search actual HTNO
+```
+
+If no result:
+
+```text
+NO I-I REGULAR RESULT
+        ↓
+Invalid HTNO
+        ↓
+STOP
+```
+
+Do **not** search:
+
+```text
+I-II
+II-I
+II-II
+Supply
+RC/RV
+```
+
+because the HTNO has already failed the fundamental validation.
+
+---
+
+# 10. After I-I Regular succeeds
+
+Now the HTNO is proven to exist.
+
+Suppose:
+
+```text
+I-I Regular
+       ↓
+FOUND
+```
+
+Then:
+
+```text
+I-II Regular
+       ↓
+search
+```
+
+Then:
+
+```text
+II-I Regular
+       ↓
+search
+```
+
+and so on.
+
+Conceptually:
+
+```text
+I-I Regular
+    │
+    ├── NOT FOUND → INVALID HTNO → STOP
+    │
+    └── FOUND
+         ↓
+      I-II Regular
+         ↓
+      II-I Regular
+         ↓
+      II-II Regular
+         ↓
+      III-I Regular
+         ↓
+      III-II Regular
+         ↓
+      IV-I Regular
+         ↓
+      IV-II Regular
+```
+
+But there is an important optimization.
+
+---
+
+# 11. Don't search future semesters unnecessarily
+
+Suppose the student entered:
+
+```text
+23E31A0586
+```
+
+and currently only III-II results are expected to exist.
+
+You don't want:
+
+```text
+IV-II
+IV-I
+III-II
+III-I
+...
+```
+
+randomly.
+
+Your catalog knows:
+
+```text
+release semester
+release date
+academic year
+regulation
+```
+
+Therefore your search engine should know which semesters **could currently exist** for that admission year.
+
+---
+
+# 12. Regular result is the backbone
+
+For each semester:
+
+```text
+REGULAR
+   ↓
+student found?
+```
+
+If yes:
+
+```text
+store result
+analyze subjects
+```
+
+Then determine whether supplementary search is required.
+
+---
+
+# 13. Your supply optimization is very good
+
+Suppose:
+
+```text
+III-I Regular
+```
+
+result:
+
+```text
+Java       A
+DBMS       A
+Networks   B
+OS         B
+AI         A
+```
+
+No failed subjects.
+
+Therefore:
+
+```text
+failedSubjects = 0
+```
+
+Then:
+
+```text
+DO NOT SEARCH SUPPLY
+DO NOT SEARCH RC/RV
+```
+
+Excellent optimization.
+
+---
+
+# 14. If there are failed subjects
+
+Example:
+
+```text
+III-I Regular
+
+Java       A
+DBMS       F
+Networks   B
+OS         F
+AI         A
+```
+
+Then:
+
+```text
+failedSubjects = 2
+```
+
+Now search relevant supplementary releases.
+
+But only for that semester/failed subjects.
+
+```text
+III-I
+   │
+   ├── Regular → FOUND
+   │
+   ├── Failed subjects = 2
+   │
+   └── Search Supply
+```
+
+---
+
+# 15. After first supply
+
+Suppose supply result:
+
+```text
+DBMS → C
+OS   → B
+```
+
+Now:
+
+```text
+failedSubjects = 0
+```
+
+Therefore:
+
+```text
+STOP SUPPLY SEARCH
+STOP RC/RV SEARCH
+```
+
+This is exactly what you want.
+
+---
+
+# 16. Student with multiple supplies
+
+Another student:
+
+```text
+Regular
+ ↓
+3 failed
+ ↓
+Supply #1
+ ↓
+1 failed
+ ↓
+Supply #2
+ ↓
+0 failed
+ ↓
+STOP
+```
+
+Your system therefore doesn't have a fixed number of searches.
+
+It dynamically determines:
+
+```text
+How many attempts are necessary?
+```
+
+This is much better than:
+
+```text
+Search all supply examCodes.
+```
+
+---
+
+# 17. RC/RV should be conditional
+
+You said:
+
+> rcrv is applicable for only failed subjects
+
+So your engine should have:
+
+```text
+if failedSubjects.length === 0:
+    skip RC/RV
+```
+
+If:
+
+```text
+failedSubjects.length > 0
+```
+
+then RC/RV candidates become eligible.
+
+But there is another important distinction:
+
+### RC/RV shouldn't automatically be searched immediately.
+
+A better model is:
+
+```text
+Regular
+   ↓
+F subjects
+   ↓
+Supply
+   ↓
+Still F?
+   ↓
+RC/RV candidate
+```
+
+The exact availability should come from your release catalog.
+
+---
+
+# 18. Search state machine
+
+I recommend implementing the student search as a state machine.
+
+```text
+START
+  │
+  ▼
+VALIDATE HTNO FORMAT
+  │
+  ▼
+I-I REGULAR
+  │
+  ├── NOT FOUND → INVALID
+  │
+  ▼
+I-I RESULT
+  │
+  ▼
+ANALYZE FAILURES
+  │
+  ├── PASS → NEXT SEMESTER
+  │
+  └── FAIL
+        │
+        ▼
+      SUPPLY
+        │
+        ├── PASS → NEXT SEMESTER
+        │
+        └── FAIL
+              │
+              ▼
+            NEXT SUPPLY
+              │
+              └── ...
+```
+
+Eventually:
+
+```text
+FAIL
+ ↓
+RC/RV eligible?
+ ↓
+YES
+ ↓
+RC/RV
+ ↓
+Re-evaluate result
+```
+
+---
+
+# 19. But there is one major problem: "same year = same examCodes"
+
+I would **not** make the rule simply:
+
+```text
+Admission year 23
+       ↓
+same examCodes
+```
+
+That is too broad.
+
+Use:
+
+```text
+Admission Year
++
+Entry Type
++
+Regulation
++
+College
++
+Course
++
+Branch
+```
+
+as your initial pattern.
+
+For example:
+
+```text
+23-E3-REGULAR-1-A0-R22
+```
+
+and:
+
+```text
+23-E3-LATERAL-1-A0-R22
+```
+
+should not automatically share the same student search pattern.
+
+However, they can still point to the **same global JNTUH release** if that release actually serves both groups.
+
+---
+
+# 20. Separate "release" from "student applicability"
+
+This distinction will make your architecture much cleaner.
+
+### Release
+
+```text
+examCode = 1964
+```
+
+means:
+
+> JNTUH published a particular result release.
+
+### Applicability
+
+means:
+
+> Which student groups can have results in this release?
+
+Therefore:
+
+```text
+jntuh_exam_releases
+        │
+        ▼
+release_applicability
+        │
+        ├── 23-E3-REGULAR-...
+        ├── 23-E3-LATERAL-...
+        └── ...
+```
+
+This solves your:
+
+> regular new academic batch + supply previous batch on same day / same examCode
+
+problem.
+
+---
+
+# 21. Recommended final database
+
+I would use these tables:
+
+```text
+┌─────────────────────────┐
+│ jntuh_exam_releases     │
+├─────────────────────────┤
+│ id                      │
+│ exam_code               │
+│ degree                  │
+│ regulation              │
+│ year                    │
+│ semester                │
+│ exam_type               │
+│ exam_month              │
+│ exam_year               │
+│ release_date            │
+│ source_url              │
+│ first_seen_at           │
+│ last_seen_at            │
+└─────────────┬───────────┘
+              │
+              ▼
+┌─────────────────────────┐
+│ release_applicability   │
+├─────────────────────────┤
+│ release_id              │
+│ group_id                │
+│ confidence              │
+│ verified                │
+└─────────────┬───────────┘
+              │
+              ▼
+┌─────────────────────────┐
+│ htno_groups             │
+├─────────────────────────┤
+│ id                      │
+│ admission_year          │
+│ college_code            │
+│ entry_type              │
+│ course_code             │
+│ branch_code             │
+│ regulation              │
+│ group_key               │
+└─────────────┬───────────┘
+              │
+              ▼
+┌─────────────────────────┐
+│ students                │
+├─────────────────────────┤
+│ id                      │
+│ htno                    │
+│ group_id                │
+│ name                    │
+│ father_name             │
+│ college_code            │
+│ first_verified_at       │
+└─────────────┬───────────┘
+              │
+              ▼
+┌─────────────────────────┐
+│ student_results         │
+├─────────────────────────┤
+│ id                      │
+│ student_id              │
+│ release_id              │
+│ semester                │
+│ attempt_type            │
+│ result_status           │
+│ failed_subject_count    │
+│ fetched_at              │
+└─────────────┬───────────┘
+              │
+              ▼
+┌─────────────────────────┐
+│ result_subjects         │
+├─────────────────────────┤
+│ result_id               │
+│ subject_code            │
+│ subject_name            │
+│ internal                │
+│ external                │
+│ total                   │
+│ grade                   │
+│ credits                 │
+└─────────────────────────┘
+```
+
+And additionally:
+
+```text
+student_search_state
+```
+
+for the optimization engine.
+
+---
+
+# 22. `student_search_state`
+
+Something like:
+
+```text
+student_id
+
+last_regular_semester
+
+last_completed_semester
+
+pending_failed_subjects
+
+supply_attempts
+
+rcrv_required
+
+search_completed
+
+search_version
+
+updated_at
 ```
 
 Example:
 
 ```text
-release_id | variant | type
---------------------------------
-1964       | ORIGINAL | intgrade
-1964       | RCRV     | rcrvintgrade
-```
-
----
-
-# 11. Then store actual student results
-
-This is the part that makes your website extremely fast.
-
-```sql
-CREATE TABLE students (
-    id BIGSERIAL PRIMARY KEY,
-
-    htno VARCHAR(20) UNIQUE NOT NULL,
-
-    batch_id BIGINT REFERENCES batches(id),
-
-    name VARCHAR(200),
-    father_name VARCHAR(200),
-    college_code VARCHAR(20)
-);
-```
-
-Then:
-
-```sql
-CREATE TABLE student_results (
-    id BIGSERIAL PRIMARY KEY,
-
-    student_id BIGINT REFERENCES students(id),
-
-    release_id BIGINT REFERENCES releases(id),
-
-    variant_id BIGINT REFERENCES release_variants(id),
-
-    result_status VARCHAR(30),
-
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    UNIQUE(student_id, release_id, variant_id)
-);
-```
-
-And subjects:
-
-```sql
-CREATE TABLE result_subjects (
-    id BIGSERIAL PRIMARY KEY,
-
-    student_result_id BIGINT REFERENCES student_results(id),
-
-    subject_code VARCHAR(50),
-    subject_name TEXT,
-
-    internal INT,
-    external INT,
-    total INT,
-
-    grade VARCHAR(10),
-    credits DECIMAL(5,2)
-);
-```
-
----
-
-# 12. Now your search becomes VERY simple
-
-User:
-
-```text
 23E31A0586
+
+last_regular_semester = III-II
+
+pending_failed_subjects = 0
+
+supply_attempts = 1
+
+rcrv_required = false
+
+search_completed = true
 ```
 
-Backend:
+Next time the same student searches:
 
 ```text
-HTNO
+DB/cache
  ↓
-students
+already completely processed
  ↓
-batch_id
- ↓
-batch_releases
- ↓
-student_results
- ↓
-result_subjects
+return stored results
 ```
 
-No need to scan JNTUH every time.
-
-For example:
-
-```text
-23E31A0586
-      │
-      ▼
-2023-REG-R22
-      │
-      ├── I-I
-      │   └── Regular
-      │
-      ├── I-II
-      │   └── Regular
-      │
-      ├── II-I
-      │   ├── Regular
-      │   └── Supplementary
-      │
-      ├── II-II
-      │   └── Regular
-      │
-      ├── III-I
-      │   ├── Regular
-      │   └── Supplementary
-      │
-      └── III-II
-          ├── Regular
-          ├── Supplementary
-          └── RC/RV
-```
+**No JNTUH request.**
 
 ---
 
-# 13. JNTUH becomes a background data source
+# 23. Search algorithm
 
-This is the biggest architectural change.
-
-Instead of:
+The complete algorithm becomes:
 
 ```text
-User
- ↓
-JNTUH
- ↓
-Result
-```
-
-we use:
-
-```text
-                     JNTUH
-                       │
-                       ▼
-                Background Sync
-                       │
-                       ▼
-               Our PostgreSQL
-                       │
-                       ▼
-                     User
-```
-
-The user interacts primarily with **your database**.
-
----
-
-# 14. Background synchronization
-
-We create a separate worker:
-
-```text
-workers/
-    releaseSync.worker.js
-    resultSync.worker.js
-```
-
-### Release sync
-
-Periodically:
-
-```text
-JNTUH result listing
-        ↓
-Find new examCode
-        ↓
-Parse release
-        ↓
-Determine associated batch
-        ↓
-Store release
-```
-
-### Result sync
-
-For a batch:
-
-```text
-2023-REG-R22
-        ↓
-Get its releases
-        ↓
-Fetch student results
-        ↓
-Store valid results
-```
-
-However, we need to be careful here:
-
-**We cannot enumerate every student's HTNO and scrape JNTUH indiscriminately.**
-
-Instead, when a student searches for the first time, we can populate that student's result history. Then subsequent searches are database reads.
-
----
-
-# 15. First search vs subsequent search
-
-### First search
-
-```text
-User enters HTNO
-        ↓
-Find student?
+USER ENTERS HTNO
         │
-       NO
-        ↓
-Parse HTNO
-        ↓
-Determine batch
-        ↓
-Get batch releases
-        ↓
-Query JNTUH for relevant releases
-        ↓
-Store valid results
-        ↓
-Return result
+        ▼
+Check browser localStorage
+        │
+   ┌────┴────┐
+   │         │
+ HIT       MISS
+   │         │
+   ▼         ▼
+Return      Backend
+cached        │
+              ▼
+        Check student DB
+              │
+       ┌──────┴──────┐
+       │             │
+    COMPLETE       NEW
+       │             │
+       ▼             ▼
+    Return       Parse HTNO
+                     │
+                     ▼
+                Find HTNO group
+                     │
+                     ▼
+              Get candidate releases
+                     │
+                     ▼
+             I-I REGULAR FIRST
+                     │
+              ┌──────┴──────┐
+              │             │
+           NOT FOUND       FOUND
+              │             │
+              ▼             ▼
+          INVALID        Save result
+          STOP               │
+                             ▼
+                      Analyze subjects
+                             │
+                     ┌───────┴────────┐
+                     │                │
+                   PASS             FAIL
+                     │                │
+                     ▼                ▼
+               Next regular        Supply
+                                      │
+                                ┌─────┴─────┐
+                                │           │
+                              PASS        FAIL
+                                │           │
+                                ▼           ▼
+                           Next sem.    Next supply
+                                              │
+                                              ▼
+                                           Repeat
+                                              │
+                                              ▼
+                                       Still failed?
+                                              │
+                                              ▼
+                                           RC/RV
 ```
 
-### Second search
+---
+
+# 24. Important optimization: candidate priority
+
+Don't store candidates as an unordered list.
+
+Store priority.
+
+Example:
 
 ```text
-User enters same HTNO
-        ↓
-students table
-        ↓
+priority 1 → current regular
+priority 2 → previous supply
+priority 3 → latest supply
+priority 4 → RC/RV
+```
+
+But more specifically:
+
+```text
+III-I
+
+REGULAR
+   ↓
+SUPPLY-1
+   ↓
+SUPPLY-2
+   ↓
+RC/RV
+```
+
+Your database can know the order.
+
+---
+
+# 25. How the system learns the pattern
+
+Suppose the first user:
+
+```text
+23E31A0586
+```
+
+searches.
+
+The system discovers:
+
+```text
+23-E3-REGULAR-1-A0-R22
+```
+
+and searches relevant releases.
+
+Suppose it finds:
+
+```text
+I-I Regular       → 1801
+I-II Regular      → 1850
+II-I Regular      → 1900
+II-II Regular     → 1950
+III-I Regular     → 1930
+III-II Regular    → 1964
+```
+
+It stores that pattern.
+
+Then another user:
+
+```text
+23E31A0512
+```
+
+comes.
+
+Instead of scanning all 200+ B.Tech examCodes:
+
+```text
+ALL EXAMCODES
+   ↓
+200+
+```
+
+you do:
+
+```text
+23-E3-REGULAR-1-A0-R22
+             ↓
+       known candidates
+             ↓
+        10–20 releases
+```
+
+Much faster.
+
+---
+
+# 26. But never trust the pattern blindly
+
+This is extremely important.
+
+Suppose:
+
+```text
+23E31A0586 → pattern A
+23E31A0587 → pattern A
+```
+
+You must **still submit the actual HTNO** to JNTUH.
+
+Do NOT do:
+
+```text
+pattern match
+    ↓
+assume student has result
+```
+
+Instead:
+
+```text
+pattern match
+      ↓
+candidate examCode
+      ↓
+actual HTNO → JNTUH
+      ↓
+actual result?
+```
+
+This prevents accidentally showing another student's result.
+
+---
+
+# 27. Two caching levels
+
+Your system should have **three** caches.
+
+### Level 1 — Browser
+
+```text
+localStorage
+```
+
+Fastest.
+
+```text
+HTNO → complete result
+```
+
+---
+
+### Level 2 — Server/database
+
+```text
 student_results
-        ↓
-PostgreSQL
-        ↓
-Return
 ```
 
-**Zero JNTUH requests.**
+If the same student searches from another device:
+
+```text
+DB → result
+```
+
+No JNTUH request.
 
 ---
 
-# 16. What happens when JNTUH publishes a new supply?
-
-This is where the architecture becomes useful.
-
-Suppose JNTUH publishes:
+### Level 3 — JNTUH release catalog
 
 ```text
-1979
-I-II R22 Supplementary
-June 2026
+jntuh_exam_releases
 ```
 
-The release sync discovers:
+This prevents repeatedly discovering examCodes.
+
+So:
 
 ```text
-1979
-```
-
-Then:
-
-```text
+Browser Cache
+      ↓ miss
+Server Cache
+      ↓ miss
+Student Search Pattern
+      ↓
+Exam Release Catalog
+      ↓
 JNTUH
- ↓
-Release Discovery
- ↓
-New Release
- ↓
-Which batches can this release belong to?
- ↓
-2023 Regular R22
-2024 Regular R22
-...
 ```
 
-We associate it with the relevant batches.
-
-Then when a student from that batch searches:
-
-```text
-HTNO
- ↓
-batch
- ↓
-new release
- ↓
-JNTUH
- ↓
-result
- ↓
-store
-```
+That's the architecture I'd use.
 
 ---
 
-# 17. Important: Batch should not contain actual results
+# 28. 24-hour catalog updater
 
-I recommend:
+Create a cron/background job:
 
 ```text
-Batch
-   ↓
-Release
-   ↓
-Student Result
-   ↓
-Subjects
+┌──────────────────────────┐
+│ Every 24 hours           │
+└────────────┬─────────────┘
+             ▼
+      JNTUH Result Portal
+             ▼
+      Extract B.Tech data
+             ▼
+      Normalize releases
+             ▼
+      Compare exam_codes
+             ▼
+     ┌───────┴────────┐
+     │                │
+   Existing           New
+     │                │
+     ▼                ▼
+ update             insert
+ last_seen          release
 ```
 
-rather than putting a huge JSON object inside `batches`.
+You should also keep:
 
-Don't do:
-
-```json
-{
-  "batch": "2023-REG-R22",
-  "results": {
-      "23E31A0001": {...},
-      "23E31A0002": {...},
-      "23E31A0003": {...}
-  }
-}
+```text
+catalog_sync_log
 ```
 
-That becomes difficult to update and query.
+with:
 
-Use relational relationships.
+```text
+started_at
+completed_at
+records_found
+new_records
+updated_records
+failed
+error
+```
+
+This lets you know whether your 24-hour crawler actually worked.
 
 ---
 
-# 18. Final database relationship
+# 29. Don't rely only on result-page scraping
+
+Use two official JNTUH sources:
+
+### Result release source
+
+The JNTUH results portal publishes result announcements and dates. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
+
+### Examination notification source
+
+The university examination portal publishes B.Tech examination notifications, including regular/supply examinations. [JNTUH Exams](https://exams1.jntuh.ac.in/Portal/common/load?utm_source=chatgpt.com)
+
+So your ingestion architecture can eventually be:
 
 ```text
-                    ┌──────────────┐
-                    │    BATCH     │
-                    │              │
-                    │ 2023 REG R22 │
-                    └──────┬───────┘
-                           │
-                    batch_releases
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │   RELEASE    │
-                    │              │
-                    │ examCode 1964│
-                    │ III-II       │
-                    │ R22          │
-                    │ Regular      │
-                    └──────┬───────┘
-                           │
-                    release_variant
-                           │
-                  ┌────────┴────────┐
-                  ▼                 ▼
-             Original             RC/RV
-             intgrade             rcrv...
-                  │                 │
-                  └────────┬────────┘
-                           │
-                     student_result
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │    STUDENT   │
-                    │              │
-                    │ 23E31A0586   │
-                    └──────┬───────┘
-                           │
-                     result_subject
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │   SUBJECT    │
-                    │              │
-                    │ code         │
-                    │ marks        │
-                    │ grade        │
-                    │ credits      │
-                    └──────────────┘
+JNTUH Result Portal
+        │
+        ├── result release metadata
+        │
+        ▼
+JNTUH Catalog
+
+JNTUH Exam Portal
+        │
+        ├── exam notification metadata
+        │
+        ▼
+Exam Schedule/Context
 ```
 
-## This is the architecture I think you are actually asking for
+This makes your catalog more reliable than trying to infer everything solely from an `examCode`.
 
-The hierarchy becomes:
+---
+
+# 30. Final architecture I recommend
 
 ```text
-BATCH
-│
-├── Student A
-├── Student B
-├── Student C
-│
-└── Result Releases
-    │
-    ├── I-I Regular
-    ├── I-II Regular
-    ├── II-I Regular
-    ├── II-I Supply
-    ├── II-II Regular
-    ├── III-I Regular
-    ├── III-I Supply
-    ├── III-II Regular
-    ├── III-II Supply
-    ├── III-II RC/RV
-    ├── IV-I Regular
-    ├── IV-I Supply
-    └── IV-II Regular
+                         JNTUH
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+       Results Portal             Exam Portal
+              │                         │
+              └────────────┬────────────┘
+                           │
+                     Catalog Worker
+                       every 24h
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │ JNTUH Exam Catalog  │
+                │                     │
+                │ ALL B.Tech releases │
+                └──────────┬──────────┘
+                           │
+                           │
+USER HTNO ────────────────►│
+                           │
+                           ▼
+                  ┌────────────────┐
+                  │ HTNO Parser    │
+                  └───────┬────────┘
+                          │
+                          ▼
+                  ┌────────────────┐
+                  │ HTNO Group     │
+                  │ / Pattern      │
+                  └───────┬────────┘
+                          │
+                          ▼
+                Relevant Releases
+                          │
+                          ▼
+                ┌──────────────────┐
+                │ Search State     │
+                │ Machine          │
+                └────────┬─────────┘
+                         │
+             ┌───────────┼────────────┐
+             ▼           ▼            ▼
+          Regular      Supply       RC/RV
+             │           │            │
+             └───────────┼────────────┘
+                         ▼
+                   Actual HTNO
+                         │
+                         ▼
+                       JNTUH
+                         │
+                         ▼
+                  Parse Result
+                         │
+                         ▼
+                 Analyze Failures
+                         │
+                         ▼
+               Update Search State
+                         │
+                         ▼
+                 Save in Database
+                         │
+                         ▼
+                  Return Results
 ```
 
-**One correction to the wording:** I would not literally store "all students' result data under a batch" as one giant batch document. Store the **batch relationship** centrally, and store releases/results in normalized tables linked to that batch. That gives you the exact batch-oriented behavior you want without creating an unmanageable data structure.
+### The key principle
+
+**The catalog tells you what examCodes exist.**
+
+**The HTNO pattern tells you which releases are probably relevant.**
+
+**The actual student's result tells you whether to continue.**
+
+**The student's subject status tells you whether Supply/RC-RV is necessary.**
+
+That gives you a system that adapts to both:
+
+```text
+Student A
+I-I → I-II → II-I → II-II
+all pass
+STOP
+```
+
+and:
+
+```text
+Student B
+I-I → I-II → supply → supply
+        ↓
+      pass
+        ↓
+II-I → fail
+        ↓
+supply
+        ↓
+RC/RV
+        ↓
+pass
+        ↓
+next semester
+```
+
+without blindly searching every examCode.
+
+Also, JNTUH's current public data demonstrates why the catalog needs to be dynamic: recent announcements include separate B.Tech releases for I-I, I-II, II-I, II-II, III-I, III-II, IV-I and IV-II, with regular, supplementary, advanced-supply and RC/RV variants appearing at different times. [JNTUH Results](https://results3.jntuh.ac.in/?utm_source=chatgpt.com)
+
+**I would build this architecture before writing more scraper logic.** The next concrete step should be designing the exact **PostgreSQL schema + relationships + indexes + search-state algorithm**, because that will determine how efficiently the backend can perform these adaptive searches.

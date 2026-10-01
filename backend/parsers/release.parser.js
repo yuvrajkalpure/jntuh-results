@@ -33,10 +33,10 @@ function parseReleaseTitle(title) {
     let attemptType = "SUPPLY";
     if (isRCRV) {
         attemptType = "RCRV";
-    } else if (lower.includes("supplementary") || lower.includes("supply") || lower.includes("supple")) {
-        attemptType = "SUPPLY";
     } else if (lower.includes("regular")) {
         attemptType = "REGULAR";
+    } else if (lower.includes("supplementary") || lower.includes("supply") || lower.includes("supple")) {
+        attemptType = "SUPPLY";
     }
 
     return {

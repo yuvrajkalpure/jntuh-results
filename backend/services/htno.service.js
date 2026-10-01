@@ -8,7 +8,20 @@ const { normalizeHTNO } = require("../utils/normalization.utils");
 function isValidHTNO(htno) {
     if (!htno) return false;
     const clean = normalizeHTNO(htno);
-    return /^[A-Z0-9]{10}$/.test(clean);
+    if (!/^[A-Z0-9]{10}$/.test(clean)) return false;
+
+    const admissionYY = parseInt(clean.substring(0, 2), 10);
+    const currentYY = new Date().getFullYear() % 100;
+    if (isNaN(admissionYY) || admissionYY < 9 || admissionYY > currentYY) {
+        return false;
+    }
+
+    const courseCode = clean[4];
+    if (courseCode !== '1' && courseCode !== '5') {
+        return false;
+    }
+
+    return true;
 }
 
 function parseHTNO(htno) {
@@ -20,12 +33,12 @@ function parseHTNO(htno) {
     const admissionYY = parseInt(cleanHtno.substring(0, 2), 10);
     const admissionYear = 2000 + admissionYY;
     const collegeCode = cleanHtno.substring(2, 4);
-    const courseType = cleanHtno[4]; // '1' = Day-Time / Regular, '5' = Lateral Entry
-    const courseCode = cleanHtno[5]; // 'A' = B.Tech
+    const courseCode = cleanHtno[4]; // '1' = Regular, '5' = Lateral Entry
+    const degreeCode = cleanHtno[5]; // 'A' = B.Tech
     const branchCode = cleanHtno.substring(6, 8);
     const serialNo = cleanHtno.substring(8, 10);
 
-    const isLateral = (courseType === '5');
+    const isLateral = (courseCode === '5');
     // Lateral entry students enter at Year 2, sharing timeline with previous year's regular batch
     const effectiveCohortYear = isLateral ? admissionYear - 1 : admissionYear;
     const studentRegulation = getStudentRegulation(effectiveCohortYear);
@@ -36,8 +49,8 @@ function parseHTNO(htno) {
         htno: cleanHtno,
         admissionYear,
         collegeCode,
-        courseType,
         courseCode,
+        degreeCode,
         branchCode,
         serialNo,
         isLateral,

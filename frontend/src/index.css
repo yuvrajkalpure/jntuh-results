@@ -338,6 +338,14 @@ main {
     display: none;
 }
 
+.mobile-text {
+    display: none;
+}
+
+.mobile-only {
+    display: none !important;
+}
+
 .desktop-text {
     display: inline;
 }
@@ -498,19 +506,13 @@ main {
         box-sizing: border-box !important;
     }
 
-    .result-table .col-code {
-        text-align: left;
-        font-size: 0.65rem;
-        padding-left: 2px;
-        width: 13%;
-        min-width: 0 !important;
-    }
-
     .result-table .col-name {
         text-align: left;
-        font-size: 0.70rem;
+        font-size: 0.74rem;
         line-height: 1.25;
-        width: 40%;
+        padding-left: 2px;
+        padding-right: 2px;
+        width: 48%;
         min-width: 0 !important;
         word-break: normal !important;
         overflow-wrap: break-word !important;
@@ -518,35 +520,168 @@ main {
     }
 
     .result-table .col-num {
-        width: 7%;
+        width: 7.5%;
         text-align: center;
         padding: 5px 1px;
+        font-size: 0.82rem;
+        font-weight: 700;
         min-width: 0 !important;
     }
 
+    .result-table .col-num.col-total {
+        font-size: 0.86rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
     .result-table .col-grade {
-        width: 9.5%;
+        width: 10%;
         text-align: center;
         padding: 5px 1px;
+        font-size: 0.82rem;
+        font-weight: 700;
         min-width: 0 !important;
     }
 
     .result-table .col-attempts {
-        width: 9.5%;
+        width: 10%;
         text-align: center;
         padding: 5px 1px;
         min-width: 0 !important;
+        display: table-cell !important;
     }
 
     .grade-badge {
-        padding: 1px 3px;
-        font-size: 0.62rem;
+        padding: 2px 4px;
+        font-size: 0.75rem;
         border-radius: 4px;
+        font-weight: 700;
     }
 
     .attempts-pill-btn {
-        padding: 2px 3px;
-        font-size: 0.60rem;
+        padding: 2px 4px;
+        font-size: 0.68rem;
         border-radius: 6px;
+    }
+
+    .clickable-row {
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+
+    .clickable-row:active {
+        background-color: #f1f5f9;
+    }
+
+    .attempts-badges {
+        display: none !important;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: flex !important;
+    }
+
+    .student-info-mobile-single-row {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #ffffff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        border: 1px solid #e2e8f0;
+        margin-bottom: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .student-mobile-name {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .student-mobile-divider {
+        color: #94a3b8;
+        font-size: 0.85rem;
+    }
+
+    .student-mobile-htno {
+        font-size: 0.90rem;
+        font-weight: 700;
+        color: #2563eb;
+    }
+
+    .sem-mobile-bar {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background: #f8fafc;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+    }
+
+    .sem-mobile-stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sem-mobile-stat.left {
+        align-items: flex-start;
+    }
+
+    .sem-mobile-stat.right {
+        align-items: flex-end;
+    }
+
+    .sem-mobile-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .sem-mobile-value {
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+
+    .sem-mobile-title {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #0369a1;
+        background: #e0f2fe;
+        padding: 4px 12px;
+        border-radius: 16px;
+        border: 1px solid #bae6fd;
+        white-space: nowrap;
+    }
+
+    .sem-mobile-jntuh-link {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #ffffff;
+        background: #2563eb;
+        padding: 3px 8px;
+        border-radius: 12px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background 0.15s ease;
+    }
+
+    .sem-mobile-jntuh-link:active {
+        background: #1d4ed8;
     }
 }

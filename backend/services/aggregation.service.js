@@ -24,25 +24,11 @@ function processSemesterGroup(group, htno) {
         item.jntuhUrl = buildJntuhUrl(htno, item);
     });
 
-    const primary = group.find(g => g.attemptType === "REGULAR") || group[0];
-
-    const attemptsList = group.map(g => {
-        const titleLower = String(g.examTitle || g.title || "").toLowerCase();
-        let resolvedType = "Supplementary";
-        if (g.attemptType === "RCRV" || titleLower.includes("rc/rv") || titleLower.includes("revaluation")) {
-            resolvedType = "RC/RV";
-        } else if (titleLower.includes("supplementary") || titleLower.includes("supply") || titleLower.includes("supple") || g.attemptType === "SUPPLY") {
-            resolvedType = "Supplementary";
-        } else if (g.attemptType === "REGULAR" || titleLower.includes("regular")) {
-            resolvedType = "Regular";
-        }
-        return {
-            examType: resolvedType,
-            title: g.title,
-            examTitle: g.examTitle || g.title,
-            jntuhUrl: g.jntuhUrl
-        };
+    const firstNonRCRV = group.find(item => {
+        const titleLower = String(item.examTitle || item.title || "").toLowerCase();
+        return item.attemptType !== "RCRV" && !titleLower.includes("rc/rv") && !titleLower.includes("revaluation");
     });
+    const primary = firstNonRCRV || group[0];
 
     // Map subject attempts across all attempts in chronological order
     const subjectMap = new Map();
@@ -51,13 +37,15 @@ function processSemesterGroup(group, htno) {
         if (!item.subjects || !Array.isArray(item.subjects)) return;
 
         const titleLower = String(item.examTitle || item.title || "").toLowerCase();
+        const isRCRV = item.attemptType === "RCRV" || titleLower.includes("rc/rv") || titleLower.includes("revaluation");
+
         let resolvedType = "Supplementary";
-        if (item.attemptType === "RCRV" || titleLower.includes("rc/rv") || titleLower.includes("revaluation")) {
+        if (isRCRV) {
             resolvedType = "RC/RV";
-        } else if (titleLower.includes("supplementary") || titleLower.includes("supply") || titleLower.includes("supple") || item.attemptType === "SUPPLY") {
-            resolvedType = "Supplementary";
-        } else if (item.attemptType === "REGULAR" || titleLower.includes("regular")) {
+        } else if (item === firstNonRCRV) {
             resolvedType = "Regular";
+        } else {
+            resolvedType = "Supplementary";
         }
 
         item.subjects.forEach(sub => {
@@ -83,7 +71,22 @@ function processSemesterGroup(group, htno) {
             }
 
             const record = subjectMap.get(code);
-            record.attemptsCount += 1;
+
+            let isNoChange = false;
+            if (isRCRV && record.attemptsHistory.length > 0) {
+                const prev = record.attemptsHistory[record.attemptsHistory.length - 1];
+                isNoChange = (
+                    String(sub.internalMarks || '').trim() === String(prev.internalMarks || '').trim() &&
+                    String(sub.externalMarks || '').trim() === String(prev.externalMarks || '').trim() &&
+                    String(sub.totalMarks || '').trim() === String(prev.totalMarks || '').trim() &&
+                    String(sub.grade || '').trim().toUpperCase() === String(prev.grade || '').trim().toUpperCase()
+                );
+            }
+
+            // Incremented ONLY for actual exam sittings (non-RC/RV)
+            if (!isRCRV) {
+                record.attemptsCount += 1;
+            }
 
             const attemptEntry = {
                 attemptNumber: record.attemptsCount,
@@ -94,27 +97,46 @@ function processSemesterGroup(group, htno) {
                 externalMarks: sub.externalMarks,
                 totalMarks: sub.totalMarks,
                 grade: sub.grade,
-                credits: sub.credits
+                credits: sub.credits,
+                ...(isRCRV ? { isNoChange, remarks: isNoChange ? "No Change" : "Grade/Marks Updated" } : {})
             };
 
             record.attemptsHistory.push(attemptEntry);
 
-            // Update final marks if this attempt passed
+            // Update final marks if this attempt passed or improved grade
             const gradeUpper = String(sub.grade).trim().toUpperCase();
-            if (gradeUpper !== "F" && gradeUpper !== "AB" && gradeUpper !== "ABSENT") {
-                record.finalGrade = sub.grade;
-                record.finalMarks = {
-                    internal: sub.internalMarks,
-                    external: sub.externalMarks,
-                    total: sub.totalMarks,
-                    grade: sub.grade,
-                    credits: sub.credits
-                };
+            const isPass = gradeUpper !== "F" && gradeUpper !== "AB" && gradeUpper !== "ABSENT" && gradeUpper !== "COMPLETION_PENDING" && gradeUpper !== "CP" && gradeUpper !== "FAIL" && gradeUpper !== "FAILED" && gradeUpper !== "-";
+            if (isPass || !isNoChange) {
+                if (isPass || record.finalGrade === "F" || record.finalGrade === "AB") {
+                    record.finalGrade = sub.grade;
+                    record.finalMarks = {
+                        internal: sub.internalMarks,
+                        external: sub.externalMarks,
+                        total: sub.totalMarks,
+                        grade: sub.grade,
+                        credits: sub.credits
+                    };
+                }
             }
         });
     });
 
     const subjectsList = Array.from(subjectMap.values());
+
+    const attemptsList = group
+        .filter(g => {
+            const titleLower = String(g.examTitle || g.title || "").toLowerCase();
+            return g.attemptType !== "RCRV" && !titleLower.includes("rc/rv") && !titleLower.includes("revaluation");
+        })
+        .map(g => {
+            let resolvedType = (g === firstNonRCRV) ? "Regular" : "Supplementary";
+            return {
+                examType: resolvedType,
+                title: g.title,
+                examTitle: g.examTitle || g.title,
+                jntuhUrl: g.jntuhUrl
+            };
+        });
 
     // Build normalized display table with Attempts column
     const tableHeader = ["Subject Code", "Subject Name", "Internal", "External", "Total", "Grade", "Credits", "Attempts"];

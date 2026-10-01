@@ -26,29 +26,38 @@ export default function ResultTable({ table, subjectsList }) {
         <table className="result-table">
           <thead>
             <tr>
-              <th className="col-code"><span className="desktop-text">Subject Code</span><span className="mobile-text">Code</span></th>
-              <th className="col-name"><span className="desktop-text">Subject Name</span><span className="mobile-text">Subject</span></th>
+              <th className="col-name">Subject</th>
               <th className="col-num"><span className="desktop-text">Internal</span><span className="mobile-text">Int</span></th>
               <th className="col-num"><span className="desktop-text">External</span><span className="mobile-text">Ext</span></th>
               <th className="col-num"><span className="desktop-text">Total</span><span className="mobile-text">Tot</span></th>
-              <th className="col-grade">Grade</th>
+              <th className="col-grade"><span className="desktop-text">Grade</span><span className="mobile-text">Gr</span></th>
               <th className="col-num"><span className="desktop-text">Credits</span><span className="mobile-text">Cr</span></th>
-              <th className="col-attempts">Attempts</th>
+              <th className="col-attempts"><span className="desktop-text">Attempts</span><span className="mobile-text">Att</span></th>
             </tr>
           </thead>
           <tbody>
             {subjectsList.map((sub) => {
               const gradeClass = getGradeClass(sub.finalGrade || sub.finalMarks?.grade);
               const isFailed = gradeClass === "grade-f";
-              const isExpanded = !!expandedSubjects[sub.subjectCode];
               const attemptsCount = sub.attemptsCount || 1;
               const hasMultipleAttempts = attemptsCount > 1;
+              const isExpanded = hasMultipleAttempts && !!expandedSubjects[sub.subjectCode];
 
               return (
                 <React.Fragment key={sub.subjectCode}>
-                  <tr className={isFailed ? 'failed-row' : ''}>
-                    <td className="col-code">{sub.subjectCode}</td>
-                    <td className="col-name">{sub.subjectName}</td>
+                  <tr
+                    onClick={() => {
+                      if (hasMultipleAttempts) toggleExpand(sub.subjectCode);
+                    }}
+                    className={`${hasMultipleAttempts ? 'clickable-row' : ''} ${isFailed ? 'failed-row' : ''}`}
+                    style={{ cursor: hasMultipleAttempts ? 'pointer' : 'default' }}
+                    title={hasMultipleAttempts ? "Click row to view attempt history and details" : ""}
+                  >
+                    <td className="col-name">
+                      <span>{sub.subjectName}</span>
+                      <strong style={{ margin: '0 4px', fontWeight: '800', color: '#64748b' }}>•</strong>
+                      <span style={{ fontSize: '0.86em', fontWeight: '600', color: '#475569' }}>{sub.subjectCode}</span>
+                    </td>
                     <td className="col-num">{sub.finalMarks?.internal ?? '-'}</td>
                     <td className="col-num">{sub.finalMarks?.external ?? '-'}</td>
                     <td className="col-num col-total">{sub.finalMarks?.total ?? '-'}</td>
@@ -63,120 +72,99 @@ export default function ResultTable({ table, subjectsList }) {
                     </td>
                     <td className="col-num">{sub.finalMarks?.credits ?? sub.credits ?? '-'}</td>
                     <td className="col-attempts">
-                      <button
-                        type="button"
-                        onClick={() => toggleExpand(sub.subjectCode)}
-                        className={`attempts-pill-btn ${hasMultipleAttempts ? 'multiple' : 'single'}`}
-                        title="Click to view detailed marks and JNTUH link per attempt"
-                      >
-                        <span className="desktop-text">{attemptsCount} Attempt{attemptsCount > 1 ? 's' : ''}</span>
-                        <span className="mobile-text">{attemptsCount}</span>
-                        <span style={{ fontSize: '0.65rem' }}>{isExpanded ? '▲' : '▼'}</span>
-                      </button>
+                      {hasMultipleAttempts ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleExpand(sub.subjectCode);
+                          }}
+                          className="attempts-pill-btn multiple"
+                          title="Click to view detailed marks per attempt"
+                        >
+                          <span className="desktop-text">{attemptsCount} Attempts</span>
+                          <span className="mobile-text">{attemptsCount}</span>
+                          <span style={{ fontSize: '0.65rem' }}>{isExpanded ? '▲' : '▼'}</span>
+                        </button>
+                      ) : (
+                        <span className="attempts-pill-btn single" style={{ cursor: 'default' }}>
+                          <span className="desktop-text">1 Attempt</span>
+                          <span className="mobile-text">1</span>
+                        </span>
+                      )}
                     </td>
                   </tr>
 
-                  {isExpanded && (
-                    <tr className="attempts-history-row" style={{ background: '#f8fafc' }}>
-                      <td colSpan="8" style={{ padding: '8px 12px' }}>
-                        <div style={{
-                          background: '#ffffff',
-                          border: '1px solid #e2e8f0',
-                          borderLeft: '4px solid #2563eb',
-                          borderRadius: '8px',
-                          padding: '12px 14px'
-                        }}>
-                          <div style={{
-                            display: 'flex',
-                            justify: 'space-between',
-                            alignItems: 'center',
-                            marginBottom: '10px',
-                            paddingBottom: '8px',
-                            borderBottom: '1px solid #f1f5f9'
-                          }}>
-                            <span style={{ fontSize: '0.82rem', fontWeight: '700', color: '#1e293b' }}>
-                              Attempt History — {sub.subjectName} ({sub.subjectCode})
+                  {isExpanded && hasMultipleAttempts && sub.attemptsHistory && sub.attemptsHistory.map((att, idx) => {
+                    const attGradeClass = getGradeClass(att.grade);
+                    const attGradeStr = String(att.grade ?? '').trim().toUpperCase();
+                    const isNoMarks = att.totalMarks === '-' || att.totalMarks === null || att.totalMarks === undefined || (att.internalMarks === '-' && att.externalMarks === '-');
+                    const isAttFailed = attGradeStr === 'F' || attGradeStr === 'AB' || attGradeStr === 'ABSENT' || isNoMarks || !att.grade || att.grade === '-';
+                    const attemptLabel = att.examType === 'RC/RV' ? 'RC/RV' : `Att ${att.attemptNumber || idx + 1}`;
+                    const examTypeTitle = att.examType === 'RC/RV' ? 'RC/RV Revaluation' : att.examType;
+
+                    return (
+                      <tr
+                        key={`att-${idx}`}
+                        className={`attempt-sub-row ${isAttFailed ? 'failed-row' : ''}`}
+                        style={{
+                          background: isAttFailed ? '#fff5f5' : '#f0fdf4',
+                          borderBottom: '1px dashed #cbd5e1'
+                        }}
+                      >
+                        <td className="col-name" style={{ fontWeight: '500' }}>
+                          <span style={{ color: '#94a3b8', marginRight: '4px' }}>↳</span>
+                          <strong style={{ fontSize: '0.78rem', color: '#1e293b', marginRight: '4px' }}>{attemptLabel}:</strong>
+                          <span style={{ fontSize: '0.78rem' }}>{examTypeTitle}</span>
+                          {att.remarks && (
+                            <span style={{
+                              fontSize: '0.65rem',
+                              fontWeight: '600',
+                              padding: '1px 5px',
+                              borderRadius: '4px',
+                              background: att.isNoChange ? '#e2e8f0' : '#dbeafe',
+                              color: att.isNoChange ? '#475569' : '#1e40af',
+                              marginLeft: '4px'
+                            }}>
+                              {att.remarks}
                             </span>
-                            <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
-                              Total Attempts: <strong>{attemptsCount}</strong>
+                          )}
+                        </td>
+                        <td className="col-num">{att.internalMarks ?? '-'}</td>
+                        <td className="col-num">{att.externalMarks ?? '-'}</td>
+                        <td className="col-num col-total">{att.totalMarks ?? '-'}</td>
+                        <td className="col-grade">
+                          {attGradeClass ? (
+                            <span className={`grade-badge ${attGradeClass}`}>
+                              {att.grade}
                             </span>
-                          </div>
-
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            {sub.attemptsHistory && sub.attemptsHistory.length > 0 ? (
-                              sub.attemptsHistory.map((att, idx) => {
-                                const attGradeClass = getGradeClass(att.grade);
-                                const attGradeStr = String(att.grade ?? '').trim().toUpperCase();
-                                const isNoMarks = att.totalMarks === '-' || att.totalMarks === null || att.totalMarks === undefined || (att.internalMarks === '-' && att.externalMarks === '-');
-                                const isAttFailed = attGradeStr === 'F' || attGradeStr === 'AB' || attGradeStr === 'ABSENT' || isNoMarks || !att.grade || att.grade === '-';
-
-                                return (
-                                  <div
-                                    key={idx}
-                                    style={{
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      justify: 'space-between',
-                                      alignItems: 'center',
-                                      gap: '12px',
-                                      padding: '8px 12px',
-                                      background: isAttFailed ? '#fef2f2' : '#f0fdf4',
-                                      border: isAttFailed ? '1px solid #fecaca' : '1px solid #bbf7d0',
-                                      borderRadius: '6px'
-                                    }}
-                                  >
-                                    <div style={{ flex: '1 1 auto', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
-                                        <span style={{
-                                          fontSize: '0.75rem',
-                                          fontWeight: '700',
-                                          color: isAttFailed ? '#991b1b' : '#166534'
-                                        }}>
-                                          Attempt {att.attemptNumber || idx + 1}: {att.examType}
-                                        </span>
-                                        <span style={{ fontSize: '0.72rem', color: '#64748b' }}>
-                                          ({att.examTitle})
-                                        </span>
-                                      </div>
-                                      <div style={{ fontSize: '0.78rem', color: '#334155', marginTop: '2px' }}>
-                                        Int: <strong>{att.internalMarks ?? '-'}</strong> | Ext: <strong>{att.externalMarks ?? '-'}</strong> | Total: <strong>{att.totalMarks ?? '-'}</strong> | Grade: <span className={`grade-badge ${attGradeClass}`}>{att.grade || '-'}</span> | Cr: <strong>{att.credits ?? '-'}</strong>
-                                      </div>
-                                    </div>
-
-                                    {att.jntuhUrl && (
-                                      <a
-                                        href={att.jntuhUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        style={{
-                                          display: 'inline-flex',
-                                          alignItems: 'center',
-                                          gap: '4px',
-                                          padding: '5px 10px',
-                                          borderRadius: '6px',
-                                          background: '#2563eb',
-                                          color: '#ffffff',
-                                          fontSize: '0.72rem',
-                                          fontWeight: '600',
-                                          textDecoration: 'none',
-                                          whiteSpace: 'nowrap',
-                                          flexShrink: 0
-                                        }}
-                                      >
-                                        JNTUH Link ↗
-                                      </a>
-                                    )}
-                                  </div>
-                                );
-                              })
-                            ) : (
-                              <div style={{ fontSize: '0.78rem', color: '#64748b' }}>No detailed attempt history recorded.</div>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
+                          ) : (
+                            att.grade || '-'
+                          )}
+                        </td>
+                        <td className="col-num">{att.credits ?? '-'}</td>
+                        <td className="col-attempts">
+                          {att.jntuhUrl && (
+                            <a
+                              href={att.jntuhUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                fontSize: '0.72rem',
+                                color: '#2563eb',
+                                fontWeight: '600',
+                                textDecoration: 'none'
+                              }}
+                              title="Open JNTUH Result Page"
+                            >
+                              <span className="desktop-text">Link ↗</span>
+                              <span className="mobile-text">↗</span>
+                            </a>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </React.Fragment>
               );
             })}

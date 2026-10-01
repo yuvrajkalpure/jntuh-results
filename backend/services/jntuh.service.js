@@ -7,13 +7,21 @@ const axios = require("axios");
 
 async function fetchRawResultHtml(htno, candidate) {
     try {
+        const isRCRV = candidate.attemptType === "RCRV" || String(candidate.title || "").toLowerCase().includes("rc/rv");
+        const defaultType = isRCRV ? "rcrvintgrade" : "intgrade";
+        const defaultResult = isRCRV ? "gradercrv" : "null";
+
+        const etype = candidate.request?.etype || "r17";
+        const resultParam = candidate.request?.result || defaultResult;
+        const typeParam = candidate.request?.type || defaultType;
+
         const formData = new URLSearchParams();
         formData.append("degree", "btech");
         formData.append("examCode", candidate.examCode);
-        formData.append("etype", candidate.request?.etype || "r17");
-        formData.append("result", candidate.request?.result || "null");
+        formData.append("etype", etype);
+        formData.append("result", resultParam);
         formData.append("grad", "null");
-        formData.append("type", candidate.request?.type || "intgrade");
+        formData.append("type", typeParam);
         formData.append("htno", htno);
 
         const response = await axios.post(
@@ -23,7 +31,7 @@ async function fetchRawResultHtml(htno, candidate) {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-                    "Referer": `http://results.jntuh.ac.in/results/jsp/SearchResult.jsp?degree=btech&examCode=${candidate.examCode}&etype=${candidate.request?.etype || 'r17'}&type=intgrade`
+                    "Referer": `http://results.jntuh.ac.in/results/jsp/SearchResult.jsp?degree=btech&examCode=${candidate.examCode}&etype=${etype}&result=${resultParam}&type=${typeParam}`
                 },
                 timeout: 15000,
                 responseType: "text",

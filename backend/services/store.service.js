@@ -1,7 +1,7 @@
 /**
  * Persistent Database Store Service
  * Implements the normalized relational architecture specified in architecture.md:
- * BATCH -> STUDENT -> STUDENT_RESULT -> RESULT_RELEASE -> RESULT_GROUP
+ * JNTUH_EXAM_RELEASES -> CATALOG_SYNC_LOGS -> HTNO_GROUPS -> CANDIDATE_APPLICABILITY -> STUDENTS -> STUDENT_SEARCH_STATE -> STUDENT_RESULTS
  */
 
 const fs = require("fs");
@@ -15,14 +15,22 @@ class StoreService {
         this.data = {
             batches: {},
             students: {},
+            htno_groups: {},
+            group_candidates: {},
+            student_search_state: {},
             result_groups: {},
-            result_releases: {},
+            jntuh_exam_releases: {},
+            catalog_sync_logs: [],
             student_results: {}
         };
         this.initStore();
     }
 
     initStore() {
+        this.reloadFromDisk();
+    }
+
+    reloadFromDisk() {
         try {
             if (!fs.existsSync(DATA_DIR)) {
                 fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -35,8 +43,12 @@ class StoreService {
                     this.data = {
                         batches: parsed.batches || {},
                         students: parsed.students || {},
+                        htno_groups: parsed.htno_groups || {},
+                        group_candidates: parsed.group_candidates || {},
+                        student_search_state: parsed.student_search_state || {},
                         result_groups: parsed.result_groups || {},
-                        result_releases: parsed.result_releases || {},
+                        jntuh_exam_releases: parsed.jntuh_exam_releases || parsed.result_releases || {},
+                        catalog_sync_logs: parsed.catalog_sync_logs || [],
                         student_results: parsed.student_results || {}
                     };
                 }
@@ -75,22 +87,44 @@ class StoreService {
         return this.data.batches[batchInfo.batchId];
     }
 
-    // 2. Students
+    // 2. HTNO Groups
+    findOrCreateGroup(groupInfo) {
+        if (!groupInfo || !groupInfo.groupKey) return null;
+        if (!this.data.htno_groups) this.data.htno_groups = {};
+
+        if (!this.data.htno_groups[groupInfo.groupKey]) {
+            this.data.htno_groups[groupInfo.groupKey] = {
+                id: groupInfo.groupKey,
+                groupKey: groupInfo.groupKey,
+                admissionYear: groupInfo.admissionYear,
+                entryType: groupInfo.entryType,
+                courseCode: groupInfo.courseCode,
+                regulation: groupInfo.regulation,
+                degree: groupInfo.degree || "BTECH",
+                firstDiscoveredAt: new Date().toISOString(),
+                lastUpdatedAt: new Date().toISOString()
+            };
+            this.saveToDisk();
+        }
+        return this.data.htno_groups[groupInfo.groupKey];
+    }
+
+    // 3. Students
     findOrCreateStudent(htno, batchInfo, studentDetails = {}) {
         const cleanHtno = String(htno).trim().toUpperCase();
         if (!this.data.students) this.data.students = {};
-        this.findOrCreateBatch(batchInfo);
 
         if (!this.data.students[cleanHtno]) {
             this.data.students[cleanHtno] = {
                 id: `student_${cleanHtno}`,
                 htno: cleanHtno,
-                batchId: batchInfo.batchId,
+                groupKey: batchInfo.groupKey || "",
+                batchId: batchInfo.batchId || "",
                 name: studentDetails.name || "",
                 fatherName: studentDetails.fatherName || "",
                 collegeCode: studentDetails.collegeCode || batchInfo.collegeCode || "",
                 branchCode: studentDetails.branchCode || batchInfo.branchCode || "",
-                createdAt: new Date().toISOString(),
+                firstVerifiedAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString()
             };
             this.saveToDisk();
@@ -110,53 +144,118 @@ class StoreService {
         return this.data.students[cleanHtno] || null;
     }
 
-    // 3. Result Groups
-    findOrCreateResultGroup(semester, regulation, degree = "BTECH") {
-        if (!this.data.result_groups) this.data.result_groups = {};
-        const groupId = `${semester}_${regulation}_${degree}`;
-        if (!this.data.result_groups[groupId]) {
-            this.data.result_groups[groupId] = {
-                id: groupId,
-                semester,
-                regulation,
-                degree,
-                createdAt: new Date().toISOString()
-            };
-            this.saveToDisk();
-        }
-        return this.data.result_groups[groupId];
+    // 4. Student Search State (State Machine)
+    getSearchState(htno) {
+        if (!htno) return null;
+        this.reloadFromDisk();
+        if (!this.data.student_search_state) return null;
+        const cleanHtno = String(htno).trim().toUpperCase();
+        return this.data.student_search_state[cleanHtno] || null;
     }
 
-    // 4. Result Releases (Shared by both Regular and Lateral students!)
-    findOrCreateResultRelease(releaseInfo) {
-        if (!this.data.result_releases) this.data.result_releases = {};
-        const releaseId = `${releaseInfo.examCode}_${releaseInfo.attemptType}`;
-        const group = this.findOrCreateResultGroup(releaseInfo.semester, releaseInfo.regulation, releaseInfo.degree);
+    saveSearchState(htno, stateData) {
+        if (!htno) return null;
+        if (!this.data.student_search_state) this.data.student_search_state = {};
 
-        if (!this.data.result_releases[releaseId]) {
-            this.data.result_releases[releaseId] = {
+        const cleanHtno = String(htno).trim().toUpperCase();
+        this.data.student_search_state[cleanHtno] = {
+            htno: cleanHtno,
+            ...(this.data.student_search_state[cleanHtno] || {}),
+            ...stateData,
+            updatedAt: new Date().toISOString()
+        };
+        this.saveToDisk();
+        return this.data.student_search_state[cleanHtno];
+    }
+
+    // 5. JNTUH Exam Catalog & Sync Logs
+    upsertCatalogRelease(releaseInfo) {
+        if (!this.data.jntuh_exam_releases) this.data.jntuh_exam_releases = {};
+        const releaseId = releaseInfo.releaseId || `${releaseInfo.examCode}_${releaseInfo.attemptType}`;
+
+        const existing = this.data.jntuh_exam_releases[releaseId];
+        const now = new Date().toISOString();
+
+        if (existing) {
+            existing.lastSeenAt = now;
+            existing.publishedDate = releaseInfo.publishedDate || existing.publishedDate;
+            existing.title = releaseInfo.title || existing.title;
+            existing.semester = releaseInfo.semester || existing.semester;
+            existing.regulation = releaseInfo.regulation || existing.regulation;
+            existing.degree = releaseInfo.degree || existing.degree;
+            existing.attemptType = releaseInfo.attemptType || existing.attemptType;
+            if (releaseInfo.request && Object.keys(releaseInfo.request).length > 0) {
+                existing.request = releaseInfo.request;
+            }
+            this.data.jntuh_exam_releases[releaseId] = existing;
+        } else {
+            this.data.jntuh_exam_releases[releaseId] = {
                 id: releaseId,
-                groupId: group.id,
                 examCode: releaseInfo.examCode,
+                degree: releaseInfo.degree || "BTECH",
+                regulation: releaseInfo.regulation,
+                semester: releaseInfo.semester,
                 attemptType: releaseInfo.attemptType,
-                examTitle: releaseInfo.title || "",
+                title: releaseInfo.title || "",
                 publishedDate: releaseInfo.publishedDate || "",
                 request: releaseInfo.request || {},
-                createdAt: new Date().toISOString()
+                firstSeenAt: now,
+                lastSeenAt: now,
+                isActive: true
             };
-            this.saveToDisk();
         }
-        return this.data.result_releases[releaseId];
+        return this.data.jntuh_exam_releases[releaseId];
     }
 
-    // 5. Student Results (Valid result)
+    getAllCatalogReleases() {
+        return Object.values(this.data.jntuh_exam_releases || {});
+    }
+
+    addSyncLog(logEntry) {
+        if (!this.data.catalog_sync_logs) this.data.catalog_sync_logs = [];
+        this.data.catalog_sync_logs.unshift(logEntry);
+        // Keep last 50 sync logs
+        this.data.catalog_sync_logs = this.data.catalog_sync_logs.slice(0, 50);
+        this.saveToDisk();
+    }
+
+    getLastSyncLog() {
+        return (this.data.catalog_sync_logs && this.data.catalog_sync_logs.length > 0)
+            ? this.data.catalog_sync_logs[0]
+            : null;
+    }
+
+    // 6. Group Candidate Applicability (Record releases that returned valid results for a group)
+    recordGroupCandidate(groupKey, releaseId) {
+        if (!groupKey || !releaseId) return;
+        if (!this.data.group_candidates) this.data.group_candidates = {};
+        if (!this.data.group_candidates[groupKey]) {
+            this.data.group_candidates[groupKey] = [];
+        }
+
+        if (!this.data.group_candidates[groupKey].includes(releaseId)) {
+            this.data.group_candidates[groupKey].push(releaseId);
+            this.saveToDisk();
+        }
+    }
+
+    getGroupCandidates(groupKey) {
+        return (this.data.group_candidates && this.data.group_candidates[groupKey]) || [];
+    }
+
+    // 7. Student Results
     saveStudentResult(htno, batchInfo, parsedResult) {
         if (!htno || !parsedResult || !parsedResult.success) return null;
         if (!this.data.student_results) this.data.student_results = {};
 
+        if (batchInfo) {
+            this.findOrCreateBatch(batchInfo);
+            this.findOrCreateGroup(batchInfo);
+        }
+
         const cleanHtno = String(htno).trim().toUpperCase();
         const student = this.findOrCreateStudent(cleanHtno, batchInfo, parsedResult.details || {});
-        const release = this.findOrCreateResultRelease({
+        const release = this.upsertCatalogRelease({
             examCode: parsedResult.examCode,
             attemptType: parsedResult.attemptType,
             semester: parsedResult.semester,
@@ -165,13 +264,16 @@ class StoreService {
             title: parsedResult.title
         });
 
+        if (batchInfo.groupKey) {
+            this.recordGroupCandidate(batchInfo.groupKey, release.id);
+        }
+
         const key = `${cleanHtno}_${release.id}`;
         this.data.student_results[key] = {
             id: key,
             studentId: student.id,
             htno: cleanHtno,
             resultReleaseId: release.id,
-            groupId: release.groupId,
             examCode: parsedResult.examCode,
             semester: parsedResult.semester,
             attemptType: parsedResult.attemptType,
@@ -188,7 +290,7 @@ class StoreService {
         return this.data.student_results[key];
     }
 
-    // Record NO_RESULT for a release (only if a valid result does not already exist)
+    // Record NO_RESULT for a release
     saveNoResult(htno, batchInfo, releaseInfo) {
         if (!htno || !releaseInfo) return null;
         if (!this.data.student_results) this.data.student_results = {};
@@ -197,13 +299,12 @@ class StoreService {
         const releaseId = `${releaseInfo.examCode}_${releaseInfo.attemptType}`;
         const key = `${cleanHtno}_${releaseId}`;
 
-        // Do NOT overwrite an existing valid student result
         if (this.data.student_results[key] && this.data.student_results[key].hasResult) {
             return this.data.student_results[key];
         }
 
         const student = this.findOrCreateStudent(cleanHtno, batchInfo);
-        const release = this.findOrCreateResultRelease({
+        const release = this.upsertCatalogRelease({
             examCode: releaseInfo.examCode,
             attemptType: releaseInfo.attemptType,
             semester: releaseInfo.semester,
@@ -217,7 +318,6 @@ class StoreService {
             studentId: student.id,
             htno: cleanHtno,
             resultReleaseId: release.id,
-            groupId: release.groupId,
             examCode: releaseInfo.examCode,
             semester: releaseInfo.semester,
             attemptType: releaseInfo.attemptType,
@@ -234,13 +334,21 @@ class StoreService {
         return this.data.student_results[key];
     }
 
-    // Check if a specific student result record exists for HTNO and releaseId
     getStudentResultForRelease(htno, releaseId) {
         if (!htno || !this.data.student_results) return null;
         const cleanHtno = String(htno).trim().toUpperCase();
         const key = `${cleanHtno}_${releaseId}`;
         return this.data.student_results[key] || null;
     }
+
+    getAllValidResultsForStudent(htno) {
+        if (!htno || !this.data.student_results) return [];
+        const cleanHtno = String(htno).trim().toUpperCase();
+        return Object.values(this.data.student_results).filter(
+            r => r.htno === cleanHtno && r.hasResult
+        );
+    }
 }
 
 module.exports = new StoreService();
+

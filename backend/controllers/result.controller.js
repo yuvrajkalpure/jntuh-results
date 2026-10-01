@@ -4,6 +4,8 @@
  */
 
 const searchService = require("../services/search.service");
+const releaseService = require("../services/release.service");
+const storeService = require("../services/store.service");
 
 async function getStudentResult(req, res) {
     try {
@@ -38,6 +40,33 @@ async function getStudentResult(req, res) {
     }
 }
 
+async function getCatalogStatus(req, res) {
+    try {
+        const releases = storeService.getAllCatalogReleases();
+        const lastSync = storeService.getLastSyncLog();
+        return res.json({
+            success: true,
+            catalogReleasesCount: releases.length,
+            lastSyncLog: lastSync,
+            sampleReleases: releases.slice(0, 10)
+        });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+async function triggerCatalogSync(req, res) {
+    try {
+        const syncResult = await releaseService.syncExamCatalog();
+        return res.json(syncResult);
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
 module.exports = {
-    getStudentResult
+    getStudentResult,
+    getCatalogStatus,
+    triggerCatalogSync
 };
+

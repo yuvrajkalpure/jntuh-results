@@ -11,4 +11,7 @@ router.get("/results/:htno", resultController.getStudentResult);
 router.get("/result/:htno", resultController.getStudentResult);
 router.get("/result", resultController.getStudentResult);
 
+router.get("/catalog/status", resultController.getCatalogStatus);
+router.post("/catalog/sync", resultController.triggerCatalogSync);
+
 module.exports = router;
