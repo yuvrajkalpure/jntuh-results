@@ -13,6 +13,7 @@ const STORE_FILE = path.join(DATA_DIR, "store.json");
 class StoreService {
     constructor() {
         this.data = {
+            catalog_version: 1,
             batches: {},
             students: {},
             htno_groups: {},
@@ -21,7 +22,9 @@ class StoreService {
             result_groups: {},
             jntuh_exam_releases: {},
             catalog_sync_logs: [],
-            student_results: {}
+            student_results: {},
+            student_release_checks: {},
+            pending_result_checks: []
         };
         this.initStore();
     }
@@ -41,6 +44,7 @@ class StoreService {
                 if (fileContent.trim()) {
                     const parsed = JSON.parse(fileContent);
                     this.data = {
+                        catalog_version: parsed.catalog_version || 1,
                         batches: parsed.batches || {},
                         students: parsed.students || {},
                         htno_groups: parsed.htno_groups || {},
@@ -49,7 +53,9 @@ class StoreService {
                         result_groups: parsed.result_groups || {},
                         jntuh_exam_releases: parsed.jntuh_exam_releases || parsed.result_releases || {},
                         catalog_sync_logs: parsed.catalog_sync_logs || [],
-                        student_results: parsed.student_results || {}
+                        student_results: parsed.student_results || {},
+                        student_release_checks: parsed.student_release_checks || {},
+                        pending_result_checks: parsed.pending_result_checks || []
                     };
                 }
             } else {
@@ -347,6 +353,126 @@ class StoreService {
         return Object.values(this.data.student_results).filter(
             r => r.htno === cleanHtno && r.hasResult
         );
+    }
+
+    // 8. Catalog Versioning & Targeted Release Checks
+    getCatalogVersion() {
+        return this.data.catalog_version || 1;
+    }
+
+    incrementCatalogVersion() {
+        if (!this.data.catalog_version) this.data.catalog_version = 1;
+        this.data.catalog_version += 1;
+        this.saveToDisk();
+        return this.data.catalog_version;
+    }
+
+    recordReleaseCheck(htno, releaseId, status) {
+        if (!htno || !releaseId) return null;
+        if (!this.data.student_release_checks) this.data.student_release_checks = {};
+        const cleanHtno = String(htno).trim().toUpperCase();
+        const key = `${cleanHtno}_${releaseId}`;
+        this.data.student_release_checks[key] = {
+            htno: cleanHtno,
+            releaseId,
+            status, // 'FOUND', 'NO_RESULT', 'NOT_NEEDED', 'PENDING'
+            checkedAt: new Date().toISOString()
+        };
+        this.saveToDisk();
+        return this.data.student_release_checks[key];
+    }
+
+    getReleaseCheck(htno, releaseId) {
+        if (!htno || !releaseId || !this.data.student_release_checks) return null;
+        const cleanHtno = String(htno).trim().toUpperCase();
+        const key = `${cleanHtno}_${releaseId}`;
+        return this.data.student_release_checks[key] || null;
+    }
+
+    getAllReleaseChecksForStudent(htno) {
+        if (!htno || !this.data.student_release_checks) return {};
+        const cleanHtno = String(htno).trim().toUpperCase();
+        const results = {};
+        Object.values(this.data.student_release_checks).forEach(check => {
+            if (check.htno === cleanHtno) {
+                results[check.releaseId] = check;
+            }
+        });
+        return results;
+    }
+
+    // 9. Pending Result Check Queue
+    addPendingResultCheck(htno, releaseId, priority = "NORMAL") {
+        if (!htno || !releaseId) return null;
+        if (!this.data.pending_result_checks) this.data.pending_result_checks = [];
+        const cleanHtno = String(htno).trim().toUpperCase();
+        const jobId = `job_${cleanHtno}_${releaseId}`;
+
+        const existingIdx = this.data.pending_result_checks.findIndex(j => j.id === jobId);
+        if (existingIdx !== -1) {
+            return this.data.pending_result_checks[existingIdx];
+        }
+
+        const job = {
+            id: jobId,
+            htno: cleanHtno,
+            releaseId,
+            priority,
+            status: "PENDING", // 'PENDING', 'PROCESSING', 'COMPLETED', 'FAILED'
+            attempts: 0,
+            error: null,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+
+        this.data.pending_result_checks.push(job);
+        this.recordReleaseCheck(cleanHtno, releaseId, "PENDING");
+        this.saveToDisk();
+        return job;
+    }
+
+    getPendingResultChecks(limit = 10) {
+        if (!this.data.pending_result_checks) return [];
+        return this.data.pending_result_checks
+            .filter(j => j.status === "PENDING")
+            .sort((a, b) => (a.priority === "HIGH" ? -1 : 1))
+            .slice(0, limit);
+    }
+
+    updatePendingJob(jobId, status, error = null) {
+        if (!this.data.pending_result_checks) return null;
+        const job = this.data.pending_result_checks.find(j => j.id === jobId);
+        if (job) {
+            job.status = status;
+            job.updatedAt = new Date().toISOString();
+            if (error) job.error = error;
+            if (status === "PROCESSING") job.attempts = (job.attempts || 0) + 1;
+
+            if (status === "COMPLETED") {
+                this.data.pending_result_checks = this.data.pending_result_checks.filter(j => j.id !== jobId);
+            }
+            this.saveToDisk();
+        }
+        return job;
+    }
+
+    removePendingJobForStudentAndRelease(htno, releaseId) {
+        if (!htno || !releaseId || !this.data.pending_result_checks) return;
+        const cleanHtno = String(htno).trim().toUpperCase();
+        const jobId = `job_${cleanHtno}_${releaseId}`;
+        this.data.pending_result_checks = this.data.pending_result_checks.filter(j => j.id !== jobId);
+        this.saveToDisk();
+    }
+
+    // 10. Student Cohort Queries for Impact Analyzer
+    getAllStudents() {
+        return Object.values(this.data.students || {});
+    }
+
+    getStudentsForGroupKeys(groupKeys = []) {
+        if (!groupKeys || groupKeys.length === 0 || !this.data.students) return [];
+        const set = new Set(groupKeys);
+        return Object.values(this.data.students).filter(s => set.has(s.groupKey));
     }
 }
 

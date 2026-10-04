@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchCard({ htno, setHtno, status, onSearch }) {
+export default function SearchCard({ htno, setHtno, status, onSearch, showSubjectCode, setShowSubjectCode, hasResult }) {
   const handleChange = (e) => {
     const val = e.target.value.toUpperCase();
     setHtno(val);
@@ -32,6 +32,21 @@ export default function SearchCard({ htno, setHtno, status, onSearch }) {
           maxLength={10}
         />
       </div>
+
+      {hasResult && (
+        <div className="search-card-options mobile-only" style={{ marginTop: '10px', alignItems: 'center', gap: '8px', paddingLeft: '2px' }}>
+          <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '600', color: '#475569', cursor: 'pointer', userSelect: 'none' }}>
+            <input
+              type="checkbox"
+              checked={!!showSubjectCode}
+              onChange={(e) => setShowSubjectCode && setShowSubjectCode(e.target.checked)}
+              style={{ width: '16px', height: '16px', accentColor: '#2563eb', cursor: 'pointer' }}
+            />
+            Show Subject Code
+          </label>
+        </div>
+      )}
+
       {status && status.message && (
         <div className={`status ${status.type}`}>
           {status.message}

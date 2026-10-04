@@ -10,11 +10,10 @@ export default function StudentInfoGrid({ details, defaultHtno }) {
 
   return (
     <div className="student-info-container">
-      {/* Mobile view: single row, no labels, no father name */}
+      {/* Mobile view: single row header */}
       <div className="student-info-mobile-single-row mobile-only">
         <span className="student-mobile-name">{name}</span>
-        {name && htno && <span className="student-mobile-divider">•</span>}
-        <span className="student-mobile-htno">{htno}</span>
+        {htno && <span className="student-mobile-htno">{htno}</span>}
       </div>
 
       {/* Desktop view: full grid cards with labels */}

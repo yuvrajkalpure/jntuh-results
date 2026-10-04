@@ -9,7 +9,7 @@ function getGradeClass(grade) {
   return "";
 }
 
-export default function ResultTable({ table, subjectsList }) {
+export default function ResultTable({ table, subjectsList, showSubjectCode }) {
   const [expandedSubjects, setExpandedSubjects] = useState({});
 
   const toggleExpand = (code) => {
@@ -19,14 +19,17 @@ export default function ResultTable({ table, subjectsList }) {
     }));
   };
 
+  const colCodeClass = showSubjectCode ? "col-code col-code-mobile-show" : "col-code desktop-only";
+
   // If subjectsList is available, use rich structured rendering with attempt history drawers
   if (subjectsList && Array.isArray(subjectsList) && subjectsList.length > 0) {
     return (
       <div className="table-wrapper">
-        <table className="result-table">
+        <table className={`result-table ${showSubjectCode ? 'show-code-mobile' : ''}`}>
           <thead>
             <tr>
-              <th className="col-name">Subject</th>
+              <th className={colCodeClass}><span className="desktop-text">Code</span><span className="mobile-text">Code</span></th>
+              <th className="col-name"><span className="desktop-text">Subject Name</span><span className="mobile-text">Subject</span></th>
               <th className="col-num"><span className="desktop-text">Internal</span><span className="mobile-text">Int</span></th>
               <th className="col-num"><span className="desktop-text">External</span><span className="mobile-text">Ext</span></th>
               <th className="col-num"><span className="desktop-text">Total</span><span className="mobile-text">Tot</span></th>
@@ -53,10 +56,9 @@ export default function ResultTable({ table, subjectsList }) {
                     style={{ cursor: hasMultipleAttempts ? 'pointer' : 'default' }}
                     title={hasMultipleAttempts ? "Click row to view attempt history and details" : ""}
                   >
+                    <td className={colCodeClass}>{sub.subjectCode}</td>
                     <td className="col-name">
                       <span>{sub.subjectName}</span>
-                      <strong style={{ margin: '0 4px', fontWeight: '800', color: '#64748b' }}>•</strong>
-                      <span style={{ fontSize: '0.86em', fontWeight: '600', color: '#475569' }}>{sub.subjectCode}</span>
                     </td>
                     <td className="col-num">{sub.finalMarks?.internal ?? '-'}</td>
                     <td className="col-num">{sub.finalMarks?.external ?? '-'}</td>
@@ -84,7 +86,7 @@ export default function ResultTable({ table, subjectsList }) {
                         >
                           <span className="desktop-text">{attemptsCount} Attempts</span>
                           <span className="mobile-text">{attemptsCount}</span>
-                          <span style={{ fontSize: '0.65rem' }}>{isExpanded ? '▲' : '▼'}</span>
+                          <span className="arrow-icon">{isExpanded ? '▲' : '▼'}</span>
                         </button>
                       ) : (
                         <span className="attempts-pill-btn single" style={{ cursor: 'default' }}>
@@ -112,9 +114,16 @@ export default function ResultTable({ table, subjectsList }) {
                           borderBottom: '1px dashed #cbd5e1'
                         }}
                       >
+                        <td className={colCodeClass} style={{ paddingLeft: '4px', fontWeight: '600' }}>
+                          <span style={{ color: '#94a3b8', marginRight: '2px' }}>↳</span>
+                          {attemptLabel}
+                        </td>
                         <td className="col-name" style={{ fontWeight: '500' }}>
-                          <span style={{ color: '#94a3b8', marginRight: '4px' }}>↳</span>
-                          <strong style={{ fontSize: '0.78rem', color: '#1e293b', marginRight: '4px' }}>{attemptLabel}:</strong>
+                          {!showSubjectCode && (
+                            <span className="mobile-only" style={{ color: '#94a3b8', marginRight: '4px' }}>
+                              ↳ <strong style={{ fontSize: '0.78rem', color: '#1e293b' }}>{attemptLabel}:</strong>
+                            </span>
+                          )}
                           <span style={{ fontSize: '0.78rem' }}>{examTypeTitle}</span>
                           {att.remarks && (
                             <span style={{

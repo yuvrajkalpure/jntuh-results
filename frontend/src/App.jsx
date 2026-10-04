@@ -5,6 +5,7 @@ import RecentSearches from './components/RecentSearches';
 import StudentInfoGrid from './components/StudentInfoGrid';
 import OverallSummaryCard from './components/OverallSummaryCard';
 import SemesterCard from './components/SemesterCard';
+import ScrollToTop from './components/ScrollToTop';
 
 const RESULT_CACHE_KEY = "jntuh_result_cache";
 const MAX_CACHED_RESULTS = 10;
@@ -15,6 +16,7 @@ export default function App() {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [resultData, setResultData] = useState(null);
   const [history, setHistory] = useState([]);
+  const [showSubjectCode, setShowSubjectCode] = useState(false);
 
   useEffect(() => {
     loadHistory();
@@ -153,18 +155,21 @@ export default function App() {
                 setHtno={setHtno}
                 status={status}
                 onSearch={(val) => handleSearch(val)}
+                showSubjectCode={showSubjectCode}
+                setShowSubjectCode={setShowSubjectCode}
+                hasResult={!!(resultData && resultData.success)}
               />
 
               {resultData && (
                 <div id="result" className="result">
                   <div className="all-results">
-                    <div className="result-card" style={{ marginBottom: "20px" }}>
+                    <div className="sticky-student-header">
                       <StudentInfoGrid details={resultData.details} defaultHtno={resultData.htno} />
                     </div>
                     <OverallSummaryCard summary={resultData.overallSummary} />
                     <div className="semesters-container" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                       {resultData.semesters?.map((sem, index) => (
-                        <SemesterCard key={sem.semester || index} semester={sem} />
+                        <SemesterCard key={sem.semester || index} semester={sem} showSubjectCode={showSubjectCode} />
                       ))}
                     </div>
                   </div>
@@ -180,6 +185,7 @@ export default function App() {
           </div>
         </div>
       </main>
+      <ScrollToTop />
     </div>
   );
 }

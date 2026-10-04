@@ -38,8 +38,8 @@ async function searchStudent(rawHtno) {
         const aggregated = aggregationService.aggregateStudentResults(cachedResults, batchInfo.isLateral, htno);
         const existingState = storeService.getSearchState(htno);
 
-        // Short-circuit cache HIT only if search was completed AND student passed ALL subjects across all semesters
-        if (aggregated && aggregated.overallSummary && !aggregated.overallSummary.isFailed && existingState && existingState.searchCompleted) {
+        // Short-circuit cache HIT only if search was completed AND student passed ALL subjects across all semesters AND no pending releases
+        if (aggregated && aggregated.overallSummary && !aggregated.overallSummary.isFailed && existingState && existingState.searchCompleted && !existingState.hasPendingReleases) {
             console.log(`[SEARCH ENGINE] DB HIT (ALL PASSED): Returning stored results for ${htno}.`);
             const studentRecord = storeService.getStudent(htno);
 
@@ -110,13 +110,16 @@ async function searchStudent(rawHtno) {
                     const parsed = resultParser.parseResultHtml(html, release);
                     if (parsed.success) {
                         resultRecord = storeService.saveStudentResult(htno, batchInfo, parsed);
+                        storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                     } else {
                         storeService.saveNoResult(htno, batchInfo, release);
+                        storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
                     }
                 }
             } catch (err) {
                 console.warn(`[SEARCH ENGINE] Entry semester check failed for release ${release.examCode}:`, err.message);
             }
+            storeService.removePendingJobForStudentAndRelease(htno, releaseId);
         }
 
         if (resultRecord && resultRecord.hasResult) {
@@ -130,6 +133,7 @@ async function searchStudent(rawHtno) {
         storeService.saveSearchState(htno, {
             validated: false,
             searchCompleted: true,
+            hasPendingReleases: false,
             invalidReason: `NO_${entrySemester}_REGULAR_RESULT`
         });
 
@@ -177,13 +181,16 @@ async function searchStudent(rawHtno) {
                         const parsed = resultParser.parseResultHtml(html, release);
                         if (parsed.success) {
                             record = storeService.saveStudentResult(htno, batchInfo, parsed);
+                            storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                         } else {
                             storeService.saveNoResult(htno, batchInfo, release);
+                            storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
                         }
                     }
                 } catch (err) {
                     console.warn(`[SEARCH ENGINE] Error fetching ${semester} release ${release.examCode}:`, err.message);
                 }
+                storeService.removePendingJobForStudentAndRelease(htno, releaseId);
             }
 
             if (record && record.hasResult) {
@@ -223,13 +230,16 @@ async function searchStudent(rawHtno) {
                             const parsed = resultParser.parseResultHtml(html, release);
                             if (parsed.success) {
                                 record = storeService.saveStudentResult(htno, batchInfo, parsed);
+                                storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                             } else {
                                 storeService.saveNoResult(htno, batchInfo, release);
+                                storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
                             }
                         }
                     } catch (err) {
                         console.warn(`[SEARCH ENGINE] Error fetching ${semester} RC/RV release ${release.examCode}:`, err.message);
                     }
+                    storeService.removePendingJobForStudentAndRelease(htno, releaseId);
                 }
 
                 if (record && record.hasResult) {
@@ -245,6 +255,7 @@ async function searchStudent(rawHtno) {
         storeService.saveSearchState(htno, {
             validated: false,
             searchCompleted: true,
+            hasPendingReleases: false,
             invalidReason: "NO_VALID_RESULTS"
         });
 
@@ -265,6 +276,7 @@ async function searchStudent(rawHtno) {
     storeService.saveSearchState(htno, {
         validated: true,
         searchCompleted: true,
+        hasPendingReleases: false,
         lastRegularSemester: targetSemesters[targetSemesters.length - 1],
         resultsCount: validStudentResults.length
     });

@@ -10,7 +10,7 @@ function formatSemesterDesktopTitle(semLabel) {
   return semLabel;
 }
 
-export default function SemesterCard({ semester }) {
+export default function SemesterCard({ semester, showSubjectCode }) {
   if (!semester) return null;
 
   const { examTitle, semester: semLabel, summary, table, attempts, subjectsList, jntuhUrl } = semester;
@@ -22,6 +22,7 @@ export default function SemesterCard({ semester }) {
   let passStatusText = "";
   let passStatusColor = "";
   let creditsDisplay = "0 / 0";
+  let backlogsCount = 0;
 
   if (summary) {
     isFailed = summary.isFailed || summary.failedSubjects > 0;
@@ -31,6 +32,12 @@ export default function SemesterCard({ semester }) {
     sgpaDisplay = !isFailed && summary.sgpa != null ? Number(summary.sgpa).toFixed(2) : "N/A";
     percentageDisplay = !isFailed && summary.percentage != null ? `${Number(summary.percentage).toFixed(1)}%` : "N/A";
     creditsDisplay = `${summary.earnedCredits} / ${summary.totalCredits}`;
+    backlogsCount = summary.failedSubjects || 0;
+  } else if (subjectsList && Array.isArray(subjectsList)) {
+    backlogsCount = subjectsList.filter(s => {
+      const g = String(s.finalGrade || s.finalMarks?.grade || '').trim().toUpperCase();
+      return g === 'F' || g === 'AB' || g === 'ABSENT';
+    }).length;
   }
 
   return (
@@ -56,6 +63,7 @@ export default function SemesterCard({ semester }) {
                 color: '#ffffff',
                 fontSize: '0.82rem',
                 fontWeight: '600',
+                border: 'none',
                 textDecoration: 'none',
                 transition: 'background 0.2s'
               }}
@@ -125,11 +133,7 @@ export default function SemesterCard({ semester }) {
 
       {/* MOBILE SINGLE-ROW HEADER */}
       <div className="sem-mobile-bar mobile-only">
-        <div className="sem-mobile-stat left">
-          <span className="sem-mobile-label">SGPA</span>
-          <span className="sem-mobile-value">{sgpaDisplay}</span>
-        </div>
-        <div className="sem-mobile-middle" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <div className="sem-mobile-left" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span className="sem-mobile-title">{semLabel}</span>
           {jntuhUrl && (
             <a
@@ -143,13 +147,30 @@ export default function SemesterCard({ semester }) {
             </a>
           )}
         </div>
-        <div className="sem-mobile-stat right">
-          <span className="sem-mobile-label">CREDITS</span>
+        <div className="sem-mobile-stat center" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '4px' }}>
+          <span className="sem-mobile-label">CR</span>
           <span className="sem-mobile-value">{creditsDisplay}</span>
+        </div>
+        <div className="sem-mobile-stat right">
+          {backlogsCount > 0 ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span className="sem-mobile-label" style={{ color: '#b91c1c' }}>BACK(S)</span>
+              <span className="sem-mobile-value" style={{ color: '#b91c1c' }}>
+                {backlogsCount}
+              </span>
+            </div>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span className="sem-mobile-label">SGPA</span>
+              <span className="sem-mobile-value" style={{ color: '#0f172a' }}>
+                {sgpaDisplay}
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
-      <ResultTable table={table} subjectsList={subjectsList} />
+      <ResultTable table={table} subjectsList={subjectsList} showSubjectCode={showSubjectCode} />
     </div>
   );
 }

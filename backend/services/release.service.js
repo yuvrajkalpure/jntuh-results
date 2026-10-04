@@ -8,6 +8,7 @@ const axios = require("axios");
 const { parseHomeJspCatalog } = require("../parsers/release.parser");
 const cacheService = require("./cache.service");
 const storeService = require("./store.service");
+const impactService = require("./impact.service");
 
 const CATALOG_CACHE_KEY = "jntuh_exam_catalog";
 const CATALOG_CACHE_DURATION = 60 * 60 * 1000; // 1 hour
@@ -39,9 +40,14 @@ async function syncExamCatalog() {
 
             for (const release of liveCatalog) {
                 const isNew = !existingCatalogMap.has(release.releaseId);
-                storeService.upsertCatalogRelease(release);
-                if (isNew) newRecords++;
-                else updatedRecords++;
+                const savedRelease = storeService.upsertCatalogRelease(release);
+                if (isNew) {
+                    newRecords++;
+                    // Trigger targeted impact analysis for new release
+                    impactService.analyzeReleaseImpact(savedRelease);
+                } else {
+                    updatedRecords++;
+                }
             }
 
             const updatedCatalog = storeService.getAllCatalogReleases();
