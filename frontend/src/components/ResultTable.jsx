@@ -42,19 +42,24 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
             {subjectsList.map((sub) => {
               const gradeClass = getGradeClass(sub.finalGrade || sub.finalMarks?.grade);
               const isFailed = gradeClass === "grade-f";
-              const attemptsCount = sub.attemptsCount || 1;
-              const hasMultipleAttempts = attemptsCount > 1;
-              const isExpanded = hasMultipleAttempts && !!expandedSubjects[sub.subjectCode];
+
+              const history = sub.attemptsHistory || [];
+              const realExamAttempts = history.filter(att => att.examType !== 'RC/RV');
+              const attemptsCount = realExamAttempts.length > 0 ? realExamAttempts.length : (sub.attemptsCount || 1);
+              const hasMultipleEntries = history.length > 1 || attemptsCount > 1;
+              const isExpanded = hasMultipleEntries && !!expandedSubjects[sub.subjectCode];
+
+              let realAttemptCounter = 0;
 
               return (
                 <React.Fragment key={sub.subjectCode}>
                   <tr
                     onClick={() => {
-                      if (hasMultipleAttempts) toggleExpand(sub.subjectCode);
+                      if (hasMultipleEntries) toggleExpand(sub.subjectCode);
                     }}
-                    className={`${hasMultipleAttempts ? 'clickable-row' : ''} ${isFailed ? 'failed-row' : ''}`}
-                    style={{ cursor: hasMultipleAttempts ? 'pointer' : 'default' }}
-                    title={hasMultipleAttempts ? "Click row to view attempt history and details" : ""}
+                    className={`${hasMultipleEntries ? 'clickable-row' : ''} ${isFailed ? 'failed-row' : ''}`}
+                    style={{ cursor: hasMultipleEntries ? 'pointer' : 'default' }}
+                    title={hasMultipleEntries ? "Click row to view attempt history and details" : ""}
                   >
                     <td className={colCodeClass}>{sub.subjectCode}</td>
                     <td className="col-name">
@@ -74,7 +79,7 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                     </td>
                     <td className="col-num">{sub.finalMarks?.credits ?? sub.credits ?? '-'}</td>
                     <td className="col-attempts">
-                      {hasMultipleAttempts ? (
+                      {hasMultipleEntries ? (
                         <button
                           type="button"
                           onClick={(e) => {
@@ -84,7 +89,7 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                           className="attempts-pill-btn multiple"
                           title="Click to view detailed marks per attempt"
                         >
-                          <span className="desktop-text">{attemptsCount} Attempts</span>
+                          <span className="desktop-text">{attemptsCount} {attemptsCount === 1 ? 'Attempt' : 'Attempts'}</span>
                           <span className="mobile-text">{attemptsCount}</span>
                           <span className="arrow-icon">{isExpanded ? '▲' : '▼'}</span>
                         </button>
@@ -97,12 +102,17 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                     </td>
                   </tr>
 
-                  {isExpanded && hasMultipleAttempts && sub.attemptsHistory && sub.attemptsHistory.map((att, idx) => {
+                  {isExpanded && hasMultipleEntries && history.map((att, idx) => {
                     const attGradeClass = getGradeClass(att.grade);
                     const attGradeStr = String(att.grade ?? '').trim().toUpperCase();
                     const isNoMarks = att.totalMarks === '-' || att.totalMarks === null || att.totalMarks === undefined || (att.internalMarks === '-' && att.externalMarks === '-');
                     const isAttFailed = attGradeStr === 'F' || attGradeStr === 'AB' || attGradeStr === 'ABSENT' || isNoMarks || !att.grade || att.grade === '-';
-                    const attemptLabel = att.examType === 'RC/RV' ? 'RC/RV' : `Att ${att.attemptNumber || idx + 1}`;
+                    
+                    let attemptLabel = 'RC/RV';
+                    if (att.examType !== 'RC/RV') {
+                      realAttemptCounter++;
+                      attemptLabel = `Att ${realAttemptCounter}`;
+                    }
                     const examTypeTitle = att.examType === 'RC/RV' ? 'RC/RV Revaluation' : att.examType;
 
                     return (
