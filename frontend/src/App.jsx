@@ -166,7 +166,7 @@ export default function App() {
                     <div className="sticky-student-header">
                       <StudentInfoGrid details={resultData.details} defaultHtno={resultData.htno} />
                     </div>
-                    <OverallSummaryCard summary={resultData.overallSummary} />
+                    <OverallSummaryCard summary={resultData.overallSummary} semesters={resultData.semesters} />
                     <div className="semesters-container" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                       {resultData.semesters?.map((sem, index) => (
                         <SemesterCard key={sem.semester || index} semester={sem} showSubjectCode={showSubjectCode} />

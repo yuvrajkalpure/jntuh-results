@@ -1,16 +1,33 @@
 import React from 'react';
 
-export default function OverallSummaryCard({ summary }) {
+export default function OverallSummaryCard({ summary, semesters }) {
   if (!summary) return null;
 
   const { isFailed, cgpa, percentage, totalEarnedCredits, totalCredits, totalSemesters } = summary;
   const cgpaDisplay = !isFailed && cgpa != null ? Number(cgpa).toFixed(2) : "N/A";
   const percentageDisplay = !isFailed && percentage != null ? `${Number(percentage).toFixed(1)}%` : "N/A";
-  const statusText = !isFailed ? "PASSED ALL" : "BACKLOGS EXIST";
-  const statusColor = !isFailed ? "#15803d" : "#b91c1c";
+
+  let totalBacklogs = 0;
+  if (semesters && Array.isArray(semesters)) {
+    totalBacklogs = semesters.reduce((sum, sem) => {
+      if (sem.summary && sem.summary.failedSubjects != null) {
+        return sum + sem.summary.failedSubjects;
+      }
+      if (sem.subjectsList && Array.isArray(sem.subjectsList)) {
+        const count = sem.subjectsList.filter(s => {
+          const g = String(s.finalGrade || s.finalMarks?.grade || '').trim().toUpperCase();
+          return g === 'F' || g === 'AB' || g === 'ABSENT';
+        }).length;
+        return sum + count;
+      }
+      return sum;
+    }, 0);
+  } else if (summary.totalFailedSubjects != null) {
+    totalBacklogs = summary.totalFailedSubjects;
+  }
 
   return (
-    <div className="result-card" style={{ marginBottom: "20px" }}>
+    <div className="result-card overall-summary-card" style={{ marginBottom: "20px" }}>
       <div
         className="exam-banner"
         style={{
@@ -37,9 +54,11 @@ export default function OverallSummaryCard({ summary }) {
           <span className="stat-sub">Earned / Max</span>
         </div>
         <div className="stat-card">
-          <span className="stat-label">Overall Status</span>
-          <span className="stat-value" style={{ color: statusColor }}>{statusText}</span>
-          <span className="stat-sub">{totalSemesters} Semesters Found</span>
+          <span className="stat-label">Total Backlogs</span>
+          <span className="stat-value" style={{ color: totalBacklogs > 0 ? '#b91c1c' : '#15803d' }}>
+            {totalBacklogs}
+          </span>
+          <span className="stat-sub">{totalBacklogs > 0 ? `${totalBacklogs} Pending` : 'Passed All Sems'}</span>
         </div>
       </div>
     </div>

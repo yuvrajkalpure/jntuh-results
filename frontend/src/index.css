@@ -505,6 +505,34 @@ main {
         gap: 10px !important;
     }
 
+    .stats-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 10px 8px !important;
+    }
+
+    .stat-card {
+        padding: 8px 10px !important;
+        border-radius: 8px !important;
+        gap: 2px !important;
+    }
+
+    .stat-label {
+        font-size: 0.65rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    .stat-value {
+        font-size: 1rem !important;
+        font-weight: 800 !important;
+    }
+
+    .stat-sub {
+        font-size: 0.62rem !important;
+    }
+
     .result-card {
         padding: 10px 4px !important;
         border-radius: 0px !important;
