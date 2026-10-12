@@ -146,6 +146,14 @@ function extractStudentInfo($) {
     return { details, examTitle };
 }
 
+const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
+
+function isWithheldOrMalpractice(text) {
+    if (!text) return false;
+    const upper = String(text).toUpperCase();
+    return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+}
+
 function extractSubjectObjects(table) {
     if (!table || table.length < 2) return [];
 
@@ -157,11 +165,16 @@ function extractSubjectObjects(table) {
     const totalIdx = headers.findIndex(h => h.includes("total"));
     const gradeIdx = headers.findIndex(h => h.includes("grade") && !h.includes("point"));
     const creditIdx = headers.findIndex(h => h.includes("credit") || h === "c");
+    const categoryIdx = headers.findIndex(h => h.includes("category") || h.includes("remark") || h.includes("result") || h.includes("status"));
 
     const subjects = [];
     for (let i = 1; i < table.length; i++) {
         const row = table[i];
         if (!row || row.length <= 1) continue;
+
+        const rowText = row.join(" ");
+        const categoryVal = categoryIdx !== -1 ? String(row[categoryIdx] || "").trim() : "";
+        const isMpOrWh = isWithheldOrMalpractice(rowText) || isWithheldOrMalpractice(categoryVal);
 
         subjects.push({
             subjectCode: codeIdx !== -1 ? row[codeIdx] : "",
@@ -170,7 +183,10 @@ function extractSubjectObjects(table) {
             externalMarks: externalIdx !== -1 ? row[externalIdx] : "",
             totalMarks: totalIdx !== -1 ? row[totalIdx] : "",
             grade: gradeIdx !== -1 ? row[gradeIdx] : "",
-            credits: creditIdx !== -1 ? row[creditIdx] : ""
+            credits: creditIdx !== -1 ? row[creditIdx] : "",
+            category: categoryVal,
+            remarks: isMpOrWh ? (categoryVal || "WITHHELD/MALPRACTICE") : "",
+            isMalpractice: isMpOrWh
         });
     }
 
@@ -197,25 +213,26 @@ function calculateGPA(table) {
         const row = table[i];
         if (!row || row.length <= Math.max(gradeIdx, creditIdx)) continue;
 
-        const gradeStr = String(row[gradeIdx]).trim().toUpperCase();
-        const creditStr = String(row[creditIdx]).trim();
+        const gradeStr = String(row[gradeIdx] || "").trim().toUpperCase();
+        const creditStr = String(row[creditIdx] || "").trim();
         const credit = parseFloat(creditStr);
-
-        if (isNaN(credit)) continue;
+        const rowText = row.join(" ");
+        const isMpOrWh = isWithheldOrMalpractice(rowText) || isWithheldOrMalpractice(gradeStr);
 
         totalSubjects++;
-        sumSubjectCredits += credit;
+        const subjectCredits = isNaN(credit) ? 0 : credit;
+        sumSubjectCredits += subjectCredits;
 
-        const points = GRADE_POINTS[gradeStr] !== undefined ? GRADE_POINTS[gradeStr] : null;
+        const isPassing = PASSING_GRADES.has(gradeStr) && !isMpOrWh;
 
-        if (points !== null) {
-            totalWeightedPoints += credit * points;
-            if (gradeStr !== "F" && gradeStr !== "AB" && gradeStr !== "ABSENT") {
-                earnedCredits += credit;
-                passedSubjects++;
-            } else {
-                failedSubjects++;
-            }
+        if (isPassing) {
+            const points = GRADE_POINTS[gradeStr] !== undefined ? GRADE_POINTS[gradeStr] : 0;
+            totalWeightedPoints += subjectCredits * points;
+            earnedCredits += subjectCredits;
+            passedSubjects++;
+        } else {
+            // Failed, Absent, Malpractice, Withheld, or incomplete (-)
+            failedSubjects++;
         }
     }
 

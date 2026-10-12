@@ -7,6 +7,20 @@
 const { calculateGPA } = require("../parsers/result.parser");
 const { getSemestersOrder } = require("../utils/semester.utils");
 
+const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
+
+function isWithheldOrMalpractice(text) {
+    if (!text) return false;
+    const upper = String(text).toUpperCase();
+    return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+}
+
+function isPassingGrade(grade) {
+    if (!grade) return false;
+    const clean = String(grade).trim().toUpperCase();
+    return PASSING_GRADES.has(clean);
+}
+
 function buildJntuhUrl(htno, candidate) {
     const etype = candidate.request?.etype || "r17";
     const resultParam = candidate.request?.result || "null";
@@ -52,6 +66,9 @@ function processSemesterGroup(group, htno) {
             const code = String(sub.subjectCode).trim().toUpperCase();
             if (!code) return;
 
+            const isMpOrWh = sub.isMalpractice || isWithheldOrMalpractice(sub.remarks) || isWithheldOrMalpractice(sub.category) || isWithheldOrMalpractice(sub.grade);
+            const mpRemarks = sub.remarks || sub.category || (isMpOrWh ? "WITHHELD/MALPRACTICE" : "");
+
             if (!subjectMap.has(code)) {
                 subjectMap.set(code, {
                     subjectCode: code,
@@ -66,6 +83,10 @@ function processSemesterGroup(group, htno) {
                         grade: sub.grade,
                         credits: sub.credits
                     },
+                    isFailed: !isPassingGrade(sub.grade) || isMpOrWh,
+                    isBacklog: !isPassingGrade(sub.grade) || isMpOrWh,
+                    isMalpractice: isMpOrWh,
+                    remarks: mpRemarks,
                     attemptsHistory: []
                 });
             }
@@ -98,24 +119,46 @@ function processSemesterGroup(group, htno) {
                 totalMarks: sub.totalMarks,
                 grade: sub.grade,
                 credits: sub.credits,
-                ...(isRCRV ? { isNoChange, remarks: isNoChange ? "No Change" : "Grade/Marks Updated" } : {})
+                isMalpractice: isMpOrWh,
+                ...(isRCRV ? { isNoChange, remarks: isNoChange ? "No Change" : "Grade/Marks Updated" } : {}),
+                ...(isMpOrWh ? { isMalpractice: true, remarks: mpRemarks } : {})
             };
 
             record.attemptsHistory.push(attemptEntry);
 
-            // Update final marks if this attempt passed or improved grade
+            // Update final marks
             const gradeUpper = String(sub.grade).trim().toUpperCase();
-            const isPass = gradeUpper !== "F" && gradeUpper !== "AB" && gradeUpper !== "ABSENT" && gradeUpper !== "COMPLETION_PENDING" && gradeUpper !== "CP" && gradeUpper !== "FAIL" && gradeUpper !== "FAILED" && gradeUpper !== "-";
-            if (isPass || !isNoChange) {
-                if (isPass || record.finalGrade === "F" || record.finalGrade === "AB") {
-                    record.finalGrade = sub.grade;
+            const isPass = isPassingGrade(gradeUpper) && !isMpOrWh;
+
+            if (isPass) {
+                record.finalGrade = sub.grade;
+                record.finalMarks = {
+                    internal: sub.internalMarks,
+                    external: sub.externalMarks,
+                    total: sub.totalMarks,
+                    grade: sub.grade,
+                    credits: sub.credits
+                };
+                record.isFailed = false;
+                record.isBacklog = false;
+                record.isMalpractice = false;
+            } else {
+                // If not passed, it remains a backlog
+                record.isFailed = true;
+                record.isBacklog = true;
+                if (!isNoChange) {
+                    record.finalGrade = sub.grade || "-";
                     record.finalMarks = {
                         internal: sub.internalMarks,
                         external: sub.externalMarks,
                         total: sub.totalMarks,
-                        grade: sub.grade,
-                        credits: sub.credits
+                        grade: sub.grade || "-",
+                        credits: sub.credits || 0
                     };
+                    if (isMpOrWh) {
+                        record.remarks = mpRemarks;
+                        record.isMalpractice = true;
+                    }
                 }
             }
         });
@@ -154,6 +197,17 @@ function processSemesterGroup(group, htno) {
     const displayTable = [tableHeader, ...tableRows];
     const summary = calculateGPA(displayTable);
 
+    // Ensure summary failedSubjects and isFailed reflect any backlogs or malpractice in subjectsList
+    const backlogCount = subjectsList.filter(s => s.isFailed || s.isBacklog || s.isMalpractice || !isPassingGrade(s.finalGrade)).length;
+    if (summary) {
+        summary.failedSubjects = Math.max(summary.failedSubjects || 0, backlogCount);
+        if (summary.failedSubjects > 0) {
+            summary.isFailed = true;
+            summary.sgpa = null;
+            summary.percentage = null;
+        }
+    }
+
     return {
         semester: primary.semester,
         title: primary.title,
@@ -171,6 +225,7 @@ function calculateOverallSummary(semesters) {
     let totalSemesterCredits = 0;
     let totalEarnedCredits = 0;
     let anyFailed = false;
+    let totalFailedSubjects = 0;
 
     semesters.forEach(sem => {
         if (!sem.summary) return;
@@ -178,7 +233,19 @@ function calculateOverallSummary(semesters) {
         totalSemesterCredits += semCredits;
         totalEarnedCredits += sem.summary.earnedCredits || 0;
 
-        if (sem.summary.isFailed) {
+        let semFailedCount = sem.summary.failedSubjects || 0;
+        if (sem.subjectsList && Array.isArray(sem.subjectsList)) {
+            const listFailedCount = sem.subjectsList.filter(s => s.isFailed || s.isBacklog || s.isMalpractice || !isPassingGrade(s.finalGrade)).length;
+            semFailedCount = Math.max(semFailedCount, listFailedCount);
+        }
+        totalFailedSubjects += semFailedCount;
+
+        let semHasBacklogs = sem.summary.isFailed || semFailedCount > 0;
+        if (!semHasBacklogs && sem.subjectsList && Array.isArray(sem.subjectsList)) {
+            semHasBacklogs = sem.subjectsList.some(s => s.isFailed || s.isBacklog || s.isMalpractice || !isPassingGrade(s.finalGrade));
+        }
+
+        if (semHasBacklogs) {
             anyFailed = true;
         } else if (sem.summary.sgpa != null) {
             totalWeightedPoints += sem.summary.sgpa * semCredits;
@@ -191,6 +258,7 @@ function calculateOverallSummary(semesters) {
             percentage: null,
             totalEarnedCredits,
             totalCredits: totalSemesterCredits,
+            totalFailedSubjects,
             isFailed: anyFailed,
             totalSemesters: semesters.length
         };
@@ -204,6 +272,7 @@ function calculateOverallSummary(semesters) {
         percentage: parseFloat(percentage),
         totalEarnedCredits,
         totalCredits: totalSemesterCredits,
+        totalFailedSubjects: 0,
         isFailed: false,
         totalSemesters: semesters.length
     };

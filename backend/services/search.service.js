@@ -26,10 +26,11 @@ async function searchStudent(rawHtno) {
     const isPassGrade = (grade) => {
         if (!grade) return false;
         const g = String(grade).trim().toUpperCase();
-        if (g === "F" || g === "AB" || g === "ABSENT" || g === "COMPLETION_PENDING" || g === "CP" || g === "FAIL" || g === "FAILED" || g === "-") {
+        if (g === "F" || g === "AB" || g === "ABSENT" || g === "COMPLETION_PENDING" || g === "CP" || g === "FAIL" || g === "FAILED" || g === "-" || g.includes("MALPRACTICE") || g.includes("WITHHELD") || g.includes("MP") || g.includes("WH")) {
             return false;
         }
-        return true;
+        const PASS_SET = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
+        return PASS_SET.has(g);
     };
 
     // 2. Check Level 2 Server Cache & Search State

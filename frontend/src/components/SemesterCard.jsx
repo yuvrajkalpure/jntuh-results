@@ -10,6 +10,22 @@ function formatSemesterDesktopTitle(semLabel) {
   return semLabel;
 }
 
+const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
+
+function isBacklogSubject(sub) {
+  if (!sub) return false;
+  if (sub.isFailed || sub.isBacklog || sub.isMalpractice) return true;
+  const grade = String(sub.finalGrade || sub.finalMarks?.grade || sub.grade || '').trim().toUpperCase();
+  const remarks = String(sub.remarks || sub.category || '').toUpperCase();
+  if (remarks.includes('MALPRACTICE') || remarks.includes('WITHHELD') || remarks.includes('SPOT CENTER') || remarks.includes('EXAM CENTER') || remarks.includes('MP') || remarks.includes('WH')) {
+    return true;
+  }
+  if (!grade || grade === '-' || grade === 'F' || grade === 'AB' || grade === 'ABSENT' || grade === 'MP' || grade === 'WH') {
+    return true;
+  }
+  return !PASSING_GRADES.has(grade);
+}
+
 export default function SemesterCard({ semester }) {
   if (!semester) return null;
 
@@ -24,20 +40,25 @@ export default function SemesterCard({ semester }) {
   let creditsDisplay = "0 / 0";
   let backlogsCount = 0;
 
+  let subjectBacklogs = 0;
+  if (subjectsList && Array.isArray(subjectsList)) {
+    subjectBacklogs = subjectsList.filter(isBacklogSubject).length;
+  }
+
   if (summary) {
-    isFailed = summary.isFailed || summary.failedSubjects > 0;
-    passStatusText = !isFailed ? "PASSED" : `FAILED (${summary.failedSubjects})`;
+    backlogsCount = Math.max(summary.failedSubjects || 0, subjectBacklogs);
+    isFailed = summary.isFailed || backlogsCount > 0;
+    passStatusText = !isFailed ? "PASSED" : `FAILED (${backlogsCount})`;
     passStatusColor = !isFailed ? "#15803d" : "#b91c1c";
 
     sgpaDisplay = !isFailed && summary.sgpa != null ? Number(summary.sgpa).toFixed(2) : "N/A";
     percentageDisplay = !isFailed && summary.percentage != null ? `${Number(summary.percentage).toFixed(1)}%` : "N/A";
     creditsDisplay = `${summary.earnedCredits} / ${summary.totalCredits}`;
-    backlogsCount = summary.failedSubjects || 0;
-  } else if (subjectsList && Array.isArray(subjectsList)) {
-    backlogsCount = subjectsList.filter(s => {
-      const g = String(s.finalGrade || s.finalMarks?.grade || '').trim().toUpperCase();
-      return g === 'F' || g === 'AB' || g === 'ABSENT';
-    }).length;
+  } else {
+    backlogsCount = subjectBacklogs;
+    isFailed = backlogsCount > 0;
+    passStatusText = !isFailed ? "PASSED" : `FAILED (${backlogsCount})`;
+    passStatusColor = !isFailed ? "#15803d" : "#b91c1c";
   }
 
   return (

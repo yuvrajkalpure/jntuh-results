@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 
+const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
+
+function isWithheldOrMalpractice(text) {
+  if (!text) return false;
+  const upper = String(text).toUpperCase();
+  return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+}
+
 function getGradeClass(grade) {
-  const clean = String(grade).trim().toUpperCase();
+  const clean = String(grade || '').trim().toUpperCase();
   if (clean === "O" || clean === "A+") return "grade-o";
   if (clean === "A" || clean === "B+") return "grade-a";
   if (clean === "B" || clean === "C") return "grade-b";
-  if (clean === "F" || clean === "AB" || clean === "ABSENT") return "grade-f";
+  if (clean === "D" || clean === "P" || clean === "PASS" || clean === "PASSED") return "grade-c";
+  if (clean === "F" || clean === "AB" || clean === "ABSENT" || clean === "-" || isWithheldOrMalpractice(clean)) return "grade-f";
   return "";
+}
+
+function isBacklogSubject(sub) {
+  if (!sub) return false;
+  if (sub.isFailed || sub.isBacklog || sub.isMalpractice) return true;
+  const grade = String(sub.finalGrade || sub.finalMarks?.grade || sub.grade || '').trim().toUpperCase();
+  const remarks = String(sub.remarks || sub.category || '').toUpperCase();
+  if (isWithheldOrMalpractice(remarks)) return true;
+  if (!grade || grade === '-' || grade === 'F' || grade === 'AB' || grade === 'ABSENT' || isWithheldOrMalpractice(grade)) return true;
+  return !PASSING_GRADES.has(grade);
 }
 
 export default function ResultTable({ table, subjectsList }) {
@@ -41,7 +60,8 @@ export default function ResultTable({ table, subjectsList }) {
           <tbody>
             {subjectsList.map((sub) => {
               const gradeClass = getGradeClass(sub.finalGrade || sub.finalMarks?.grade);
-              const isFailed = gradeClass === "grade-f";
+              const isFailed = isBacklogSubject(sub) || gradeClass === "grade-f";
+              const isMp = sub.isMalpractice || isWithheldOrMalpractice(sub.remarks) || isWithheldOrMalpractice(sub.category);
 
               const history = sub.attemptsHistory || [];
               const realExamAttempts = history.filter(att => att.examType !== 'RC/RV');
@@ -64,14 +84,29 @@ export default function ResultTable({ table, subjectsList }) {
                     <td className={colCodeClass}>{sub.subjectCode}</td>
                     <td className="col-name" style={{ fontWeight: '700' }}>
                       <span style={{ fontWeight: '700' }}>{sub.subjectName}</span>
+                      {isMp && (
+                        <span style={{
+                          display: 'inline-block',
+                          marginLeft: '8px',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          fontSize: '0.72rem',
+                          fontWeight: '700',
+                          background: '#fee2e2',
+                          color: '#b91c1c',
+                          border: '1px solid #fca5a5'
+                        }}>
+                          WITHHELD / MALPRACTICE
+                        </span>
+                      )}
                     </td>
                     <td className="col-num">{sub.finalMarks?.internal ?? '-'}</td>
                     <td className="col-num">{sub.finalMarks?.external ?? '-'}</td>
                     <td className="col-num col-total">{sub.finalMarks?.total ?? '-'}</td>
                     <td className="col-grade">
-                      {gradeClass ? (
-                        <span className={`grade-badge ${gradeClass}`}>
-                          {sub.finalMarks?.grade || sub.finalGrade}
+                      {gradeClass || isFailed ? (
+                        <span className={`grade-badge ${gradeClass || 'grade-f'}`}>
+                          {sub.finalMarks?.grade || sub.finalGrade || '-'}
                         </span>
                       ) : (
                         sub.finalGrade || '-'
@@ -106,7 +141,8 @@ export default function ResultTable({ table, subjectsList }) {
                     const attGradeClass = getGradeClass(att.grade);
                     const attGradeStr = String(att.grade ?? '').trim().toUpperCase();
                     const isNoMarks = att.totalMarks === '-' || att.totalMarks === null || att.totalMarks === undefined || (att.internalMarks === '-' && att.externalMarks === '-');
-                    const isAttFailed = attGradeStr === 'F' || attGradeStr === 'AB' || attGradeStr === 'ABSENT' || isNoMarks || !att.grade || att.grade === '-';
+                    const isAttMp = att.isMalpractice || isWithheldOrMalpractice(att.remarks) || isWithheldOrMalpractice(att.category);
+                    const isAttFailed = attGradeStr === 'F' || attGradeStr === 'AB' || attGradeStr === 'ABSENT' || isNoMarks || !att.grade || att.grade === '-' || isAttMp;
                     
                     let attemptLabel = 'RC/RV';
                     if (att.examType !== 'RC/RV') {
@@ -134,11 +170,12 @@ export default function ResultTable({ table, subjectsList }) {
                             <span style={{
                               fontSize: '0.65rem',
                               fontWeight: '600',
-                              padding: '1px 5px',
+                              padding: '2px 6px',
                               borderRadius: '4px',
-                              background: att.isNoChange ? '#e2e8f0' : '#dbeafe',
-                              color: att.isNoChange ? '#475569' : '#1e40af',
-                              marginLeft: '4px'
+                              background: isAttMp ? '#fee2e2' : (att.isNoChange ? '#e2e8f0' : '#dbeafe'),
+                              color: isAttMp ? '#b91c1c' : (att.isNoChange ? '#475569' : '#1e40af'),
+                              border: isAttMp ? '1px solid #fca5a5' : 'none',
+                              marginLeft: '6px'
                             }}>
                               {att.remarks}
                             </span>
@@ -203,12 +240,12 @@ export default function ResultTable({ table, subjectsList }) {
             if (rowIndex > 0) {
               if (gradeIdx !== -1 && row[gradeIdx]) {
                 const gStr = String(row[gradeIdx]).trim().toUpperCase();
-                if (gStr === "F" || gStr === "AB" || gStr === "ABSENT") isRowFailed = true;
+                if (gStr === "F" || gStr === "AB" || gStr === "ABSENT" || gStr === "-" || isWithheldOrMalpractice(gStr)) isRowFailed = true;
               }
               if (!isRowFailed) {
                 isRowFailed = row.some(cell => {
                   const cStr = String(cell).trim().toUpperCase();
-                  return cStr === "F" || cStr === "AB" || cStr === "ABSENT";
+                  return cStr === "F" || cStr === "AB" || cStr === "ABSENT" || isWithheldOrMalpractice(cStr);
                 });
               }
             }
