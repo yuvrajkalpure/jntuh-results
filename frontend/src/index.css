@@ -441,13 +441,16 @@ main {
 }
 
 .result-table th {
-    background: #e2e8f0;
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #0f172a;
-    padding: 10px 8px;
-    border-bottom: 2px solid #cbd5e1;
-    text-align: left;
+    background: #e2e8f0 !important;
+    font-size: 0.8rem !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    padding: 10px 4px !important;
+    border-bottom: 2px solid #cbd5e1 !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    box-sizing: border-box !important;
+    line-height: 1.2 !important;
 }
 
 .result-table td {
@@ -459,33 +462,42 @@ main {
 }
 
 .result-table .col-code {
-    font-weight: 600;
-    white-space: nowrap;
-    font-size: 0.78rem;
     width: 12%;
 }
 
-.result-table .col-name {
-    font-weight: 500;
-    word-break: break-word;
-    min-width: 200px;
-    width: 40%;
-    font-size: 0.76rem;
+.result-table td.col-code {
+    font-weight: 700 !important;
+    color: #090d16 !important;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    text-align: left;
 }
 
-.result-table .col-num {
+.result-table .col-name {
+    width: 40%;
+}
+
+.result-table td.col-name {
+    font-weight: 700;
+    word-break: break-word;
+    min-width: 200px;
+    font-size: 0.76rem;
+    text-align: left;
+}
+
+.result-table td.col-num {
     text-align: center;
 }
 
-.result-table .col-total {
+.result-table td.col-total {
     font-weight: 700;
 }
 
-.result-table .col-grade {
+.result-table td.col-grade {
     text-align: center;
 }
 
-.result-table .col-attempts {
+.result-table td.col-attempts {
     text-align: center;
 }
 
@@ -568,14 +580,16 @@ main {
     }
 
     .result-table th {
-        font-size: 0.68rem;
-        padding: 6px 1px;
-        text-align: center;
-        background: #e2e8f0;
-        color: #0f172a;
-        font-weight: 800;
-        border-bottom: 2px solid #cbd5e1;
+        font-size: 0.68rem !important;
+        padding: 6px 1px !important;
+        text-align: center !important;
+        background: #e2e8f0 !important;
+        color: #0f172a !important;
+        font-weight: 800 !important;
+        border-bottom: 2px solid #cbd5e1 !important;
         box-sizing: border-box !important;
+        vertical-align: middle !important;
+        line-height: 1.2 !important;
     }
 
     .result-table td {
@@ -588,62 +602,75 @@ main {
     .result-table td.col-name {
         text-align: left;
         font-size: 0.65rem !important;
+        font-weight: 700 !important;
         line-height: 1.2;
         padding-left: 2px;
         padding-right: 2px;
-        width: 53%;
+        width: 41% !important;
         min-width: 0 !important;
         word-break: normal !important;
         overflow-wrap: break-word !important;
         hyphens: none !important;
     }
 
-    .col-code-mobile-show {
+    .result-table .col-code {
         display: table-cell !important;
+        width: 12% !important;
+        min-width: 0 !important;
+    }
+
+    .result-table td.col-code {
         text-align: left;
         font-size: 0.68rem;
         padding-left: 2px;
         padding-right: 1px;
-        width: 12% !important;
-        min-width: 0 !important;
-        font-weight: 600;
-    }
-
-    .result-table.show-code-mobile .col-name {
-        width: 41% !important;
+        font-weight: 700 !important;
+        color: #090d16 !important;
     }
 
     .result-table .col-num {
         width: 7.5%;
+        min-width: 0 !important;
+    }
+
+    .result-table td.col-num {
         text-align: center;
         padding: 5px 0px;
         font-size: 0.82rem;
         font-weight: 700;
-        min-width: 0 !important;
     }
 
-    .result-table .col-num.col-total {
+    .result-table td.col-num.col-total {
         font-size: 0.86rem;
         font-weight: 800;
         color: #0f172a;
+    }
+
+    .result-table .col-num.col-total {
         width: 8%;
     }
 
     .result-table .col-grade {
         width: 8%;
+        min-width: 0 !important;
+    }
+
+    .result-table td.col-grade {
         text-align: center;
         padding: 5px 0px;
         font-size: 0.82rem;
         font-weight: 700;
-        min-width: 0 !important;
     }
 
     .result-table .col-attempts {
         width: 8%;
-        text-align: center;
-        padding: 5px 0px;
         min-width: 0 !important;
         display: table-cell !important;
+    }
+
+    .result-table td.col-attempts {
+        text-align: center;
+        padding: 5px 0px;
     }
 
     .grade-badge {

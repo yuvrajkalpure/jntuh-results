@@ -9,11 +9,15 @@ const path = require("path");
 
 const DATA_DIR = path.join(__dirname, "../data");
 const STORE_FILE = path.join(DATA_DIR, "store.json");
+const RESULTS_TTL_MS = 180 * 24 * 60 * 60 * 1000; // 6 months (180 days)
 
 class StoreService {
     constructor() {
+        this.RESULTS_TTL_MS = RESULTS_TTL_MS;
         this.data = {
             catalog_version: 1,
+            results_ttl_days: 180,
+            results_cache_duration_ms: RESULTS_TTL_MS,
             batches: {},
             students: {},
             htno_groups: {},
@@ -45,6 +49,8 @@ class StoreService {
                     const parsed = JSON.parse(fileContent);
                     this.data = {
                         catalog_version: parsed.catalog_version || 1,
+                        results_ttl_days: parsed.results_ttl_days || 180,
+                        results_cache_duration_ms: parsed.results_cache_duration_ms || RESULTS_TTL_MS,
                         batches: parsed.batches || {},
                         students: parsed.students || {},
                         htno_groups: parsed.htno_groups || {},
@@ -164,14 +170,39 @@ class StoreService {
         if (!this.data.student_search_state) this.data.student_search_state = {};
 
         const cleanHtno = String(htno).trim().toUpperCase();
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + RESULTS_TTL_MS).toISOString();
         this.data.student_search_state[cleanHtno] = {
             htno: cleanHtno,
             ...(this.data.student_search_state[cleanHtno] || {}),
             ...stateData,
-            updatedAt: new Date().toISOString()
+            updatedAt: now.toISOString(),
+            expiresAt: expiresAt
         };
         this.saveToDisk();
         return this.data.student_search_state[cleanHtno];
+    }
+
+    isResultExpired(result) {
+        if (!result) return true;
+        if (result.expiresAt) {
+            return new Date(result.expiresAt).getTime() < Date.now();
+        }
+        if (result.fetchedAt) {
+            return (Date.now() - new Date(result.fetchedAt).getTime()) > RESULTS_TTL_MS;
+        }
+        return false;
+    }
+
+    isStateExpired(state) {
+        if (!state) return true;
+        if (state.expiresAt) {
+            return new Date(state.expiresAt).getTime() < Date.now();
+        }
+        if (state.updatedAt) {
+            return (Date.now() - new Date(state.updatedAt).getTime()) > RESULTS_TTL_MS;
+        }
+        return false;
     }
 
     // 5. JNTUH Exam Catalog & Sync Logs
@@ -275,6 +306,8 @@ class StoreService {
         }
 
         const key = `${cleanHtno}_${release.id}`;
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + RESULTS_TTL_MS).toISOString();
         this.data.student_results[key] = {
             id: key,
             studentId: student.id,
@@ -286,7 +319,8 @@ class StoreService {
             examTitle: parsedResult.examTitle || parsedResult.title,
             resultStatus: parsedResult.summary?.isFailed ? "FAILED" : "PASSED",
             hasResult: true,
-            fetchedAt: new Date().toISOString(),
+            fetchedAt: now.toISOString(),
+            expiresAt: expiresAt,
             summary: parsedResult.summary,
             subjects: parsedResult.subjects || [],
             table: parsedResult.table || []
@@ -319,6 +353,8 @@ class StoreService {
             title: releaseInfo.title
         });
 
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + RESULTS_TTL_MS).toISOString();
         this.data.student_results[key] = {
             id: key,
             studentId: student.id,
@@ -330,7 +366,8 @@ class StoreService {
             examTitle: releaseInfo.title,
             resultStatus: "NO_RESULT",
             hasResult: false,
-            fetchedAt: new Date().toISOString(),
+            fetchedAt: now.toISOString(),
+            expiresAt: expiresAt,
             summary: null,
             subjects: [],
             table: []
@@ -340,18 +377,23 @@ class StoreService {
         return this.data.student_results[key];
     }
 
-    getStudentResultForRelease(htno, releaseId) {
+    getStudentResultForRelease(htno, releaseId, includeExpired = false) {
         if (!htno || !this.data.student_results) return null;
         const cleanHtno = String(htno).trim().toUpperCase();
         const key = `${cleanHtno}_${releaseId}`;
-        return this.data.student_results[key] || null;
+        const record = this.data.student_results[key] || null;
+        if (!record) return null;
+        if (!includeExpired && this.isResultExpired(record)) {
+            return null;
+        }
+        return record;
     }
 
-    getAllValidResultsForStudent(htno) {
+    getAllValidResultsForStudent(htno, includeExpired = false) {
         if (!htno || !this.data.student_results) return [];
         const cleanHtno = String(htno).trim().toUpperCase();
         return Object.values(this.data.student_results).filter(
-            r => r.htno === cleanHtno && r.hasResult
+            r => r.htno === cleanHtno && r.hasResult && (includeExpired || !this.isResultExpired(r))
         );
     }
 

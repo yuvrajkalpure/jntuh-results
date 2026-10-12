@@ -38,9 +38,9 @@ async function searchStudent(rawHtno) {
         const aggregated = aggregationService.aggregateStudentResults(cachedResults, batchInfo.isLateral, htno);
         const existingState = storeService.getSearchState(htno);
 
-        // Short-circuit cache HIT only if search was completed AND student passed ALL subjects across all semesters AND no pending releases
-        if (aggregated && aggregated.overallSummary && !aggregated.overallSummary.isFailed && existingState && existingState.searchCompleted && !existingState.hasPendingReleases) {
-            console.log(`[SEARCH ENGINE] DB HIT (ALL PASSED): Returning stored results for ${htno}.`);
+        // Short-circuit cache HIT only if search was completed AND student passed ALL subjects across all semesters AND no pending releases AND results cache not expired (6 months)
+        if (aggregated && aggregated.overallSummary && !aggregated.overallSummary.isFailed && existingState && existingState.searchCompleted && !existingState.hasPendingReleases && !storeService.isStateExpired(existingState)) {
+            console.log(`[SEARCH ENGINE] DB HIT (ALL PASSED): Returning stored results for ${htno} (valid within 6-month cache).`);
             const studentRecord = storeService.getStudent(htno);
 
             return {
@@ -68,10 +68,9 @@ async function searchStudent(rawHtno) {
 
     const existingState = storeService.getSearchState(htno);
     if (existingState && existingState.validated === false) {
-        // Expire invalid state after 6 hours to allow re-checking JNTUH portal
-        const ageHours = existingState.updatedAt ? (Date.now() - new Date(existingState.updatedAt).getTime()) / (1000 * 60 * 60) : 999;
-        if (ageHours < 6) {
-            console.log(`[SEARCH ENGINE] HTNO ${htno} previously validated as INVALID. Skipping JNTUH requests.`);
+        // Expire invalid state after 6 months to allow re-checking JNTUH portal
+        if (!storeService.isStateExpired(existingState)) {
+            console.log(`[SEARCH ENGINE] HTNO ${htno} previously validated as INVALID (valid within 6-month cache). Skipping JNTUH requests.`);
             return {
                 success: false,
                 error: {

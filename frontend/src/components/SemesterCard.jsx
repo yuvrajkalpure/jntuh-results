@@ -10,7 +10,7 @@ function formatSemesterDesktopTitle(semLabel) {
   return semLabel;
 }
 
-export default function SemesterCard({ semester, showSubjectCode }) {
+export default function SemesterCard({ semester }) {
   if (!semester) return null;
 
   const { examTitle, semester: semLabel, summary, table, attempts, subjectsList, jntuhUrl } = semester;
@@ -170,7 +170,7 @@ export default function SemesterCard({ semester, showSubjectCode }) {
         </div>
       </div>
 
-      <ResultTable table={table} subjectsList={subjectsList} showSubjectCode={showSubjectCode} />
+      <ResultTable table={table} subjectsList={subjectsList} />
     </div>
   );
 }

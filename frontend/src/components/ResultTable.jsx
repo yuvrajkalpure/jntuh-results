@@ -9,7 +9,7 @@ function getGradeClass(grade) {
   return "";
 }
 
-export default function ResultTable({ table, subjectsList, showSubjectCode }) {
+export default function ResultTable({ table, subjectsList }) {
   const [expandedSubjects, setExpandedSubjects] = useState({});
 
   const toggleExpand = (code) => {
@@ -19,13 +19,13 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
     }));
   };
 
-  const colCodeClass = showSubjectCode ? "col-code col-code-mobile-show" : "col-code desktop-only";
+  const colCodeClass = "col-code";
 
   // If subjectsList is available, use rich structured rendering with attempt history drawers
   if (subjectsList && Array.isArray(subjectsList) && subjectsList.length > 0) {
     return (
       <div className="table-wrapper">
-        <table className={`result-table ${showSubjectCode ? 'show-code-mobile' : ''}`}>
+        <table className="result-table">
           <thead>
             <tr>
               <th className={colCodeClass}><span className="desktop-text">Code</span><span className="mobile-text">Code</span></th>
@@ -62,8 +62,8 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                     title={hasMultipleEntries ? "Click row to view attempt history and details" : ""}
                   >
                     <td className={colCodeClass}>{sub.subjectCode}</td>
-                    <td className="col-name">
-                      <span>{sub.subjectName}</span>
+                    <td className="col-name" style={{ fontWeight: '700' }}>
+                      <span style={{ fontWeight: '700' }}>{sub.subjectName}</span>
                     </td>
                     <td className="col-num">{sub.finalMarks?.internal ?? '-'}</td>
                     <td className="col-num">{sub.finalMarks?.external ?? '-'}</td>
@@ -128,12 +128,7 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                           <span style={{ color: '#94a3b8', marginRight: '2px' }}>↳</span>
                           {attemptLabel}
                         </td>
-                        <td className="col-name" style={{ fontWeight: '500' }}>
-                          {!showSubjectCode && (
-                            <span className="mobile-only" style={{ color: '#94a3b8', marginRight: '4px' }}>
-                              ↳ <strong style={{ fontSize: '0.78rem', color: '#1e293b' }}>{attemptLabel}:</strong>
-                            </span>
-                          )}
+                        <td className="col-name" style={{ fontWeight: '600' }}>
                           <span style={{ fontSize: '0.78rem' }}>{examTypeTitle}</span>
                           {att.remarks && (
                             <span style={{
@@ -237,10 +232,11 @@ export default function ResultTable({ table, subjectsList, showSubjectCode }) {
                     }
                   }
 
+                  const isSubjectName = !isHeader && (headers[cellIndex]?.includes("subject") || headers[cellIndex]?.includes("name"));
                   return isHeader ? (
                     <th key={cellIndex}>{cellContent}</th>
                   ) : (
-                    <td key={cellIndex}>{cellContent}</td>
+                    <td key={cellIndex} className={isSubjectName ? "col-name" : ""} style={isSubjectName ? { fontWeight: '700' } : {}}>{cellContent}</td>
                   );
                 })}
               </tr>

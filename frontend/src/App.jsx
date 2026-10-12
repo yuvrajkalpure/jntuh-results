@@ -16,7 +16,6 @@ export default function App() {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [resultData, setResultData] = useState(null);
   const [history, setHistory] = useState([]);
-  const [showSubjectCode, setShowSubjectCode] = useState(false);
 
   useEffect(() => {
     loadHistory();
@@ -155,8 +154,6 @@ export default function App() {
                 setHtno={setHtno}
                 status={status}
                 onSearch={(val) => handleSearch(val)}
-                showSubjectCode={showSubjectCode}
-                setShowSubjectCode={setShowSubjectCode}
                 hasResult={!!(resultData && resultData.success)}
               />
 
@@ -169,7 +166,7 @@ export default function App() {
                     <OverallSummaryCard summary={resultData.overallSummary} semesters={resultData.semesters} />
                     <div className="semesters-container" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                       {resultData.semesters?.map((sem, index) => (
-                        <SemesterCard key={sem.semester || index} semester={sem} showSubjectCode={showSubjectCode} />
+                        <SemesterCard key={sem.semester || index} semester={sem} />
                       ))}
                     </div>
                   </div>
