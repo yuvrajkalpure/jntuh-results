@@ -4,8 +4,18 @@ const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS"
 
 function isWithheldOrMalpractice(text) {
   if (!text) return false;
-  const upper = String(text).toUpperCase();
-  return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+  const clean = String(text).trim().toUpperCase();
+  if (!clean) return false;
+  if (clean === "MP" || clean === "WH" || clean === "MALPRACTICE" || clean === "WITHHELD") {
+    return true;
+  }
+  if (clean.includes("WITHHELD") || clean.includes("MALPRACTICE")) {
+    return true;
+  }
+  if (clean.includes("SPOT CENTER") || clean.includes("EXAM CENTER")) {
+    return true;
+  }
+  return false;
 }
 
 function getGradeClass(grade) {
@@ -20,12 +30,13 @@ function getGradeClass(grade) {
 
 function isBacklogSubject(sub) {
   if (!sub) return false;
-  if (sub.isFailed || sub.isBacklog || sub.isMalpractice) return true;
   const grade = String(sub.finalGrade || sub.finalMarks?.grade || sub.grade || '').trim().toUpperCase();
+  if (PASSING_GRADES.has(grade)) return false;
+  if (sub.isFailed || sub.isBacklog || sub.isMalpractice) return true;
   const remarks = String(sub.remarks || sub.category || '').toUpperCase();
   if (isWithheldOrMalpractice(remarks)) return true;
   if (!grade || grade === '-' || grade === 'F' || grade === 'AB' || grade === 'ABSENT' || isWithheldOrMalpractice(grade)) return true;
-  return !PASSING_GRADES.has(grade);
+  return true;
 }
 
 export default function ResultTable({ table, subjectsList }) {
@@ -61,7 +72,7 @@ export default function ResultTable({ table, subjectsList }) {
             {subjectsList.map((sub) => {
               const gradeClass = getGradeClass(sub.finalGrade || sub.finalMarks?.grade);
               const isFailed = isBacklogSubject(sub) || gradeClass === "grade-f";
-              const isMp = sub.isMalpractice || isWithheldOrMalpractice(sub.remarks) || isWithheldOrMalpractice(sub.category);
+              const isMp = isFailed && (sub.isMalpractice || isWithheldOrMalpractice(sub.remarks) || isWithheldOrMalpractice(sub.category));
 
               const history = sub.attemptsHistory || [];
               const realExamAttempts = history.filter(att => att.examType !== 'RC/RV');

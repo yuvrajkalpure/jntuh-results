@@ -40,7 +40,7 @@ async function syncExamCatalog() {
 
             for (const release of liveCatalog) {
                 const isNew = !existingCatalogMap.has(release.releaseId);
-                const savedRelease = storeService.upsertCatalogRelease(release);
+                const savedRelease = storeService.upsertCatalogRelease(release, false);
                 if (isNew) {
                     newRecords++;
                     // Trigger targeted impact analysis for new release
@@ -49,6 +49,9 @@ async function syncExamCatalog() {
                     updatedRecords++;
                 }
             }
+
+            // Save catalog to disk once after indexing all releases
+            storeService.saveCatalogToDisk();
 
             const updatedCatalog = storeService.getAllCatalogReleases();
             cacheService.set(CATALOG_CACHE_KEY, updatedCatalog, CATALOG_CACHE_DURATION);

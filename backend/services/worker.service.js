@@ -16,11 +16,12 @@ let isWorkerRunning = false;
  */
 async function processJob(job) {
     const { id, htno, releaseId } = job;
-    const release = storeService.data.jntuh_exam_releases[releaseId];
+    const release = storeService.getCatalogRelease(releaseId);
 
     if (!release) {
         console.warn(`[QUEUE WORKER] Release ${releaseId} not found in catalog for job ${id}.`);
         storeService.updatePendingJob(id, "FAILED", "RELEASE_NOT_FOUND");
+        storeService.recordReleaseCheck(htno, releaseId, "NOT_NEEDED", "RELEASE_NOT_IN_CATALOG");
         return;
     }
 
@@ -37,15 +38,16 @@ async function processJob(job) {
                 console.log(`[QUEUE WORKER] Successfully fetched and stored result for ${htno} (${release.examCode}).`);
             } else {
                 storeService.saveNoResult(htno, batchInfo, release);
-                storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
+                storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
             }
         } else {
             storeService.saveNoResult(htno, batchInfo, release);
-            storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
+            storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
         }
         storeService.updatePendingJob(id, "COMPLETED");
     } catch (error) {
         console.warn(`[QUEUE WORKER] Error processing job ${id} for ${htno}:`, error.message);
+        storeService.recordReleaseCheck(htno, releaseId, "RETRY", error.message);
         if ((job.attempts || 0) >= 3) {
             storeService.updatePendingJob(id, "FAILED", error.message);
         } else {

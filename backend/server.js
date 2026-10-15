@@ -7,6 +7,7 @@ const cors = require("cors");
 const resultRoutes = require("./routes/result.routes");
 const releaseService = require("./services/release.service");
 const workerService = require("./services/worker.service");
+const storeService = require("./services/store.service");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,6 +43,7 @@ const SYNC_INTERVAL = 24 * 60 * 60 * 1000; // 24 hours
 if (require.main === module) {
     app.listen(PORT, "0.0.0.0", async () => {
         console.log(`[SERVER] JNTUH Results API running on port ${PORT}`);
+        // Cache & Incremental Semester Update Engine Active
         
         // Start background result check queue worker
         workerService.startQueueWorker(30000, 5);
@@ -53,6 +55,13 @@ if (require.main === module) {
             console.warn("[SERVER] Startup catalog sync warning:", err.message);
         }
 
+        // Initial 6-month retention cleanup on startup
+        try {
+            storeService.cleanupExpiredResults();
+        } catch (err) {
+            console.warn("[SERVER] Startup retention cleanup warning:", err.message);
+        }
+
         // Schedule catalog sync worker every 24 hours
         setInterval(async () => {
             console.log("[SERVER] Scheduled 24-hour catalog sync triggered...");
@@ -62,7 +71,19 @@ if (require.main === module) {
                 console.error("[SERVER] Scheduled catalog sync error:", err.message);
             }
         }, SYNC_INTERVAL);
+
+        // Schedule daily 6-month retention cleanup worker every 24 hours
+        setInterval(() => {
+            console.log("[SERVER] Scheduled 24-hour retention cleanup triggered...");
+            try {
+                storeService.cleanupExpiredResults();
+            } catch (err) {
+                console.error("[SERVER] Scheduled retention cleanup error:", err.message);
+            }
+        }, SYNC_INTERVAL);
     });
 }
 
 module.exports = app;
+// Server restarted: selective check & partitioned catalog architecture active
+

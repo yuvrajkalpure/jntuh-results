@@ -26,22 +26,63 @@ async function searchStudent(rawHtno) {
     const isPassGrade = (grade) => {
         if (!grade) return false;
         const g = String(grade).trim().toUpperCase();
-        if (g === "F" || g === "AB" || g === "ABSENT" || g === "COMPLETION_PENDING" || g === "CP" || g === "FAIL" || g === "FAILED" || g === "-" || g.includes("MALPRACTICE") || g.includes("WITHHELD") || g.includes("MP") || g.includes("WH")) {
+        if (g === "F" || g === "AB" || g === "ABSENT" || g === "COMPLETION_PENDING" || g === "CP" || g === "FAIL" || g === "FAILED" || g === "-" || g === "MP" || g === "WH" || g.includes("MALPRACTICE") || g.includes("WITHHELD")) {
             return false;
         }
         const PASS_SET = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS", "PASSED"]);
         return PASS_SET.has(g);
     };
 
-    // 2. Check Level 2 Server Cache & Search State
+    // 2. Check 6-Month HTNO Retention Expiration
+    if (storeService.isStudentExpired(htno)) {
+        console.log(`[SEARCH ENGINE] 6-month retention expired for ${htno}. Purging expired records to fetch fresh results...`);
+        storeService.deleteStudentData(htno);
+    }
+
+    // 3. Check Level 2 Server Cache & Incremental Semester Update
     const cachedResults = storeService.getAllValidResultsForStudent(htno);
     if (cachedResults.length > 0) {
-        const aggregated = aggregationService.aggregateStudentResults(cachedResults, batchInfo.isLateral, htno);
-        const existingState = storeService.getSearchState(htno);
+        // Load examination catalog to check if JNTUH has released any new semesters or supplementary exams
+        const catalog = await releaseService.getExamCatalog();
+        const targetSemesters = [...batchInfo.targetSemesters].reverse(); // asc order: 1-1 -> 1-2 -> ...
+        const cachedSemesterSet = new Set(cachedResults.map(r => r.semester));
+        const currentAggregated = aggregationService.aggregateStudentResults(cachedResults, batchInfo.isLateral, htno);
 
-        // Short-circuit cache HIT only if search was completed AND student passed ALL subjects across all semesters AND no pending releases AND results cache not expired (6 months)
-        if (aggregated && aggregated.overallSummary && !aggregated.overallSummary.isFailed && existingState && existingState.searchCompleted && !existingState.hasPendingReleases && !storeService.isStateExpired(existingState)) {
-            console.log(`[SEARCH ENGINE] DB HIT (ALL PASSED): Returning stored results for ${htno} (valid within 6-month cache).`);
+        // Identify candidate releases to query for updates:
+        // A) Any new semesters reached by the cohort that are not yet in the student's cache
+        // B) Any semesters where the student still has backlogs (query new supplementary or RC/RV releases)
+        const candidateReleasesToCheck = [];
+        const seenReleaseKeys = new Set();
+
+        for (const semester of targetSemesters) {
+            const isNewSemester = !cachedSemesterSet.has(semester);
+            const semData = currentAggregated?.semesters?.find(s => s.semester === semester);
+            const hasBacklogs = semData && (semData.summary?.isFailed || semData.summary?.failedSubjects > 0 || semData.subjectsList?.some(s => s.isFailed || s.isBacklog));
+
+            // Only check this semester if it's completely new or has active backlogs
+            if (isNewSemester || hasBacklogs) {
+                const groupInfo = { semester, regulation: batchInfo.regulation };
+                const releases = releaseService.getReleasesForGroup(groupInfo, catalog);
+
+                for (const release of releases) {
+                    const releaseId = `${release.examCode}_${release.attemptType}`;
+                    if (seenReleaseKeys.has(releaseId)) continue;
+                    seenReleaseKeys.add(releaseId);
+
+                    const existingCheck = storeService.getReleaseCheck(htno, releaseId);
+                    const existingResult = storeService.getStudentResultForRelease(htno, releaseId);
+
+                    // If neither checked nor stored, it is an un-queried release from JNTUH
+                    if (!existingCheck && !existingResult) {
+                        candidateReleasesToCheck.push(release);
+                    }
+                }
+            }
+        }
+
+        // If no new releases exist in catalog for new semesters or backlogs -> INSTANT CACHE HIT
+        if (candidateReleasesToCheck.length === 0) {
+            console.log(`[SEARCH ENGINE] DB HIT: All cached results up to date for ${htno} (valid within backend cache).`);
             const studentRecord = storeService.getStudent(htno);
 
             return {
@@ -49,22 +90,85 @@ async function searchStudent(rawHtno) {
                 student: {
                     htno,
                     batchId: batchInfo.batchId,
-                    name: studentRecord?.name || aggregated.details.name || "",
-                    fatherName: studentRecord?.fatherName || aggregated.details.fatherName || "",
+                    name: studentRecord?.name || currentAggregated.details.name || "",
+                    fatherName: studentRecord?.fatherName || currentAggregated.details.fatherName || "",
                     collegeCode: studentRecord?.collegeCode || batchInfo.collegeCode
                 },
                 details: {
-                    name: studentRecord?.name || aggregated.details.name || "",
+                    name: studentRecord?.name || currentAggregated.details.name || "",
                     htno,
-                    fatherName: studentRecord?.fatherName || aggregated.details.fatherName || "",
+                    fatherName: studentRecord?.fatherName || currentAggregated.details.fatherName || "",
                     collegeCode: studentRecord?.collegeCode || batchInfo.collegeCode
                 },
-                overallSummary: aggregated.overallSummary,
-                semesters: aggregated.semesters,
+                overallSummary: currentAggregated.overallSummary,
+                semesters: currentAggregated.semesters,
                 rawResultsCount: cachedResults.length,
                 fromCache: true
             };
         }
+
+        // Query JNTUH only for the candidate releases (new semesters / new supplementary attempts)
+        console.log(`[SEARCH ENGINE] Incremental check for ${htno}: Querying ${candidateReleasesToCheck.length} new/updated releases from JNTUH...`);
+        let newFoundCount = 0;
+
+        for (const release of candidateReleasesToCheck) {
+            const releaseId = `${release.examCode}_${release.attemptType}`;
+            try {
+                const html = await jntuhService.fetchRawResultHtml(htno, release);
+                if (html) {
+                    const parsed = resultParser.parseResultHtml(html, release);
+                    if (parsed.success) {
+                        storeService.saveStudentResult(htno, batchInfo, parsed);
+                        storeService.recordReleaseCheck(htno, releaseId, "FOUND");
+                        newFoundCount++;
+                    } else {
+                        storeService.saveNoResult(htno, batchInfo, release);
+                        storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
+                    }
+                }
+            } catch (err) {
+                console.warn(`[SEARCH ENGINE] Error checking updated release ${release.examCode}:`, err.message);
+                storeService.recordReleaseCheck(htno, releaseId, "RETRY", err.message);
+            }
+            storeService.removePendingJobForStudentAndRelease(htno, releaseId);
+        }
+
+        // Combine cached results with any newly found releases
+        const allValidResults = storeService.getAllValidResultsForStudent(htno);
+        const finalAggregated = aggregationService.aggregateStudentResults(allValidResults, batchInfo.isLateral, htno);
+        const studentRecord = storeService.getStudent(htno);
+
+        storeService.saveSearchState(htno, {
+            validated: true,
+            searchCompleted: true,
+            hasPendingReleases: false,
+            lastRegularSemester: targetSemesters[targetSemesters.length - 1],
+            resultsCount: allValidResults.length
+        });
+
+        console.log(`[SEARCH ENGINE] Incremental search completed for ${htno}: Loaded from cache with ${newFoundCount} updated releases.`);
+
+        return {
+            success: true,
+            student: {
+                htno,
+                batchId: batchInfo.batchId,
+                name: studentRecord?.name || finalAggregated.details.name || "",
+                fatherName: studentRecord?.fatherName || finalAggregated.details.fatherName || "",
+                collegeCode: studentRecord?.collegeCode || batchInfo.collegeCode
+            },
+            details: {
+                name: studentRecord?.name || finalAggregated.details.name || "",
+                htno,
+                fatherName: studentRecord?.fatherName || finalAggregated.details.fatherName || "",
+                collegeCode: studentRecord?.collegeCode || batchInfo.collegeCode
+            },
+            overallSummary: finalAggregated.overallSummary,
+            semesters: finalAggregated.semesters,
+            rawResultsCount: allValidResults.length,
+            fromCache: newFoundCount === 0,
+            updatedSemesters: newFoundCount > 0
+        };
     }
 
     const existingState = storeService.getSearchState(htno);
@@ -113,11 +217,12 @@ async function searchStudent(rawHtno) {
                         storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                     } else {
                         storeService.saveNoResult(htno, batchInfo, release);
-                        storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
+                        storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
                     }
                 }
             } catch (err) {
                 console.warn(`[SEARCH ENGINE] Entry semester check failed for release ${release.examCode}:`, err.message);
+                storeService.recordReleaseCheck(htno, releaseId, "RETRY", err.message);
             }
             storeService.removePendingJobForStudentAndRelease(htno, releaseId);
         }
@@ -168,6 +273,14 @@ async function searchStudent(rawHtno) {
             // prune remaining releases for this semester.
             if (regularFoundForSemester && failedSubjectCodes.size === 0) {
                 console.log(`[SEARCH ENGINE] HTNO ${htno} passed all subjects in ${semester}. Pruning remaining releases.`);
+                const currentIndex = nonRcrvReleases.indexOf(release);
+                for (let i = currentIndex; i < nonRcrvReleases.length; i++) {
+                    const prunedRel = nonRcrvReleases[i];
+                    const prunedId = `${prunedRel.examCode}_${prunedRel.attemptType}`;
+                    if (!storeService.getReleaseCheck(htno, prunedId)) {
+                        storeService.recordReleaseCheck(htno, prunedId, "NOT_NEEDED", "ALL_SUBJECTS_PASSED");
+                    }
+                }
                 break;
             }
 
@@ -184,11 +297,12 @@ async function searchStudent(rawHtno) {
                             storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                         } else {
                             storeService.saveNoResult(htno, batchInfo, release);
-                            storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
+                            storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
                         }
                     }
                 } catch (err) {
                     console.warn(`[SEARCH ENGINE] Error fetching ${semester} release ${release.examCode}:`, err.message);
+                    storeService.recordReleaseCheck(htno, releaseId, "RETRY", err.message);
                 }
                 storeService.removePendingJobForStudentAndRelease(htno, releaseId);
             }
@@ -216,6 +330,15 @@ async function searchStudent(rawHtno) {
 
         // B. Target RC/RV Search ONLY for written examCodes that had failed subjects
         const targetedRcrvReleases = rcrvReleases.filter(r => examCodesWithFails.has(r.examCode));
+        const skippedRcrvReleases = rcrvReleases.filter(r => !examCodesWithFails.has(r.examCode));
+
+        // Mark unneeded RC/RV releases as NOT_NEEDED
+        skippedRcrvReleases.forEach(r => {
+            const relId = `${r.examCode}_${r.attemptType}`;
+            if (!storeService.getReleaseCheck(htno, relId)) {
+                storeService.recordReleaseCheck(htno, relId, "NOT_NEEDED", "NO_FAILS_IN_EXAM_CODE");
+            }
+        });
 
         if (targetedRcrvReleases.length > 0) {
             console.log(`[SEARCH ENGINE] HTNO ${htno} written examCodes with failed subjects in ${semester}: [${Array.from(examCodesWithFails).join(', ')}]. Querying targeted RC/RV releases...`);
@@ -233,11 +356,12 @@ async function searchStudent(rawHtno) {
                                 storeService.recordReleaseCheck(htno, releaseId, "FOUND");
                             } else {
                                 storeService.saveNoResult(htno, batchInfo, release);
-                                storeService.recordReleaseCheck(htno, releaseId, "NO_RESULT");
+                                storeService.recordReleaseCheck(htno, releaseId, "NOT_FOUND");
                             }
                         }
                     } catch (err) {
                         console.warn(`[SEARCH ENGINE] Error fetching ${semester} RC/RV release ${release.examCode}:`, err.message);
+                        storeService.recordReleaseCheck(htno, releaseId, "RETRY", err.message);
                     }
                     storeService.removePendingJobForStudentAndRelease(htno, releaseId);
                 }

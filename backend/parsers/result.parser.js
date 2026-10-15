@@ -150,8 +150,20 @@ const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS"
 
 function isWithheldOrMalpractice(text) {
     if (!text) return false;
-    const upper = String(text).toUpperCase();
-    return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+    const clean = String(text).trim().toUpperCase();
+    if (!clean) return false;
+    // Exact acronym matches for official JNTUH codes
+    if (clean === "MP" || clean === "WH" || clean === "MALPRACTICE" || clean === "WITHHELD") {
+        return true;
+    }
+    // Full phrase matches (never partial 2-letter substrings!)
+    if (clean.includes("WITHHELD") || clean.includes("MALPRACTICE")) {
+        return true;
+    }
+    if (clean.includes("SPOT CENTER") || clean.includes("EXAM CENTER")) {
+        return true;
+    }
+    return false;
 }
 
 function extractSubjectObjects(table) {
@@ -172,9 +184,15 @@ function extractSubjectObjects(table) {
         const row = table[i];
         if (!row || row.length <= 1) continue;
 
-        const rowText = row.join(" ");
+        const gradeVal = gradeIdx !== -1 ? String(row[gradeIdx] || "").trim() : "";
         const categoryVal = categoryIdx !== -1 ? String(row[categoryIdx] || "").trim() : "";
-        const isMpOrWh = isWithheldOrMalpractice(rowText) || isWithheldOrMalpractice(categoryVal);
+        const isPass = PASSING_GRADES.has(gradeVal.toUpperCase());
+
+        // A passing grade cannot be malpractice or withheld
+        const isMpOrWh = !isPass && (
+            isWithheldOrMalpractice(gradeVal) || 
+            isWithheldOrMalpractice(categoryVal)
+        );
 
         subjects.push({
             subjectCode: codeIdx !== -1 ? row[codeIdx] : "",
@@ -216,8 +234,7 @@ function calculateGPA(table) {
         const gradeStr = String(row[gradeIdx] || "").trim().toUpperCase();
         const creditStr = String(row[creditIdx] || "").trim();
         const credit = parseFloat(creditStr);
-        const rowText = row.join(" ");
-        const isMpOrWh = isWithheldOrMalpractice(rowText) || isWithheldOrMalpractice(gradeStr);
+        const isMpOrWh = isWithheldOrMalpractice(gradeStr);
 
         totalSubjects++;
         const subjectCredits = isNaN(credit) ? 0 : credit;

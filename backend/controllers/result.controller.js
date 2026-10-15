@@ -64,9 +64,51 @@ async function triggerCatalogSync(req, res) {
     }
 }
 
+async function getStudentReleaseChecks(req, res) {
+    try {
+        const rawHtno = req.params.htno || req.query.htno;
+        const checks = storeService.getStudentReleaseChecksSummary(rawHtno);
+        return res.json(checks);
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+async function getStudentStoreSummary(req, res) {
+    try {
+        const rawHtno = req.params.htno || req.query.htno;
+        const summary = storeService.getStudentStoreSummary(rawHtno);
+        return res.json(summary);
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+async function getRetentionStatus(req, res) {
+    try {
+        const status = storeService.getRetentionStatus();
+        return res.json({ success: true, ...status });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+async function triggerRetentionCleanup(req, res) {
+    try {
+        const result = storeService.cleanupExpiredResults();
+        return res.json({ success: true, ...result });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
 module.exports = {
     getStudentResult,
     getCatalogStatus,
-    triggerCatalogSync
+    triggerCatalogSync,
+    getStudentReleaseChecks,
+    getStudentStoreSummary,
+    getRetentionStatus,
+    triggerRetentionCleanup
 };
 

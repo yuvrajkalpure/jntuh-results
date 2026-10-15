@@ -11,8 +11,20 @@ const PASSING_GRADES = new Set(["O", "A+", "A", "B+", "B", "C", "D", "P", "PASS"
 
 function isWithheldOrMalpractice(text) {
     if (!text) return false;
-    const upper = String(text).toUpperCase();
-    return upper.includes("WITHHELD") || upper.includes("MALPRACTICE") || upper.includes("SPOT CENTER") || upper.includes("EXAM CENTER") || upper.includes("MP") || upper.includes("WH");
+    const clean = String(text).trim().toUpperCase();
+    if (!clean) return false;
+    // Exact acronym matches for official JNTUH codes
+    if (clean === "MP" || clean === "WH" || clean === "MALPRACTICE" || clean === "WITHHELD") {
+        return true;
+    }
+    // Full phrase matches (never partial 2-letter substrings!)
+    if (clean.includes("WITHHELD") || clean.includes("MALPRACTICE")) {
+        return true;
+    }
+    if (clean.includes("SPOT CENTER") || clean.includes("EXAM CENTER")) {
+        return true;
+    }
+    return false;
 }
 
 function isPassingGrade(grade) {
@@ -66,8 +78,17 @@ function processSemesterGroup(group, htno) {
             const code = String(sub.subjectCode).trim().toUpperCase();
             if (!code) return;
 
-            const isMpOrWh = sub.isMalpractice || isWithheldOrMalpractice(sub.remarks) || isWithheldOrMalpractice(sub.category) || isWithheldOrMalpractice(sub.grade);
-            const mpRemarks = sub.remarks || sub.category || (isMpOrWh ? "WITHHELD/MALPRACTICE" : "");
+            const gradeUpper = String(sub.grade || "").trim().toUpperCase();
+            const isPass = isPassingGrade(gradeUpper);
+
+            // A passing grade cannot be malpractice or withheld
+            const isMpOrWh = !isPass && (
+                isWithheldOrMalpractice(gradeUpper) ||
+                isWithheldOrMalpractice(sub.category) ||
+                (sub.category && isWithheldOrMalpractice(sub.category)) ||
+                (sub.remarks && isWithheldOrMalpractice(sub.remarks))
+            );
+            const mpRemarks = isMpOrWh ? (sub.remarks || sub.category || "WITHHELD/MALPRACTICE") : "";
 
             if (!subjectMap.has(code)) {
                 subjectMap.set(code, {
@@ -83,8 +104,8 @@ function processSemesterGroup(group, htno) {
                         grade: sub.grade,
                         credits: sub.credits
                     },
-                    isFailed: !isPassingGrade(sub.grade) || isMpOrWh,
-                    isBacklog: !isPassingGrade(sub.grade) || isMpOrWh,
+                    isFailed: !isPass || isMpOrWh,
+                    isBacklog: !isPass || isMpOrWh,
                     isMalpractice: isMpOrWh,
                     remarks: mpRemarks,
                     attemptsHistory: []
@@ -127,9 +148,6 @@ function processSemesterGroup(group, htno) {
             record.attemptsHistory.push(attemptEntry);
 
             // Update final marks
-            const gradeUpper = String(sub.grade).trim().toUpperCase();
-            const isPass = isPassingGrade(gradeUpper) && !isMpOrWh;
-
             if (isPass) {
                 record.finalGrade = sub.grade;
                 record.finalMarks = {
@@ -142,6 +160,7 @@ function processSemesterGroup(group, htno) {
                 record.isFailed = false;
                 record.isBacklog = false;
                 record.isMalpractice = false;
+                record.remarks = "";
             } else {
                 // If not passed, it remains a backlog
                 record.isFailed = true;
@@ -155,9 +174,9 @@ function processSemesterGroup(group, htno) {
                         grade: sub.grade || "-",
                         credits: sub.credits || 0
                     };
+                    record.isMalpractice = isMpOrWh;
                     if (isMpOrWh) {
                         record.remarks = mpRemarks;
-                        record.isMalpractice = true;
                     }
                 }
             }
